@@ -1,0 +1,6 @@
+Change Component DesignItemId : Designator=stm32 Old DesignItemId=BLUE_PILLADVANCED New DesignItemId=BLUE_PILL
+Change Component Footprint: Designator=stm32 Old Footprint=BLUE_PILL_ADV New Footprint=BLUE_PILL
+Change Component Comment : Designator=stm32 Old Comment=BLUE_PILLADVANCED New Comment=
+Change Component Library : Designator=stm32 Old Library=BluePill.SCHLIB New Library=BluePill.IntLib
+Added Member To Class: ClassName=piccaloSchematic Member=Component tof03 Header 7
+Added Room: Name=piccaloSchematic
