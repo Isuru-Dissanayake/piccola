@@ -22,8 +22,8 @@ void leftReverse()
 
 void leftBrake()
 {
-    digitalWrite(AIN1,HIGH);
-    digitalWrite(AIN2,HIGH);
+    digitalWrite(AIN1, HIGH);
+    digitalWrite(AIN2, HIGH);
 }
 
 void leftForwardBase()
@@ -52,8 +52,8 @@ void rightReverse()
 
 void rightBrake()
 {
-    digitalWrite(BIN1,HIGH);
-    digitalWrite(BIN2,HIGH);
+    digitalWrite(BIN1, HIGH);
+    digitalWrite(BIN2, HIGH);
 }
 
 void rightForwardBase()
@@ -71,13 +71,13 @@ void rightReverseBase()
 void writePwm()
 {
     analogWrite(PWMA, leftPwm);
-    analogWrite(PWMB, rightPwm)
+    analogWrite(PWMB, rightPwm);
 }
 
 void writeBasePwm()
 {
-    analogWrite(leftBase);
-    analogWrite(rightBase);
+    analogWrite(PWMA, leftBase);
+    analogWrite(PWMB, rightBase);
 }
 
 void forward()
