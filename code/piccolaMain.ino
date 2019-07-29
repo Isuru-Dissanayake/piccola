@@ -5,7 +5,7 @@
 
 void setup()
 {
-    pinMode(4, OUTPUT);
+    stbyHigh();
 }
 
 void loop()
