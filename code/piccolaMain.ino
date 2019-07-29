@@ -5,7 +5,8 @@
 
 void setup()
 {
-    stbyHigh();
+    motorDiver();
+    motorInterrupt();
 }
 
 void loop()
