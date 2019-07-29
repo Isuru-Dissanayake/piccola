@@ -1,0 +1,6 @@
+{
+    "port": "COM4",
+    "board": "arduino:avr:uno",
+    "programmer": "ArduinoISP",
+    "sketch": "piccolaMain.ino"
+}
