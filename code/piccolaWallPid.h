@@ -25,3 +25,25 @@ void wallPid()
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
 }
+
+void wallFollow()
+{
+    checkWalls();
+    if (checkWalls[0] == 1 && checkWalls[2] == 1)
+    {
+        wallPid();
+        forward();
+    }
+
+    else if (checkWalls[0] == 0 && checkWalls[2] == 1)
+    {
+        rightPid();
+        forward();
+    }
+
+    else if (chechWalls[0] == 1 && checkWalls[2] == 0)
+    {
+        leftPid();
+        forward();
+    }
+}
