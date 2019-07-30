@@ -6,8 +6,8 @@
 #define BIN2 8
 #define PWMB A1
 
-#define leftOut1 2   //interrupt pins of motors
-#define leftOut2 3
+#define leftOut1 2   //interrupt pins of motors 
+#define leftOut2 3          
 #define rightOut1 4
 #define rightOut2 5
 
