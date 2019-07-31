@@ -7,10 +7,21 @@
 #define PWMB A1
 
 #define leftOut1 2   //interrupt pins of motors 
-#define leftOut2 3          
-#define rightOut1 4
-#define rightOut2 5
+#define leftOut2 13          
+#define rightOut1 A2
+#define rightOut2 A3
 
+#define GPIO1 7           
+#define GPIO2 6           
+#define GPIO3 5 
+#define GPIO4 4
+#define GPIO5 3
+
+#define tofAddress1 43
+#define tofAddress2 44
+#define tofAddress3 45
+#define tofAddress4 46
+#define tofAddress5 47
 
 void motorDiver()
 {
