@@ -10,5 +10,12 @@ void mazeSolve()
         //move right
         break;
 
+    case 'L' :
+        //move left
+        break;
+    
+    case 'B' :
+        //move back
+        break;
     }
 }
