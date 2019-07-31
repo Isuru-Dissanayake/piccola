@@ -31,3 +31,5 @@ float wallError = 0;
 float wallLastError = 0;
 
 float correction;
+
+char nextMove = 'F';
