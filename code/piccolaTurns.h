@@ -51,11 +51,6 @@ void turnRightEncoder()
     leftEncoder = 0;
     rightEncoder = 0;
 
-    attachInterrupt(digitalPinToInterrupt(2), countLeftOut1, RISING);
-    attachInterrupt(digitalPinToInterrupt(3), countLeftOut2, RISING);
-    //attachInterrupt(digitalPinToInterrupt(4), countRightOut1, RISING);
-    //attachInterrupt(digitalPinToInterrupt(5), countRightOut1, RISING);
-
     while ((leftEncoder <= encoderLeftCount) || (rightEncoder >= encoderRightCount))
     {
         if (leftEncoder <= encoderLeftCount)
@@ -86,11 +81,6 @@ void turnLeftEncoder()
 {   
     leftEncoder = 0;
     rightEncoder = 0;
-
-    attachInterrupt(digitalPinToInterrupt(2), countLeftOut1, RISING);
-    attachInterrupt(digitalPinToInterrupt(3), countLeftOut2, RISING);
-    //attachInterrupt(digitalPinToInterrupt(4), countRightOut1, RISING);
-    //attachInterrupt(digitalPinToInterrupt(5), countRightOut1, RISING);
 
     while ((leftEncoder >= encoderLeftCount) || (rightEncoder <= encoderRightCount))
     {
