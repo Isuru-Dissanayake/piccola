@@ -14,6 +14,12 @@ void setup()
     motorDiver();
     motorInterrupt();
     tofSetup();
+
+    attachInterrupt(digitalPinToInterrupt(2), countLeftOut1, RISING);
+    attachInterrupt(digitalPinToInterrupt(3), countLeftOut2, RISING);
+    //attachInterrupt(digitalPinToInterrupt(4), countRightOut1, RISING);
+    //attachInterrupt(digitalPinToInterrupt(5), countRightOut1, RISING);
+
     Serial.begin(9600);
 }
 
