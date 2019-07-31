@@ -7,10 +7,12 @@
             "includePath": [
                 "${workspaceRoot}",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\**",
+                "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\libraries\\\\**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\tools\\\\**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\tools\\\\**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\libraries\\\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\5.4.0\\include",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\VL6180X\\src",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
                 "C:\\Program Files (x86)\\Arduino/hardware\\arduino\\avr\\variants\\standard",
                 "C:\\Program Files (x86)\\Arduino",
