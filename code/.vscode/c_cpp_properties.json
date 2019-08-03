@@ -20,9 +20,7 @@
                 "C:\\Program Files (x86)\\Arduino",
                 "C:\\Piccola\\piccola\\code"
             ],
-            "forcedInclude": [
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
-            ],
+            "forcedInclude": [],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
