@@ -1,6 +1,6 @@
 {
     "port": "COM4",
     "board": "arduino:avr:uno",
-    "programmer": "ArduinoISP",
+    "programmer": "AVRISP mkII",
     "sketch": "piccolaMain.ino"
 }
