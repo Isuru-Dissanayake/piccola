@@ -15,13 +15,14 @@
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\libraries\\\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\5.4.0\\include",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\VL6180X\\src",
-                "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\libraries\\VL6180X\\src",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
                 "C:\\Program Files (x86)\\Arduino/hardware\\arduino\\avr\\variants\\standard",
                 "C:\\Program Files (x86)\\Arduino",
                 "C:\\Piccola\\piccola\\code"
             ],
-            "forcedInclude": [],
+            "forcedInclude": [
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+            ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
