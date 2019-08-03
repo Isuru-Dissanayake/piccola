@@ -4,7 +4,7 @@
 #define STBY 9
 #define BIN1 8
 #define BIN2 7
-#define PWMB 6
+#define PWMB 10
 
 #define leftOut1 2   //interrupt pins of motors 
 #define leftOut2 3          
