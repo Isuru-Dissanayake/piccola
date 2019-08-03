@@ -1,5 +1,5 @@
 {
-    "port": "COM4",
+    "port": "COM3",
     "board": "arduino:avr:uno",
     "programmer": "AVRISP mkII",
     "sketch": "piccolaMain.ino"
