@@ -23,7 +23,6 @@ void tofSetup()
     delay(10);
     tof1.init();
     tof1.configureDefault();
-    //Sensor1.startRangeContinuous();
     tof1.setTimeout(500);
     tof1.setAddress(tofAddress1);
 
