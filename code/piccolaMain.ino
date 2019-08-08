@@ -20,7 +20,7 @@ void setup()
     //attachInterrupt(digitalPinToInterrupt(4), countRightOut1, RISING);
     //attachInterrupt(digitalPinToInterrupt(5), countRightOut1, RISING);
 
-    Serial.begin(9600);
+    Serial2.begin(9600);
 }
 
 void loop()
