@@ -1,5 +1,5 @@
 {
-    "port": "COM3",
+    "port": "COM1",
     "board": "stm32duino:STM32F1:genericSTM32F103C",
     "programmer": "ArduinoISP",
     "sketch": "piccolaMain.ino",
