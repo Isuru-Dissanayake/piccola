@@ -275,11 +275,11 @@ def makeConsistant2(x,y):
     
 
     for i in range(4):
-        if minVals[i]== -1:
+        if (minVals[i]== -1 or minVals[i]==0):
             minVals[i]= 1000
 
     minVal= min(minVals)
-    flood[y][x]= minVal+1
+    flood2[y][x]= minVal+1
     
 def floodFill(x,y,xprev,yprev):
     '''updates the flood matrix such that every square is consistant (current cell is x,y)
@@ -350,101 +350,28 @@ def floodFill2():
         if(x0>=0 and y0>=0):
             if (flood2[y0][x0]==0):
                 if (isAccessible(xrun,yrun,x0,y0)):
-
+                    makeConsistant2(x0,y0)
                     stack.append(x0)
                     stack.append(y0)
         if(x1>=0 and y1>=0):
-            if (isAccessible(xrun,yrun,x1,y1)):
-                stack.append(x1)
-                stack.append(y1)
-        if(x2>=0 and y2>=0):
-            if (isAccessible(xrun,yrun,x2,y2)):
-                stack.append(x2)
-                stack.append(y2)
-        if(x3>=0 and y3>=0):
-            if (isAccessible(xrun,yrun,x3,y3)):
-                stack.append(x3)
-                stack.append(y3)
-
-    while (len(stack)!= 0):
-        yrun= stack.pop()
-        xrun= stack.pop()
-
-        if isConsistant(xrun,yrun):
-            pass
-        else:
-            makeConsistant(xrun,yrun)
-            #stack.append(xrun)
-            #stack.append(yrun)
-            x0,y0,x1,y1,x2,y2,x3,y3= getSurrounds(xrun,yrun)
-            if(x0>=0 and y0>=0):
-                if (isAccessible(xrun,yrun,x0,y0)):
-                    stack.append(x0)
-                    stack.append(y0)
-            if(x1>=0 and y1>=0):
+            if (flood2[y1][x1]==0):
                 if (isAccessible(xrun,yrun,x1,y1)):
+                    makeConsistant2(x1,y1)
                     stack.append(x1)
                     stack.append(y1)
-            if(x2>=0 and y2>=0):
+        if(x2>=0 and y2>=0):
+            if (flood2[y2][x2]==0):
                 if (isAccessible(xrun,yrun,x2,y2)):
+                    makeConsistant2(x2,y2)
                     stack.append(x2)
                     stack.append(y2)
-            if(x3>=0 and y3>=0):
+        if(x3>=0 and y3>=0):
+            if (flood2[y3][x3]==0):
                 if (isAccessible(xrun,yrun,x3,y3)):
+                    makeConsistant2(x3,y3)
                     stack.append(x3)
                     stack.append(y3)
 
-
-
-
-    '''if isConsistant(x,y):
-        return
-    else:
-        #API.setText(x,y,str(isConsistant(x,y)))
-        #return
-        fill=True
-        while(fill==True):
-            fill= False
-            #API.setColor(x,y,'green')
-            for yrun in range(16):
-                for xrun in range(16):
-                    if (isConsistant(xrun,yrun)):
-                       pass
-                    else:
-                        fill = True
-                        makeConsistant(xrun,yrun)
-
-            #break 
-                        
-            if (fill==False):    
-                break
-
-        API.setColor(x,y,'green')
-
-        
-            for yrun in range(y+1):
-                for xrun in range(x):
-                    if not (isConsistant(xrun,yrun)):
-                        fill = True
-                        makeConsistant(xrun,yrun)
-
-            for yrun in range(y+1,16):
-                for xrun in range(x+1):
-                    if not (isConsistant(xrun,yrun)):
-                        fill = True
-                        makeConsistant(xrun,yrun)
-
-            for yrun in range(y,16):
-                for xrun in range(x+1,16):
-                    if not (isConsistant(xrun,yrun)):
-                        fill = True
-                        makeConsistant(xrun,yrun) 
-
-            for yrun in range(y):
-                for xrun in range(x,16):
-                    if not (isConsistant(xrun,yrun)):
-                        fill = True
-                        makeConsistant(xrun,yrun)  ''' 
                         
 def toMove(x,y,xprev,yprev,orient):
     '''returns the direction to turn into L,F,R or B
@@ -568,7 +495,7 @@ def toMoveBack(x,y,xprev,yprev,orient):
 def showFlood():
     for x in range(16):
         for y in range(16):
-            API.setText(x,y,str(flood[y][x]))
+            API.setText(x,y,str(flood2[y][x]))
 
 def showVisited(x,y):
     return
@@ -579,23 +506,6 @@ def main():
     xprev=0
     yprev=0
     orient=0
-    '''
-    flood=[[14,13,12,11,10,9,8,7,7,8,9,10,11,12,13,14],
-        [13,12,11,10,9,8,7,6,6,7,8,9,10,11,12,13],
-        [12,11,10,9,8,7,6,5,5,6,7,8,9,10,11,12],
-        [11,10,9,8,7,6,5,4,4,5,6,7,8,9,10,11],
-        [10,9,8,7,6,5,4,3,3,4,5,6,7,8,9,10],
-        [9,8,7,6,5,4,3,2,2,3,4,5,6,7,8,9],
-        [8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8],
-        [7,6,5,4,3,2,1,0,0,1,2,3,4,5,6,7],
-        [7,6,5,4,3,2,1,0,0,1,2,3,4,5,6,7],
-        [8,7,6,5,4,3,2,1,1,2,3,4,5,6,7,8],
-        [9,8,7,6,5,4,3,2,2,3,4,5,6,7,8,9],
-        [10,9,8,7,6,5,4,3,3,4,5,6,7,8,9,10],
-        [11,10,9,8,7,6,5,4,4,5,6,7,8,9,10,11],
-        [12,11,10,9,8,7,6,5,5,6,7,8,9,10,11,12],
-        [13,12,11,10,9,8,7,6,6,7,8,9,10,11,12,13],
-        [14,13,12,11,10,9,8,7,7,8,9,10,11,12,13,14]]'''
 
     while True:
         API.setColor(x, y, 'red')
@@ -606,63 +516,14 @@ def main():
 
         if (flood[y][x]!=0):
             floodFill(x,y,xprev,yprev)
+            floodFill2()
 
         
         else:
-            for j in flood:
-                for i in j:
-                    i=1000
-            flood[0][15]=0
-            floodFill(15,0,15,0)
             while(True):
                 showFlood()
         
         
-        '''
-        else:    #robot is inside the middle 
-            API.turnLeft()
-            orient = API.orientation(orient,'L')
-            API.turnLeft()
-            orient = API.orientation(orient,'L')
-            log("moveForward")
-            showFlood()
-            API.moveForward()
-            x,y = API.updateCoordinates(x,y,orient)
-
-            while(True):
-                L= API.wallLeft()
-                R= API.wallRight()
-                F= API.wallFront()
-                updateWalls(x,y,orient,L,R,F)
-                if (flood[y][x]!=0):
-                    floodFill(x,y,xprev,yprev)
-
-                direction= toMoveBack(x,y,xprev,yprev,orient)
-
-                if (direction=='L'):
-                    API.turnLeft()
-                    orient = API.orientation(orient,'L')
-
-                elif (direction=='R'):
-                    API.turnRight()
-                    orient = API.orientation(orient,'R')
-
-                elif (direction=='B'):
-                    API.turnLeft()
-                    orient = API.orientation(orient,'L')
-                    API.turnLeft()
-                    orient = API.orientation(orient,'L')
-
-                log("moveForward")
-                showFlood()
-                API.moveForward()
-                xprev=x
-                yprev=y
-                x,y = API.updateCoordinates(x,y,orient)
-
-        '''
-                
-
         direction= toMove(x,y,xprev,yprev,orient)
 
         
