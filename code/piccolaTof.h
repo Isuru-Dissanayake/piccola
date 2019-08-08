@@ -1,3 +1,15 @@
+#define GPIO1 PA0         
+#define GPIO2 PA1          
+#define GPIO3 PA5
+#define GPIO4 PA6
+#define GPIO5 PA4
+
+#define tofAddress1 43
+#define tofAddress2 44
+#define tofAddress3 45
+#define tofAddress4 46
+#define tofAddress5 47
+
 VL6180X tof1;
 VL6180X tof2;
 VL6180X tof3;
@@ -70,18 +82,22 @@ void tofRead()
 
 void printTof()
 {
-    Serial.print(tof[0]);
-    Serial.print(",  ");
-    Serial.print(tof[1]);
-    Serial.print(",  ");
-    Serial.print(tof[2]);
-    Serial.print(",  ");
-    Serial.print(tof[3]);
-    Serial.print(",  ");
-    Serial.print(tof[4]);
-    Serial.println();
+    Serial2.print(tof[0]);
+    Serial2.print(",  ");
+    Serial2.print(tof[1]);
+    Serial2.print(",  ");
+    Serial2.print(tof[2]);
+    Serial2.print(",  ");
+    Serial2.print(tof[3]);
+    Serial2.print(",  ");
+    Serial2.print(tof[4]);
+    Serial2.println();
+    
 }
 
+
+
+/*
 void checkWalls()
 {
     wallAvailable[5] ={0};
@@ -240,3 +256,8 @@ void checkWalls()
     }
     
 }
+
+
+
+
+*/
