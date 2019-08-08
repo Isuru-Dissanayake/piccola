@@ -1,27 +1,16 @@
-#define PWMA 11    //motor driver pins
-#define AIN2 13
-#define AIN1 12
-#define STBY 9
-#define BIN1 8
-#define BIN2 7
-#define PWMB 10
+#define PWMA PB8    //motor driver pins
+#define AIN2 PA12
+#define AIN1 PA7
+#define STBY PA11
+#define BIN1 PB0
+#define BIN2 PB1
+#define PWMB PB9
 
-#define leftOut1 2   //interrupt pins of motors 
-#define leftOut2 3          
-#define rightOut1 4
-#define rightOut2 5
+#define leftOut1 PB12   //interrupt pins of motors 
+#define leftOut2 PB13          
+#define rightOut1 PB14
+#define rightOut2 PB15
 
-#define GPIO1 A5         
-#define GPIO2 A4          
-#define GPIO3 A3
-#define GPIO4 A2
-#define GPIO5 A1
-
-#define tofAddress1 43
-#define tofAddress2 44
-#define tofAddress3 45
-#define tofAddress4 46
-#define tofAddress5 47
 
 void motorDiver()
 {
