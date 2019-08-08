@@ -19,7 +19,9 @@
                 "C:\\Program Files (x86)\\Arduino",
                 "C:\\Piccola\\piccola\\code"
             ],
-            "forcedInclude": [],
+            "forcedInclude": [
+                "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\variants\\generic_stm32f103c\\board.cpp"
+            ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,
                 "path": [
