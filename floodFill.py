@@ -342,7 +342,7 @@ def floodFill2():
     queue.append(8)
     queue.append(8)
 
-    while (len(queue!=0)):
+    while (len(queue)!=0):
         yrun=queue.pop(0)
         xrun=queue.pop(0)
 
@@ -351,26 +351,26 @@ def floodFill2():
             if (flood2[y0][x0]==0):
                 if (isAccessible(xrun,yrun,x0,y0)):
                     makeConsistant2(x0,y0)
-                    stack.append(x0)
-                    stack.append(y0)
+                    queue.append(x0)
+                    queue.append(y0)
         if(x1>=0 and y1>=0):
             if (flood2[y1][x1]==0):
                 if (isAccessible(xrun,yrun,x1,y1)):
                     makeConsistant2(x1,y1)
-                    stack.append(x1)
-                    stack.append(y1)
+                    queue.append(x1)
+                    queue.append(y1)
         if(x2>=0 and y2>=0):
             if (flood2[y2][x2]==0):
                 if (isAccessible(xrun,yrun,x2,y2)):
                     makeConsistant2(x2,y2)
-                    stack.append(x2)
-                    stack.append(y2)
+                    queue.append(x2)
+                    queue.append(y2)
         if(x3>=0 and y3>=0):
             if (flood2[y3][x3]==0):
                 if (isAccessible(xrun,yrun,x3,y3)):
                     makeConsistant2(x3,y3)
-                    stack.append(x3)
-                    stack.append(y3)
+                    queue.append(x3)
+                    queue.append(y3)
 
                         
 def toMove(x,y,xprev,yprev,orient):
