@@ -26,11 +26,11 @@ void countRightOut1()
 {
     if (digitalRead(rightOut1) == HIGH && digitalRead(rightOut2) == LOW)
     {
-        rightEncoder = rightEncoder + 1;
+        rightEncoder = rightEncoder - 1;
     }
     else if (digitalRead(rightOut1) == HIGH && digitalRead(rightOut2) == HIGH)
     {
-        rightEncoder = rightEncoder - 1;
+        rightEncoder = rightEncoder + 1;
     }
 }
 
@@ -38,11 +38,11 @@ void countRightOut2()
 {
     if (digitalRead(rightOut2) == HIGH && digitalRead(rightOut1) == HIGH)
     {
-        rightEncoder = rightEncoder + 1;
+        rightEncoder = rightEncoder - 1;
     }
     else if (digitalRead(rightOut2) == HIGH && digitalRead(rightOut1) == LOW)
     {
-        rightEncoder = rightEncoder - 1;
+        rightEncoder = rightEncoder + 1;
     }
 }
 
