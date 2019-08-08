@@ -5,6 +5,7 @@
 #include "piccolaVariables.h"
 #include "piccolaMotors.h"
 #include "piccolaTurns.h"
+#include "piccolaSpeed.h"
 #include "piccolaTof.h"
 #include "piccolaWallPid.h"
 #include "piccolaMazeSolve.h"
