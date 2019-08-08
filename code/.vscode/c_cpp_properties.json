@@ -3,10 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\STM32\\tools\\**",
-                "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.6.1\\**",
                 "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\stm32duino\\tools\\**",
                 "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\**",
+                "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\variants\\generic_stm32f103c",
                 "${workspaceRoot}",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\**",
                 "C:\\\\Program Files (x86)\\\\Arduino\\\\hardware\\\\arduino\\\\avr\\\\libraries\\\\**",
@@ -21,7 +20,7 @@
                 "C:\\Piccola\\piccola\\code"
             ],
             "forcedInclude": [
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "C:\\Users\\minik\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\variants\\generic_stm32f103c\\board.cpp"
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": false,

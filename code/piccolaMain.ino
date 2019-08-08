@@ -7,8 +7,10 @@ int t = 0;
 #include "piccolaTof.h"
 #include "piccolaMotors.h"
 #include "piccolaTurns.h"
-
-
+#include "piccolaSpeed.h"
+#include "piccolaTof.h"
+#include "piccolaWallPid.h"
+#include "piccolaMazeSolve.h"
 
 void setup()
 {
@@ -33,16 +35,7 @@ void setup()
 }
 
 
-void interrupted(){
-  Serial2.println("Interrupted");
-  if (t==0){
-    digitalWrite(PC13, HIGH);
-    t=1;
-  }
-  else{
-    digitalWrite(PC13, LOW);
-    t=0;
-  }
+    Serial2.begin(9600);
 }
 
 
