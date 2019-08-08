@@ -1,5 +1,5 @@
-int leftBase = 120;
-int rightBase = 120;
+int leftBase =180;
+int rightBase = 170;
 int leftPwm;
 int rightPwm;
 
