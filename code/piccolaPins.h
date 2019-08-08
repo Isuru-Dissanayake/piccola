@@ -1,10 +1,10 @@
-#define PWMA 11    //motor driver pins
-#define AIN2 13
-#define AIN1 12
-#define STBY 9
-#define BIN1 8
-#define BIN2 7
-#define PWMB 10
+#define PWMA PB8    //motor driver pins
+#define AIN2 PA12
+#define AIN1 PA7
+#define STBY PA11
+#define BIN1 PB0
+#define BIN2 PB1
+#define PWMB PB9
 
 #define leftOut1 2   //interrupt pins of motors 
 #define leftOut2 3          
