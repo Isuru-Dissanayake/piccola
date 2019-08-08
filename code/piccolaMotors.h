@@ -98,11 +98,12 @@ void brake()
 {
     leftBrake();
     rightBrake();
-    delay(100);
+    delay(1000);
 }
 
 void forwardBase()
 {
+    stbyHigh();
     leftForward();
     rightForward();
     writeBasePwm();
@@ -110,6 +111,7 @@ void forwardBase()
 
 void reverseBase()
 {
+    stbyHigh();
     leftReverse();
     rightReverse();
     writeBasePwm();
@@ -117,6 +119,7 @@ void reverseBase()
 
 void turnRight()
 {
+    stbyHigh();
     leftForward();
     rightReverse();
     writeBasePwm();
@@ -124,6 +127,7 @@ void turnRight()
 
 void turnLeft()
 {
+    stbyHigh();
     leftReverse();
     rightForward();
     writeBasePwm();
