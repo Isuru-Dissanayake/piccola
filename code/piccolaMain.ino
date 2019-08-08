@@ -40,13 +40,13 @@ void loop()
 { //tofRead();
   //printTof();
   turnRight();
-  //Serial2.println("reverse");
-  delay(2000);
+  Serial2.println("reverse");
+  delay(1000);
   brake();
   delay(1000);
-  turnLeft();
-  //Serial2.println("forward");
-  delay(2000);
+  turnRight();
+  Serial2.println("forward");
+  delay(1000);
   brake();
   delay(1000);
 
