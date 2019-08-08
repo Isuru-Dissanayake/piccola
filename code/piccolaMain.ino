@@ -8,7 +8,6 @@ int t = 0;
 #include "piccolaMotors.h"
 #include "piccolaTurns.h"
 #include "piccolaSpeed.h"
-#include "piccolaTof.h"
 #include "piccolaWallPid.h"
 #include "piccolaMazeSolve.h"
 
@@ -34,9 +33,6 @@ void setup()
     
 }
 
-
-    Serial2.begin(9600);
-}
 
 
 
