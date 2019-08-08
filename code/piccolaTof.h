@@ -97,7 +97,7 @@ void printTof()
 
 
 
-
+/*
 void checkWalls()
 {
     wallAvailable[5] ={0};
@@ -260,4 +260,4 @@ void checkWalls()
 
 
 
-
+*/
