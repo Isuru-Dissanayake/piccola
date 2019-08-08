@@ -6,10 +6,10 @@
 #define BIN2 PB1
 #define PWMB PB9
 
-#define leftOut1 2   //interrupt pins of motors 
-#define leftOut2 3          
-#define rightOut1 4
-#define rightOut2 5
+#define leftOut1 PB12   //interrupt pins of motors 
+#define leftOut2 PB13          
+#define rightOut1 PB14
+#define rightOut2 PB15
 
 #define GPIO1 PA0         
 #define GPIO2 PA1         
