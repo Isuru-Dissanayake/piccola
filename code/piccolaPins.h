@@ -11,11 +11,11 @@
 #define rightOut1 4
 #define rightOut2 5
 
-#define GPIO1 A5         
-#define GPIO2 A4          
-#define GPIO3 A3
-#define GPIO4 A2
-#define GPIO5 A1
+#define GPIO1 PA0         
+#define GPIO2 PA1         
+#define GPIO3 PA5
+#define GPIO4 PA6
+#define GPIO5 PA4
 
 #define tofAddress1 43
 #define tofAddress2 44
