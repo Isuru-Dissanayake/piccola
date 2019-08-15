@@ -83,6 +83,7 @@ void tofCell()
 void tofPid()
 {
     tof[0] = tof1.readRangeSingleMillimeters();
+    tof[2] = tof3.readRangeSingleMillimeters();
     tof[4] = tof5.readRangeSingleMillimeters();
 }
 
@@ -110,7 +111,7 @@ void printTof()
 
 void checkWallsPid()
 {
-    wallAvailable[2] ={0};
+    wallAvailable[3] ={0};
     //check left wall availability
     if (tof[0] <= 150)
     {
@@ -142,25 +143,53 @@ void checkWallsPid()
     //check right wall availability
     if (tof[4] <= 150)
     {
-        wallAvailable[1] = 1;
+        wallAvailable[2] = 1;
     }
     else
     {
         tofPid();
         if (tof[4] <= 150)
         {
-            wallAvailable[1] = 1;
+            wallAvailable[2] = 1;
         }
         else
         {
             tofPid();
             if (tof[4] <= 150)
             {
-                wallAvailable[1] = 1;
+                wallAvailable[2] = 1;
             }
             else
             {
+                wallAvailable[2] = 0;
+            }
+            
+        }
+        
+    }
+
+    //check front wall availability
+    if (tof[2] > 140)
+    {
+        wallAvailable[1] =  0;
+    }
+    else
+    {
+        tofPid();
+        if (tof[2] > 140)
+        {
+            wallAvailable[1] = 0;
+        }
+        else
+        {
+            tofPid();
+            if (tof[2] > 140)
+            {
                 wallAvailable[1] = 0;
+            }
+            else
+            {
+                wallAvailable[1] = 1;
             }
             
         }
