@@ -50,9 +50,17 @@ void turnRightEncoder()
 {   
     leftEncoder = 0;
     rightEncoder = 0;
-
-    while ((leftEncoder <= encoderLeftCount) || (rightEncoder >= encoderRightCount))
+    while (leftEncoder <= encoderLeftCount || rightEncoder >= encoderRightCount)
     {
+        if (rightEncoder >= encoderRightCount) 
+        {
+            rightReverseBase();
+        }
+        else
+        {
+            rightBrake();
+        }
+        
         if (leftEncoder <= encoderLeftCount)
         {
             leftForwardBase();
@@ -60,17 +68,9 @@ void turnRightEncoder()
         else
         {
             leftBrake();
-        }
-
-        if (rightEncoder >= encoderRightCount)
-        {
-            rightReverseBase();
-        }
-        else
-        {
-           rightBrake(); 
-        }    
+        } 
     }
+    brake();
     encoderLeftCount = 0;
     encoderRightCount = 0;
     leftEncoder = 0;
@@ -81,9 +81,17 @@ void turnLeftEncoder()
 {   
     leftEncoder = 0;
     rightEncoder = 0;
-
-    while ((leftEncoder >= encoderLeftCount) || (rightEncoder <= encoderRightCount))
+    while (rightEncoder <= encoderRightCount || leftEncoder >= encoderLeftCount)
     {
+        if (rightEncoder <= encoderRightCount) 
+        {
+            rightForwardBase();
+        }
+        else
+        {
+            rightBrake();
+        }
+        
         if (leftEncoder >= encoderLeftCount)
         {
             leftReverseBase();
@@ -92,18 +100,61 @@ void turnLeftEncoder()
         {
             leftBrake();
         }
-
-        if (rightEncoder <= encoderRightCount)
-        {
-            rightForwardBase();
-        }
-        else
-        {
-           rightBrake(); 
-        }    
+        
     }
+    brake();
     encoderLeftCount = 0;
     encoderRightCount = 0;
     leftEncoder = 0;
     rightEncoder = 0;
+}
+
+void turnNinetyLeft()
+{
+    encoderRightCount = 440;
+    encoderLeftCount = -440;
+    turnLeftEncoder();
+}
+
+void turnNinetyRight()
+{
+    encoderLeftCount = 440;
+    encoderRightCount = -440;
+    turnRightEncoder();
+}
+
+void rightTurn()
+{
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = 1500;
+    leftPwm = leftBase + 75;
+    rightPwm = rightBase - 80;
+    while (leftEncoder <= encoderLeftCount)
+    {
+        forward();
+    }
+    brake();
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+}
+
+void leftTurn()
+{
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderRightCount = 1500;
+    leftPwm = leftBase - 85;
+    rightPwm = rightBase + 75;
+    while (rightEncoder <= encoderRightCount)
+    {
+        forward();
+    }
+    brake();
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
 }
