@@ -105,7 +105,7 @@ void brake()
     stbyHigh();
     leftBrake();
     rightBrake();
-    delay(1000);
+    delay(100);
 }
 
 void forwardBase()
