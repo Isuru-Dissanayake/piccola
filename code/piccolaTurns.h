@@ -89,6 +89,8 @@ void turnLeftEncoder()
         }
         else
         {
+
+
             rightBrake();
         }
         
@@ -129,12 +131,12 @@ void rightTurn()
     rightEncoder = 0;
     encoderLeftCount = 1500;
     leftPwm = leftBase + 75;
-    rightPwm = rightBase - 80;
+    rightPwm = rightBase - 77;
     while (leftEncoder <= encoderLeftCount)
     {
         forward();
     }
-    brake();
+    //brake();
     leftEncoder = 0;
     rightEncoder = 0;
     encoderLeftCount = 0;
@@ -146,13 +148,13 @@ void leftTurn()
     leftEncoder = 0;
     rightEncoder = 0;
     encoderRightCount = 1500;
-    leftPwm = leftBase - 85;
+    leftPwm = leftBase - 75;
     rightPwm = rightBase + 75;
     while (rightEncoder <= encoderRightCount)
     {
         forward();
     }
-    brake();
+    //brake();
     leftEncoder = 0;
     rightEncoder = 0;
     encoderLeftCount = 0;
