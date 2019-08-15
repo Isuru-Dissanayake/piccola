@@ -1,5 +1,5 @@
 int leftBase =180;
-int rightBase = 177;
+int rightBase = 180;
 int leftPwm;
 int rightPwm;
 
@@ -9,7 +9,7 @@ int encoderLeftCount;
 int encoderRightCount;
 
 float tof[5];
-int wallAvailable[2];
+int wallAvailable[3];
 int cellWalls[3];
 
 float leftP = 0.15;
