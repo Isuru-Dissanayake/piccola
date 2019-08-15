@@ -28,12 +28,14 @@ void leftBrake()
 
 void leftForwardBase()
 {
+    stbyHigh();
     leftForward();
     analogWrite(PWMA, leftBase);
 }
 
 void leftReverseBase()
 {
+    stbyHigh();
     leftReverse();
     analogWrite(PWMA, leftBase);
 }
@@ -58,12 +60,14 @@ void rightBrake()
 
 void rightForwardBase()
 {
+    stbyHigh();
     rightForward();
     analogWrite(PWMB, rightBase);
 }
 
 void rightReverseBase()
 {
+    stbyHigh();
     rightReverse();
     analogWrite(PWMB, rightBase);
 }
@@ -82,6 +86,7 @@ void writeBasePwm()
 
 void forward()
 {
+    stbyHigh();
     leftForward();
     rightForward();
     writePwm();
@@ -89,6 +94,7 @@ void forward()
 
 void reverse()
 {
+    stbyHigh();
     leftReverse();
     rightReverse();
     writePwm();
@@ -96,6 +102,7 @@ void reverse()
 
 void brake()
 {
+    stbyHigh();
     leftBrake();
     rightBrake();
     delay(1000);
