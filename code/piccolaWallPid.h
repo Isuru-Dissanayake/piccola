@@ -1,6 +1,6 @@
 void leftPid()
 {
-    leftError = 35 - tof[0];
+    leftError = 60 - tof[0];
     correction = (leftError * leftP) + ((leftError - leftLastError) * leftD);
     leftLastError = leftError;
     leftPwm = leftBase + correction;
@@ -9,7 +9,7 @@ void leftPid()
 
 void rightPid()
 {
-    rightError = 35 - tof[4];
+    rightError = 60 - tof[4];
     correction  = (rightError * rightP) + ((rightError - rightLastError) * rightD);
     rightLastError = rightError;
     leftPwm = leftBase - correction;
@@ -28,20 +28,20 @@ void wallPid()
 
 void wallFollow()
 {
-    checkWalls();
-    if (cellWalls[0] == 1 && cellWalls[2] == 1)
+    checkWallsPid();
+    if (wallAvailable[0] == 1 && wallAvailable[1] == 1)
     {
         wallPid();
         forward();
     }
 
-    else if (cellWalls[0] == 0 && cellWalls[2] == 1)
+    else if (wallAvailable[0] == 0 && wallAvailable[1] == 1)
     {
         rightPid();
         forward();
     }
 
-    else if (cellWalls[0] == 1 && cellWalls[2] == 0)
+    else if (wallAvailable[0] == 1 && wallAvailable[1] == 0)
     {
         leftPid();
         forward();
