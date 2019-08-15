@@ -25,10 +25,17 @@ void setup()
 
 void loop()
 {
-    cellStart();
-    forwardBase();
-    //delay(3000);
-    cellBrake();
-    //delay(1000);
-    
+    if(Serial2.available())
+  {
+    Val=Serial2.read(); 
+  if (Val[0]=='p')
+  {
+    wallP= float(Val[1:4]);
+    Serial2.println(wallP);
+  }
+  else if (Val[0]=='d')
+  {
+    wallD= float(Val[1:4]);
+    Serial2.println(wallD);
+  }
 }
