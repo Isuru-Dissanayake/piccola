@@ -51,7 +51,7 @@ void tofSetup()
     tof3.init();
     tof3.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof3.setTimeout(5);
+    tof3.setTimeout(10);
     tof3.setAddress(tofAddress3);
 
     digitalWrite(GPIO4, HIGH);
@@ -59,7 +59,7 @@ void tofSetup()
     tof4.init();
     tof4.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof4.setTimeout(5);
+    tof4.setTimeout(10);
     tof4.setAddress(tofAddress4);
 
     digitalWrite(GPIO5, HIGH);
@@ -67,7 +67,7 @@ void tofSetup()
     tof5.init();
     tof5.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof5.setTimeout(5);
+    tof5.setTimeout(10);
     tof5.setAddress(tofAddress5);
 }
 
@@ -169,21 +169,21 @@ void checkWallsPid()
     }
 
     //check front wall availability
-    if (tof[2] > 140)
+    if (tof[2] > 150)
     {
         wallAvailable[1] =  0;
     }
     else
     {
         tofPid();
-        if (tof[2] > 140)
+        if (tof[2] > 150)
         {
             wallAvailable[1] = 0;
         }
         else
         {
             tofPid();
-            if (tof[2] > 140)
+            if (tof[2] > 150)
             {
                 wallAvailable[1] = 0;
             }
@@ -229,21 +229,21 @@ void checkWallsCell()
     }
 
     //check left-forward wall availability
-    if (tof[1] <= 150)
+    if (tof[1] <= 170)
     {
         cellWalls[0] = 1;
     }
     else
     {
         tofCell();
-        if (tof[1] <= 150)
+        if (tof[1] <= 170)
         {
             cellWalls[0] = 1;
         }
         else
         {
             tofCell();
-            if (tof[1] <= 150)
+            if (tof[1] <= 170)
             {
                 cellWalls[0] = 1;
             }
@@ -257,21 +257,21 @@ void checkWallsCell()
     }
     
     //check left-forward wall availability
-    if (tof[3] <= 150)
+    if (tof[3] <= 170)
     {
         cellWalls[2] = 1;
     }
     else
     {
         tofCell();
-        if (tof[3] <= 150)
+        if (tof[3] <= 170)
         {
             cellWalls[2] = 1;
         }
         else
         {
             tofCell();
-            if (tof[3] <= 150)
+            if (tof[3] <= 170)
             {
                 cellWalls[2] = 1;
             }
@@ -289,7 +289,7 @@ void printWallState()
 {
     for (int i=0; i<3; i++)
     {
-        Serial2.print(wallAvailable[i]);
+        Serial2.print(cellWalls[i]);
         Serial2.print("   ");
     }
     Serial2.println("");
