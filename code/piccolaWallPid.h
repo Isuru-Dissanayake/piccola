@@ -29,21 +29,25 @@ void wallPid()
 void wallFollow()
 {
     checkWallsPid();
-    if (wallAvailable[0] == 1 && wallAvailable[1] == 1)
+    if (wallAvailable[0] == 1 && wallAvailable[2] == 1)
     {
         wallPid();
         forward();
     }
 
-    else if (wallAvailable[0] == 0 && wallAvailable[1] == 1)
+    else if (wallAvailable[0] == 0 && wallAvailable[2] == 1)
     {
         rightPid();
         forward();
     }
 
-    else if (wallAvailable[0] == 1 && wallAvailable[1] == 0)
+    else if (wallAvailable[0] == 1 && wallAvailable[2] == 0)
     {
         leftPid();
         forward();
     }
-}
+    else if(wallAvailable[0] == 0 && wallAvailable[2] == 0)
+    {
+        forwardBase();
+    }
+}  
