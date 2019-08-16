@@ -129,14 +129,14 @@ void rightTurn()
 {
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = 1540;
+    encoderLeftCount = 1550;
     leftPwm = leftBase + 75;
-    rightPwm = rightBase - 75;
+    rightPwm = rightBase - 78;
     while (leftEncoder <= encoderLeftCount)
     {
         forward();
     }
-    brake();
+    //brake();
     leftEncoder = 0;
     rightEncoder = 0;
     encoderLeftCount = 0;
@@ -154,7 +154,7 @@ void leftTurn()
     {
         forward();
     }
-    brake();
+    //brake();
     leftEncoder = 0;
     rightEncoder = 0;
     encoderLeftCount = 0;
@@ -163,6 +163,8 @@ void leftTurn()
 
 void turnBack()
 {
+    rightBase=177;
+    leftBase=180;
     encoderLeftCount = 920;
     encoderRightCount = -920;
     turnRightEncoder();
