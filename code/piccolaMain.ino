@@ -57,7 +57,8 @@ void loopk()
 void loop()
 {
     delay(1000);
-    rightTurn();
+    turnBack();
+    //leftTurn();
     /*
     delay(1000);
     cellStart();
