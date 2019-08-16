@@ -57,17 +57,74 @@ void loopk()
 void loop()
 {
     delay(1000);
-    turnBack();
-    //leftTurn();
-    /*
-    delay(1000);
     cellStart();
-    while(1)
+    while (1)
     {
-        tofPid();
-        checkWallsPid();
-        wallPid();
-        forward();
+        tofCell();
+        checkWallsCell();
+        if (cellWalls[2] == 0)
+        {
+            rightTurn();
+            brake();
+        }
+
+        else if(cellWalls[1] == 0)
+        {
+            leftEncoder = 0;
+            rightEncoder = 0;
+            encoderLeftCount = 1250;
+            encoderRightCount = 1250;
+            while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+            {
+                tofPid();
+                checkWallsPid();
+                wallFollow();
+            }
+            //brake();
+        }
+
+        else if(cellWalls[0] == 0)
+        {
+            leftTurn();
+            brake();
+        }
+
+        else
+        {
+            cellBrake();
+            turnBack();
+            cellStart();
+        }
+        
+
     }
-    */
+}
+
+void loopm()
+{
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = 1280;
+    encoderRightCount = 1280;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+    tofPid();
+    checkWallsPid();
+    wallFollow();
+    }
+    brake();
+    delay(500);
+    tofCell();
+    checkWallsCell();
+    if (wallAvailable[2] == 0)
+    {
+        rightTurn();
+    }
+}
+
+void loopd()
+{
+    tofCell();
+    checkWallsCell();
+    printWallState();
 }
