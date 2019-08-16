@@ -6,6 +6,7 @@
 #include "piccolaMotors.h"
 #include "piccolaTurns.h"
 #include "piccolaWallPid.h"
+#include "piccolaSpeed.h"
 
 
 
@@ -23,6 +24,40 @@ void setup()
 
 void loop()
 {
+    delay(1000);
+    cellStart();
+    while(1)
+    {
+        tofCell();
+        checkWallsCell();
+        if (cellWalls[1] == 1)
+        {
+            cellBrake();
+            delay(3000);
+        }
+        else if (cellWalls[0] ==1 && cellWalls[2] == 1)
+        {
+            forwardBase();
+        }
+
+        else if (cellWalls[2] == 0)
+        {
+            rightTurn();
+        }
+
+        else
+        {
+            leftTurn();
+        }
+    }
     
     
+}
+
+void loopm()
+{
+    //delay(1000);
+    tofPid();
+    printTof();
+
 }
