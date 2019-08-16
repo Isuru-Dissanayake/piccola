@@ -25,7 +25,7 @@ float rightError = 0;
 float rightLastError = 0;
 
 float wallP = 0.15;
-float wallD = 0;
+float wallD = 0.02;
 
 float wallError = 0;
 float wallLastError = 0;
