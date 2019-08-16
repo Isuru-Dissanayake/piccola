@@ -35,7 +35,7 @@ void tofSetup()
     delay(10);
     tof1.init();
     tof1.configureDefault();
-    tof1.setTimeout(50);
+    tof1.setTimeout(10);
     tof1.setAddress(tofAddress1);
 
     digitalWrite(GPIO2, HIGH);
@@ -43,7 +43,7 @@ void tofSetup()
     tof2.init();
     tof2.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof2.setTimeout(50);
+    tof2.setTimeout(10);
     tof2.setAddress(tofAddress2);
 
     digitalWrite(GPIO3, HIGH);
@@ -51,7 +51,7 @@ void tofSetup()
     tof3.init();
     tof3.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof3.setTimeout(50);
+    tof3.setTimeout(5);
     tof3.setAddress(tofAddress3);
 
     digitalWrite(GPIO4, HIGH);
@@ -59,7 +59,7 @@ void tofSetup()
     tof4.init();
     tof4.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof4.setTimeout(50);
+    tof4.setTimeout(5);
     tof4.setAddress(tofAddress4);
 
     digitalWrite(GPIO5, HIGH);
@@ -67,7 +67,7 @@ void tofSetup()
     tof5.init();
     tof5.configureDefault();
     //Sensor1.startRangeContinuous();
-    tof5.setTimeout(50);
+    tof5.setTimeout(5);
     tof5.setAddress(tofAddress5);
 }
 
@@ -89,19 +89,19 @@ void tofPid()
 
 void printTof()
 {
-    /*
+    
     Serial2.print(tof[0]);
     Serial2.print(",  ");
-    */
-    Serial2.print(tof[1]);
-    Serial2.print(",  ");
+    
+    //Serial2.print(tof[1]);
+    //Serial2.print(",  ");
     Serial2.print(tof[2]);
     Serial2.print(",  ");
-    Serial2.print(tof[3]);
-    Serial2.print(",  ");
-    /*
+    //Serial2.print(tof[3]);
+    //Serial2.print(",  ");
+    
     Serial2.print(tof[4]);
-    */
+    
     Serial2.println();
     
 }
@@ -201,21 +201,21 @@ void checkWallsPid()
 void checkWallsCell()
 {
     //check front wall availability
-    if (tof[2] > 40)
+    if (tof[2] > 150)
     {
         cellWalls[1] =  0;
     }
     else
     {
         tofCell();
-        if (tof[2] > 40)
+        if (tof[2] > 150)
         {
             cellWalls[1] = 0;
         }
         else
         {
             tofCell();
-            if (tof[2] > 40)
+            if (tof[2] > 150)
             {
                 cellWalls[1] = 0;
             }
@@ -229,21 +229,21 @@ void checkWallsCell()
     }
 
     //check left-forward wall availability
-    if (tof[1] <= 200)
+    if (tof[1] <= 150)
     {
         cellWalls[0] = 1;
     }
     else
     {
         tofCell();
-        if (tof[1] <= 200)
+        if (tof[1] <= 150)
         {
             cellWalls[0] = 1;
         }
         else
         {
             tofCell();
-            if (tof[1] <= 200)
+            if (tof[1] <= 150)
             {
                 cellWalls[0] = 1;
             }
@@ -257,21 +257,21 @@ void checkWallsCell()
     }
     
     //check left-forward wall availability
-    if (tof[3] <= 200)
+    if (tof[3] <= 150)
     {
         cellWalls[2] = 1;
     }
     else
     {
         tofCell();
-        if (tof[3] <= 200)
+        if (tof[3] <= 150)
         {
             cellWalls[2] = 1;
         }
         else
         {
             tofCell();
-            if (tof[3] <= 200)
+            if (tof[3] <= 150)
             {
                 cellWalls[2] = 1;
             }
@@ -283,6 +283,16 @@ void checkWallsCell()
         }
         
     }
+}
+
+void printWallState()
+{
+    for (int i=0; i<3; i++)
+    {
+        Serial2.print(wallAvailable[i]);
+        Serial2.print("   ");
+    }
+    Serial2.println("");
 }
 
 
