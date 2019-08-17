@@ -42,7 +42,7 @@ void tofSetup()
     delay(10);
     tof2.init();
     tof2.configureDefault();
-    //Sensor1.startRangeContinuous();
+    //tof2.startInterleavedContinuous();
     tof2.setTimeout(10);
     tof2.setAddress(tofAddress2);
 
@@ -50,7 +50,7 @@ void tofSetup()
     delay(10);
     tof3.init();
     tof3.configureDefault();
-    //Sensor1.startRangeContinuous();
+    //tof2.startInterleavedContinuous();
     tof3.setTimeout(10);
     tof3.setAddress(tofAddress3);
 
@@ -58,7 +58,7 @@ void tofSetup()
     delay(10);
     tof4.init();
     tof4.configureDefault();
-    //Sensor1.startRangeContinuous();
+    //tof2.startInterleavedContinuous();
     tof4.setTimeout(10);
     tof4.setAddress(tofAddress4);
 
@@ -90,17 +90,17 @@ void tofPid()
 void printTof()
 {
     
-    Serial2.print(tof[0]);
-    Serial2.print(",  ");
-    
-    //Serial2.print(tof[1]);
+    //Serial2.print(tof[0]);
     //Serial2.print(",  ");
+    
+    Serial2.print(tof[1]);
+    Serial2.print(",  ");
     Serial2.print(tof[2]);
     Serial2.print(",  ");
-    //Serial2.print(tof[3]);
-    //Serial2.print(",  ");
+    Serial2.print(tof[3]);
+    Serial2.print(",  ");
     
-    Serial2.print(tof[4]);
+    //Serial2.print(tof[4]);
     
     Serial2.println();
     
@@ -198,6 +198,69 @@ void checkWallsPid()
     
 }
 
+/*
+void checkWallsPid()
+{
+    if (tof[2] > 170)
+    {
+        wallAvailable[1] =  0;
+    }
+    else
+    {
+        wallAvailable[1] =  1;
+    } 
+
+    if (tof[0] <= 135)
+    {
+        wallAvailable[0] = 1;
+    }
+    else
+    {
+        wallAvailable[0] = 0; 
+    }
+
+    if (tof[4] <= 135)
+    {
+        wallAvailable[2] = 1;
+    }
+    else
+    {
+        wallAvailable[2] = 0; 
+    }
+}
+*/
+void checkWallsCell()
+{
+    if (tof[2] > 150)
+    {
+        cellWalls[1] =  0;
+    }
+    else
+    {
+        cellWalls[1] =  1;
+    } 
+
+    if (tof[1] <= 135)
+    {
+        cellWalls[0] = 1;
+    }
+    else
+    {
+        cellWalls[0] = 0; 
+    }
+
+    if (tof[3] <= 135)
+    {
+        cellWalls[2] = 1;
+    }
+    else
+    {
+        cellWalls[2] = 0; 
+    }
+}
+
+
+/*
 void checkWallsCell()
 {
     //check front wall availability
@@ -284,7 +347,7 @@ void checkWallsCell()
         
     }
 }
-
+*/
 void printWallState()
 {
     for (int i=0; i<3; i++)
