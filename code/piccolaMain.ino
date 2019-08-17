@@ -7,8 +7,9 @@
 #include "piccolaTurns.h"
 #include "piccolaWallPid.h"
 #include "piccolaSpeed.h"
+#include "piccolaMoves.h"
 
-
+unsigned long time;
 
 void setup()
 {
@@ -54,18 +55,24 @@ void loopk()
     
 }
 
-void loop()
+void loopg()
 {
     delay(1000);
-    cellStart();
+    //cellStart();
     while (1)
     {
-        tofCell();
+        delay(2000);
+        tofPid();
         checkWallsCell();
+        printTof();
+        delay(1000);
+        printWallState();
+        delay(4000);
         if (cellWalls[2] == 0)
         {
             rightTurn();
             brake();
+            delay(1000);
         }
 
         else if(cellWalls[1] == 0)
@@ -80,13 +87,15 @@ void loop()
                 checkWallsPid();
                 wallFollow();
             }
-            //brake();
+            brake();
+            delay(1000);
         }
 
         else if(cellWalls[0] == 0)
         {
             leftTurn();
             brake();
+            delay(1000);
         }
 
         else
@@ -94,37 +103,41 @@ void loop()
             cellBrake();
             turnBack();
             cellStart();
+            brake();
         }
-        
-
     }
 }
 
-void loopm()
+
+
+
+void looph()
 {
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderLeftCount = 1280;
-    encoderRightCount = 1280;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-    {
-    tofPid();
-    checkWallsPid();
-    wallFollow();
-    }
-    brake();
-    delay(500);
-    tofCell();
-    checkWallsCell();
-    if (wallAvailable[2] == 0)
-    {
-        rightTurn();
-    }
+    delay(1000);
+    cellStart();
+    cellForward();
+    rightTurn();
+    leftTurn();
+    cellForward();
+    cellForward();
+    rightTurn();
+    rightTurn();
+    leftTurn();
+    cellForward();
+    rightTurn();
+    leftTurn();
+    leftTurn();
+    rightTurn();
+    leftTurn();
+    cellForward();
+    cellBrake();
+    delay(3000);
 }
 
-void loopd()
+void loop()
 {
     tofCell();
     checkWallsCell();
+    printTof();
     printWallState();
 }
