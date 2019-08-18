@@ -10,7 +10,6 @@
 #include "piccolaMoves.h"
 #include "piccolaMazeSolve.h"
 
-unsigned long time;
 
 void setup()
 {
