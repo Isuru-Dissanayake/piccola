@@ -1,28 +1,21 @@
 void mazeSolve()
 {
+    
     switch (nextMove)
     {
-    case 'F' :
-        leftEncoder = 0;
-        rightEncoder = 0;
-        encoderLeftCount = 1280;
-        encoderRightCount = 1280;
-        while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-        {
-            forwardBase();
-        }
+    case 'F' :      //move forward
+        cellForwad();
         break;
-    
-    case 'R' :
-        //move right
+    case 'R' :      //move right
+        rightTurn();
         break;
 
-    case 'L' :
-        //move left
+    case 'L' :      //move left
+        leftTurn();
         break;
     
-    case 'B' :
-        //move back
+    case 'B' :      //move back
+        cellBack();
         break;
     }
 }
