@@ -21,8 +21,11 @@ void mazeSolve()
     {
         nextMove = 'B';
     }
-
+    Serial2.print(millis() - time);
+    Serial2.print("   ");
+    Serial2.println(nextMove);
     
+    /*
     switch (nextMove)
     {
     case 'F' :      //move forward
@@ -40,4 +43,5 @@ void mazeSolve()
         cellBack();
         break;
     }
+    */
 }
