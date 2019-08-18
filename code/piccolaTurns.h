@@ -125,47 +125,11 @@ void turnNinetyRight()
     turnRightEncoder();
 }
 
-void rightTurn()
-{
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderLeftCount = 1550;
-    leftPwm = leftBase + 75;
-    rightPwm = rightBase - 81;
-    while (leftEncoder <= encoderLeftCount)
-    {
-        forward();
-    }
-    //brake();
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderLeftCount = 0;
-    encoderRightCount = 0;
-}
-
-void leftTurn()
-{
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderRightCount = 1555;
-    leftPwm = leftBase - 75;
-    rightPwm = rightBase + 75;
-    while (rightEncoder <= encoderRightCount)
-    {
-        forward();
-    }
-    //brake();
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderLeftCount = 0;
-    encoderRightCount = 0;
-}
-
 void turnBack()
 {
     rightBase=177;
     leftBase=180;
-    encoderLeftCount = 920;
-    encoderRightCount = -920;
+    encoderLeftCount = 930;
+    encoderRightCount = -930;
     turnRightEncoder();
 }
