@@ -8,6 +8,7 @@
 #include "piccolaWallPid.h"
 #include "piccolaSpeed.h"
 #include "piccolaMoves.h"
+#include "piccolaMazeSolve.h"
 
 unsigned long time;
 
@@ -25,5 +26,5 @@ void setup()
 
 void loop()
 {
-    
+
 }
