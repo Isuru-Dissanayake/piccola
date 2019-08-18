@@ -107,98 +107,6 @@ void printTof()
 }
 
 
-
-
-void checkWallsPid()
-{
-    wallAvailable[3] ={0};
-    //check left wall availability
-    if (tof[0] <= 150)
-    {
-        wallAvailable[0] = 1;
-    }
-    else
-    {
-        tofPid();
-        if (tof[0] <= 150)
-        {
-            wallAvailable[0] = 1;
-        }
-        else
-        {
-            tofPid();
-            if (tof[0] <= 150)
-            {
-                wallAvailable[0] = 1;
-            }
-            else
-            {
-                wallAvailable[0] = 0;
-            }
-            
-        }
-        
-    }
-
-    //check right wall availability
-    if (tof[4] <= 150)
-    {
-        wallAvailable[2] = 1;
-    }
-    else
-    {
-        tofPid();
-        if (tof[4] <= 150)
-        {
-            wallAvailable[2] = 1;
-        }
-        else
-        {
-            tofPid();
-            if (tof[4] <= 150)
-            {
-                wallAvailable[2] = 1;
-            }
-            else
-            {
-                wallAvailable[2] = 0;
-            }
-            
-        }
-        
-    }
-
-    //check front wall availability
-    if (tof[2] > 150)
-    {
-        wallAvailable[1] =  0;
-    }
-    else
-    {
-        tofPid();
-        if (tof[2] > 150)
-        {
-            wallAvailable[1] = 0;
-        }
-        else
-        {
-            tofPid();
-            if (tof[2] > 150)
-            {
-                wallAvailable[1] = 0;
-            }
-            else
-            {
-                wallAvailable[1] = 1;
-            }
-            
-        }
-        
-    }
-    
-}
-
-/*
 void checkWallsPid()
 {
     if (tof[2] > 170)
@@ -228,7 +136,7 @@ void checkWallsPid()
         wallAvailable[2] = 0; 
     }
 }
-*/
+
 void checkWallsCell()
 {
     if (tof[2] > 150)
@@ -260,94 +168,7 @@ void checkWallsCell()
 }
 
 
-/*
-void checkWallsCell()
-{
-    //check front wall availability
-    if (tof[2] > 150)
-    {
-        cellWalls[1] =  0;
-    }
-    else
-    {
-        tofCell();
-        if (tof[2] > 150)
-        {
-            cellWalls[1] = 0;
-        }
-        else
-        {
-            tofCell();
-            if (tof[2] > 150)
-            {
-                cellWalls[1] = 0;
-            }
-            else
-            {
-                cellWalls[1] = 1;
-            }
-            
-        }
-        
-    }
 
-    //check left-forward wall availability
-    if (tof[1] <= 170)
-    {
-        cellWalls[0] = 1;
-    }
-    else
-    {
-        tofCell();
-        if (tof[1] <= 170)
-        {
-            cellWalls[0] = 1;
-        }
-        else
-        {
-            tofCell();
-            if (tof[1] <= 170)
-            {
-                cellWalls[0] = 1;
-            }
-            else
-            {
-                cellWalls[0] = 0;
-            }
-            
-        }
-        
-    }
-    
-    //check left-forward wall availability
-    if (tof[3] <= 170)
-    {
-        cellWalls[2] = 1;
-    }
-    else
-    {
-        tofCell();
-        if (tof[3] <= 170)
-        {
-            cellWalls[2] = 1;
-        }
-        else
-        {
-            tofCell();
-            if (tof[3] <= 170)
-            {
-                cellWalls[2] = 1;
-            }
-            else
-            {
-                cellWalls[2] = 0;
-            }
-            
-        }
-        
-    }
-}
-*/
 void printWallState()
 {
     for (int i=0; i<3; i++)
