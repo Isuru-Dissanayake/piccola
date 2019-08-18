@@ -11,6 +11,7 @@
 #include "piccolaMazeSolve.h"
 
 
+
 void setup()
 {
     tofSetup();
@@ -25,5 +26,7 @@ void setup()
 
 void loop()
 {
-
+    time = millis();
+    mazeSolve();
+    
 }
