@@ -1,5 +1,6 @@
 void mazeSolve()
 {
+    tofCell();
     
     switch (nextMove)
     {
