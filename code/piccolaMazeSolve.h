@@ -3,12 +3,12 @@ void mazeSolve()
     //brake();
     //delay(1000);
     //time = millis();
-    brake();
+    //brake();
     tofCell();
     tofCell();
     checkWallsCell();
-    printWallState();
-    delay(1000);
+    //printWallState();
+    //delay(1000);
     if (cellWalls[2] == 0)
     {
         nextMove = 'R';
