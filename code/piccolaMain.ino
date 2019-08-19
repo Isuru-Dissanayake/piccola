@@ -24,7 +24,7 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loop()
+void loopm()
 {
     delay(1000);
     cellStart();
@@ -35,17 +35,11 @@ void loop()
     
 }
 
-void loopm()
+void loop()
 {
-    delay(1000);
-    cellStart();
-    brake();
-    delay(1000);
-    while(1)
-    {
-        cellForward();
-        brake();
-        delay(1000);
-    }
+    tofPid();
+    //printTof();
+    leftPid();
+    forward();
     
 }
