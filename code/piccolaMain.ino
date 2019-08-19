@@ -24,7 +24,7 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loopq()
+void loop()
 {
     delay(1000);
     cellStart();
@@ -35,12 +35,15 @@ void loopq()
     
 }
 
-void loop()
+void loopm()
 {
+    delay(1000);
+    cellStart();
+    brake();
     delay(1000);
     while(1)
     {
-        leftTurn();
+        cellForward();
         brake();
         delay(1000);
     }
