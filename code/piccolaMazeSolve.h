@@ -1,5 +1,9 @@
 void mazeSolve()
 {
+    //brake();
+    //delay(1000);
+    //time = millis();
+    tofCell();
     tofCell();
     checkWallsCell();
     if (cellWalls[2] == 0)
@@ -21,11 +25,10 @@ void mazeSolve()
     {
         nextMove = 'B';
     }
-    Serial2.print(millis() - time);
-    Serial2.print("   ");
-    Serial2.println(nextMove);
-    
-    /*
+    //Serial2.print(millis() - time);
+    //Serial2.print("   ");
+    //Serial2.println(nextMove);
+    //delay(1000);
     switch (nextMove)
     {
     case 'F' :      //move forward
@@ -43,5 +46,5 @@ void mazeSolve()
         cellBack();
         break;
     }
-    */
+    
 }
