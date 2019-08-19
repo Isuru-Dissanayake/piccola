@@ -2,8 +2,8 @@ void cellStart()
 {
     rightEncoder=0;
     leftEncoder=0;
-    encoderRightCount=640;
-    encoderLeftCount=640;
+    encoderRightCount=625;
+    encoderLeftCount=625;
     rightBase=60;
     leftBase=60;
 
