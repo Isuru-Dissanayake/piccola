@@ -1,6 +1,6 @@
 void leftPid()
 {
-    leftError = 60 - tof[0];
+    leftError = 50 - tof[0];
     correction = (leftError * leftP) + ((leftError - leftLastError) * leftD);
     leftLastError = leftError;
     leftPwm = leftBase + correction;
@@ -9,7 +9,7 @@ void leftPid()
 
 void rightPid()
 {
-    rightError = 60 - tof[4];
+    rightError = 58 - tof[4];
     correction  = (rightError * rightP) + ((rightError - rightLastError) * rightD);
     rightLastError = rightError;
     leftPwm = leftBase - correction;
@@ -19,7 +19,7 @@ void rightPid()
 
 void wallPid()
 {
-    wallError = tof[0] - tof[4];
+    wallError = tof[0] - (tof[4]-8);
     correction = (wallError * wallP) + ((wallError - wallLastError) * wallD);
     wallLastError = wallError;
     leftPwm = leftBase - correction;
