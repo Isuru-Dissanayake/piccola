@@ -7,8 +7,14 @@ void cellForward()
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         tofPid();
-        checkWallsPid();
-        wallFollow();
+        if (tof[2] == 138 || tof[2] == 139)
+        {
+            break;
+        }
+        else
+        {
+            wallFollow();
+        }
     }
 }
 
