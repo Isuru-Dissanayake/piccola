@@ -24,9 +24,25 @@ void setup()
     Serial2.begin(9600);
 }
 
+void loopq()
+{
+    delay(1000);
+    cellStart();
+    while(1)
+    {
+        mazeSolve();
+    }
+    
+}
+
 void loop()
 {
-    time = millis();
-    mazeSolve();
+    delay(1000);
+    while(1)
+    {
+        leftTurn();
+        brake();
+        delay(1000);
+    }
     
 }
