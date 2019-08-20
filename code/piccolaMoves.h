@@ -1,20 +1,32 @@
+void mazeStart()
+{
+    rightEncoder=0;
+    leftEncoder=0;
+    encoderRightCount=900;
+    encoderLeftCount=900;
+    rightBase=60;
+    leftBase=60;
+
+    while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
+    {
+        rightBase = int(70+110/(1+pow(2.73,((300-rightEncoder)*0.012))));
+        leftBase = int(70+110/(1+pow(2.73,((300-leftEncoder)*0.012))));
+        forwardBase();
+    }
+    rightBase=177;
+    leftBase=180;
+    //forwardBase();
+}
 void cellForward()
 {
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = 1250;
-    encoderRightCount = 1250;
+    encoderLeftCount = 1274;
+    encoderRightCount = 1274;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         tofPid();
-        if (tof[2] <=138)
-        {
-            break;
-        }
-        else
-        {
-            wallFollow();
-        }
+        wallFollow();
     }
 }
 
@@ -51,7 +63,16 @@ void rightTurn()
     rightBase = 176;
     while (leftEncoder <= 50)
     {
-        forwardBase();
+        tof[2] = tof3.readRangeSingleMillimeters();
+        if (tof[2] <= 138)
+        {
+            //brake();
+            break;
+        }
+        else
+        {
+            forwardBase();
+        }
     }
     leftEncoder = 0;
     rightEncoder = 0;
@@ -66,12 +87,12 @@ void leftTurn()
     encoderRightCount = 1340;
     while (rightEncoder <= 50)
     {
-        rightBase = int(176+79/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        leftBase = int(180-100/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        rightBase = int(176+70/(1+pow(2.73,((25-rightEncoder)*0.05))));
+        leftBase = int(180-95/(1+pow(2.73,((25-leftEncoder)*0.05))));
         forwardBase();
     }
-    leftBase = 80;
-    rightBase = 255;
+    leftBase = 85;
+    rightBase = 246;
     leftEncoder = 0;
     rightEncoder = 0;
     while (rightEncoder <= encoderRightCount)
@@ -83,8 +104,8 @@ void leftTurn()
     rightEncoder = 0;
     while (rightEncoder <= 50)
     {
-        rightBase = int(255-79/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        leftBase = int(80+100/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        rightBase = int(246-70/(1+pow(2.73,((25-rightEncoder)*0.05))));
+        leftBase = int(85+95/(1+pow(2.73,((25-leftEncoder)*0.05))));
         forwardBase();
     }
 
@@ -92,12 +113,12 @@ void leftTurn()
     rightEncoder = 0;
     leftBase = 180;
     rightBase = 176;
-    while (rightEncoder <= 70)
+    while (rightEncoder <= 60)
     {
         tof[2] = tof3.readRangeSingleMillimeters();
         if (tof[2] <= 138)
         {
-            brake();
+            //brake();
             break;
         }
         else
