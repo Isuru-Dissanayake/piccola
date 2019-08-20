@@ -11,6 +11,7 @@
 #define rightOut1 PB14
 #define rightOut2 PB15
 
+#define led PB11
 
 void motorDiver()
 {
