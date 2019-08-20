@@ -27,7 +27,7 @@ void setup()
 void loopm()
 {
     delay(1000);
-    cellStart();
+    //cellStart();
     while(1)
     {
         mazeSolve();
@@ -35,11 +35,23 @@ void loopm()
     
 }
 
-void loop()
+void loopj()
 {
     tofPid();
     //printTof();
-    leftPid();
+    wallPid();
     forward();
     
+}
+
+void loop()
+{
+    delay(1000);
+    while(1)
+    {
+        //cellForward();
+        leftTurn();
+        brake();
+        delay(1000);
+    }
 }
