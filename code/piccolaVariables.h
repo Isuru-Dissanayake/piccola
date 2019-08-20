@@ -12,6 +12,9 @@ float tof[5];
 int wallAvailable[3];
 int cellWalls[3];
 
+int rightWall  = 1;
+int leftWall = 1;
+
 float leftP = 0.8;
 float leftD = 3.4;
 
