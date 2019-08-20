@@ -2,8 +2,8 @@ void mazeStart()
 {
     rightEncoder=0;
     leftEncoder=0;
-    encoderRightCount=950;
-    encoderLeftCount=950;
+    encoderRightCount=900;
+    encoderLeftCount=900;
     rightBase=60;
     leftBase=60;
 
@@ -21,8 +21,8 @@ void cellForward()
 {
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = 1274;
-    encoderRightCount = 1274;
+    encoderLeftCount = 1300;
+    encoderRightCount = 1300;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         tofPid();
