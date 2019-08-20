@@ -47,11 +47,15 @@ void loopj()
 void loop()
 {
     delay(1000);
+    mazeStart();
     while(1)
     {
-        //cellForward();
-        leftTurn();
+        cellForward();
+        cellForward();
+        cellForward();
+        cellForward();
         brake();
         delay(1000);
     }
+    
 }
