@@ -2,8 +2,8 @@ void mazeStart()
 {
     rightEncoder=0;
     leftEncoder=0;
-    encoderRightCount=900;
-    encoderLeftCount=900;
+    encoderRightCount=950;
+    encoderLeftCount=950;
     rightBase=60;
     leftBase=60;
 
