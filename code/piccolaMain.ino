@@ -24,10 +24,12 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loop()
+void loopww()
 {
     delay(1000);
     mazeStart();
+    brake();
+    delay(1000);
     while(1)
     {
         mazeSolve();
@@ -44,22 +46,14 @@ void loopj()
     
 }
 
-void loopn()
+void loop()
 {
-    //digitalWrite(led, HIGH);
     delay(1000);
-    mazeStart();
-    while(1)
-    {
-        cellForward();
-        brake();
-        delay(1000);
-        cellForward();
-        cellForward();
-        cellForward();
-        brake();
-        delay(1000);
-    }
-    
+    cellStart();
+    cellBrake();
+    cellStart();
+    cellForward();
+    cellForward();
+    cellBrake();
     
 }
