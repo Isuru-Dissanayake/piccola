@@ -23,8 +23,6 @@ char turning;
 QueueArray <byte> queue;
 //StackArray <byte> stack;
 
-void setup(){}
-void loop(){}
 byte cells[16][16] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -112,14 +110,14 @@ byte updateCoordinates(byte x, byte y, byte orient){
     if (orient==3)
         x--;
 
-    return(x,y); 
+    return(x,y);
 }
 
 
 
 void updateWalls(byte x, byte y, byte orient, boolean L, boolean R, boolean F){
     if(L && R && F){
-        if (orient==0) 
+        if (orient==0)
             cells[y][x]= 13;
         else if (orient==1)
             cells[y][x]= 12;
@@ -141,20 +139,20 @@ void updateWalls(byte x, byte y, byte orient, boolean L, boolean R, boolean F){
             cells[y][x]= 8;
         else if (orient==1)
             cells[y][x]= 7;
-        else if (orient==2) 
+        else if (orient==2)
             cells[y][x]= 6;
-        else if (orient==3) 
+        else if (orient==3)
             cells[y][x]= 5;
     }
 
     else if (R && F && !L){
-        if (orient==0) 
+        if (orient==0)
             cells[y][x]= 7;
-        else if (orient==1) 
+        else if (orient==1)
             cells[y][x]= 6;
-        else if (orient==2) 
+        else if (orient==2)
             cells[y][x]= 5;
-        else if (orient==3) 
+        else if (orient==3)
             cells[y][x]= 8;
     }
 
@@ -163,38 +161,38 @@ void updateWalls(byte x, byte y, byte orient, boolean L, boolean R, boolean F){
             cells[y][x]= 2;
         else if (orient==1)
             cells[y][x]= 3;
-        else if (orient==2) 
+        else if (orient==2)
             cells[y][x]= 4;
-        else if (orient==3) 
+        else if (orient==3)
             cells[y][x]= 1;
     }
 
     else if(L){
         if (orient==0)
             cells[y][x]= 1;
-        else if (orient==1) 
+        else if (orient==1)
             cells[y][x]= 2;
-        else if (orient==2) 
+        else if (orient==2)
             cells[y][x]= 3;
-        else if (orient==3) 
+        else if (orient==3)
             cells[y][x]= 4;
     }
 
     else if(R){
-        if (orient==0) 
+        if (orient==0)
             cells[y][x]= 3;
-        else if (orient==1) 
+        else if (orient==1)
             cells[y][x]= 4;
-        else if (orient==2) 
+        else if (orient==2)
             cells[y][x]= 1;
-        else if (orient==3) 
+        else if (orient==3)
             cells[y][x]= 2;
     }
 
     else
         cells[y][x]= 15;
 
-  
+
 }
 
 boolean isAccessible(byte x, byte y, byte xNext, byte yNext){
@@ -211,7 +209,7 @@ boolean isAccessible(byte x, byte y, byte xNext, byte yNext){
             else
                 return(true);
         }
-  }    
+  }
     else if (y==yNext){
         if(x>xNext){
             if(cells[y][x]==1 || cells[y][x]==5 || cells[y][x]==8 || cells[y][x]==9 || cells[y][x]==11 || cells[y][x]==13 || cells[y][x]==14 || cells[yNext][xNext]==3 || cells[yNext][xNext]==6 || cells[yNext][xNext]==7 || cells[yNext][xNext]==9 || cells[yNext][xNext]==11 || cells[yNext][xNext]==12 || cells[yNext][xNext]==13 )
@@ -228,7 +226,7 @@ boolean isAccessible(byte x, byte y, byte xNext, byte yNext){
 
 
     }
-  
+
 }
 
 byte getSurrounds(byte x,byte y){
@@ -262,13 +260,13 @@ void changeDestination(byte destinationy,byte destinationx){
     queue.enqueue(destinationy);
     queue.enqueue(destinationx);
 
-    
+
     while (!queue.isEmpty ()){
         yrun=queue.dequeue();
         xrun=queue.dequeue();
 
         x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3= getSurrounds(xrun,yrun);
-        
+
         if(x_0>=0 && y_0>=0 ){
             if (flood[y_0][x_0]==255){
                 flood[y_0][x_0]= flood[yrun][xrun]+1;
@@ -303,7 +301,7 @@ void changeDestination(byte destinationy,byte destinationx){
 
 
 void floodFill2(){
-  
+
   for (int i=0;i<16;i++){
         for (int j=0;j<16;j++){
             flood2[i][j]=0;
@@ -326,7 +324,7 @@ void floodFill2(){
 
     byte xrun=0;
     byte yrun=0;
-    
+
      while (!queue.isEmpty ()){
         yrun=queue.dequeue();
         xrun=queue.dequeue();
@@ -369,16 +367,16 @@ void floodFill2(){
             }
         }
      }
-  
+
 }
 
 
 void floodFill3(){
-    
+
     byte xrun=0;
     byte yrun=0;
     while (!queue.isEmpty ()){
-      
+
         yrun=queue.dequeue();
         xrun=queue.dequeue();
 
@@ -423,7 +421,7 @@ void floodFill3(){
 }
 
 
-                       
+
 char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
     byte val= flood[y][x];
@@ -457,7 +455,7 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     byte minVal=minVals[0];
     byte minCell=0;
     byte noMovements=0;
-    
+
     for (int i=4; i<4;i++){
         if (minVals[i]!=1000)
             noMovements+=1;
@@ -562,7 +560,7 @@ void appendDestination(byte x,byte y){
             flood[i][j]=255;
         }
     }
-    
+
     flood[y][x]=0;
 
     queue.enqueue(y);
@@ -571,15 +569,15 @@ void appendDestination(byte x,byte y){
 
 
 char maze(boolean L, boolean R, boolean F){
-  
+
   updateWalls(x,y,orient,L,R,F);
 
-  
+
   if (flood[y][x]!=0){
-            
+
             if (state==0){
                 appendZero();}
-                
+
             floodFill3();
   }
 
@@ -593,12 +591,12 @@ char maze(boolean L, boolean R, boolean F){
             floodFill2();
         }
 
-            
+
         if (shortPath){
             dir= toMove2(x,y,xprev,yprev,orient);}
         else{
             dir= toMove(x,y,xprev,yprev,orient);}
-        
+
         if (dir=='L'){
             orient = orientation(orient,'L');
         }
