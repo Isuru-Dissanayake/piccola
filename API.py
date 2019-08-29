@@ -76,6 +76,7 @@ def moveForward():
     response = command(args=["moveForward"], return_type=str)
 
     if response == "crash":
+        #log(str(cells[y][x]))
         raise MouseCrashedError()
 
 def turnRight():
@@ -113,3 +114,6 @@ def wasReset():
 
 def ackReset():
     command(args=["ackReset"], return_type=str)
+
+def log(string):
+    sys.stderr.write("{}\n".format(string))
