@@ -30,4 +30,5 @@ void loop()
 {
     delay(1000);
     rightTurn();
+    brake();
 }
