@@ -9,6 +9,7 @@
 #include "piccolaSpeed.h"
 #include "piccolaMoves.h"
 #include "piccolaMazeSolve.h"
+#include "piccolaZlgo.h"
 
 
 
@@ -27,7 +28,6 @@ void setup()
 
 void loop()
 {
-    tofPid();
-    wallFollow();
-    //cellForward();
+    delay(1000);
+    rightTurn();
 }
