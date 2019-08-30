@@ -9,7 +9,6 @@
 #include "piccolaSpeed.h"
 #include "piccolaMoves.h"
 #include "piccolaMazeSolve.h"
-#include "piccolaZlgo.h"
 
 
 
@@ -28,9 +27,7 @@ void setup()
 
 void loop()
 {
-    delay(1000);
-    cellStart();
-    //cellForward();
-    cellBrake();
-    brake();
+    leftBase = 120;
+    rightBase = 120;
+    forwardBase();
 }
