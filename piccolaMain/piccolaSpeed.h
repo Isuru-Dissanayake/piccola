@@ -9,8 +9,8 @@ void cellStart()
 
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
-        rightBase = int(70+110/(1+pow(2.73,((319-rightEncoder)*0.012))));
-        leftBase = int(70+110/(1+pow(2.73,((319-leftEncoder)*0.012))));
+        rightBase = int(70+110/(1+pow(2.73,((317-rightEncoder)*0.012))));
+        leftBase = int(70+110/(1+pow(2.73,((317-leftEncoder)*0.012))));
         forwardBase();
     }
     rightBase=176;
@@ -29,8 +29,8 @@ void cellBrake()
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
 
     {
-        rightBase = int(176-110/(1+pow(2.73,((319-rightEncoder)*0.012))));
-        leftBase = int(180-110/(1+pow(2.73,((319-leftEncoder)*0.012))));
+        rightBase = int(176-110/(1+pow(2.73,((317-rightEncoder)*0.012))));
+        leftBase = int(180-110/(1+pow(2.73,((317-leftEncoder)*0.012))));
         forwardBase();  
     }
     brake();
