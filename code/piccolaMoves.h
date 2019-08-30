@@ -21,12 +21,13 @@ void cellForward()
 {
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = 1300;
-    encoderRightCount = 1300;
+    encoderLeftCount = 1273;
+    encoderRightCount = 1273;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        tofPid();
-        wallFollow();
+        //tofPid();
+        //wallFollow();
+        forwardBase();
     }
 }
 
