@@ -21,8 +21,8 @@ void cellForward()
 {
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = 1276;
-    encoderRightCount = 1276;
+    encoderLeftCount = 1275;
+    encoderRightCount = 1275;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         //tofPid();
