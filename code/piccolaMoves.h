@@ -28,59 +28,47 @@ void cellForward()
     {
         tofPid();
         wallFollow();
-        //forwardBase();
     }
 }
+
 
 void rightTurn()
 {
     leftEncoder = 0;
-    rightEncoder = 0;
-    encoderLeftCount = 1340;
+    encoderLeftCount = 1250;
     while (leftEncoder <= 50)
     {
         leftBase = int(180+75/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        rightBase = int(176-86/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        rightBase = int(176-90/(1+pow(2.73,((25-leftEncoder)*0.05))));
         forwardBase();
     }
     leftBase = 255;
-    rightBase = 90;
+    rightBase = 86;
     leftEncoder = 0;
-    rightEncoder = 0;
     while (leftEncoder <= encoderLeftCount)
     {
         forwardBase();
     }
     leftEncoder = 0;
-    rightEncoder = 0;
     while (leftEncoder <= 60)
     {
-        leftBase = int(255-75/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        rightBase = int(90+86/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        leftBase = int(255-75/(1+pow(2.73,((30-rightEncoder)*0.05))));
+        rightBase = int(86+90/(1+pow(2.73,((30-leftEncoder)*0.05))));
         forwardBase();
     }
     leftEncoder = 0;
-    rightEncoder = 0;
     leftBase = 180;
     rightBase = 176;
     while (leftEncoder <= 50)
     {
-        tof[2] = tof3.readRangeSingleMillimeters();
-        if (tof[2] <= 138)
-        {
-            //brake();
-            break;
-        }
-        else
-        {
-            forwardBase();
-        }
+        forwardBase();
     }
     leftEncoder = 0;
     rightEncoder = 0;
     encoderLeftCount = 0;
     encoderRightCount = 0;
 }
+
 
 void leftTurn()
 {
