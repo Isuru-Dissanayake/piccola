@@ -167,38 +167,31 @@ def isConsistant(x,y):
     if (x0>=0 and y0>=0):
         if (isAccessible(x,y,x0,y0)):
             minVals[0]=flood[y0][x0]
-            #if (flood[y0][x0]<minVal):
-            #minVals.append(flood[y0][x0])
-                #minVal= flood[y0][x0]
     if (x1>=0 and y1>=0):
         if (isAccessible(x,y,x1,y1)):
             minVals[1]=flood[y1][x1]
-            #if (flood[y1][x1]<minVal):
-            #minVals.append(flood[y1][x1])
-                #minVal= flood[y1][x1]
     if (x2>=0 and y2>=0):
         if (isAccessible(x,y,x2,y2)):
             minVals[2]=flood[y2][x2]
-            #if (flood[y2][x2]<minVal):
-            #minVals.append(flood[y1][x1])
-                #minVal= flood[y2][x2]
     if (x3>=0 and y3>=0):
         if (isAccessible(x,y,x3,y3)):
             minVals[3]=flood[y3][x3]
-            #if (flood[y3][x3]<minVal):
-            #minVals.append(flood[y1][x1])
-                #minVal= flood[y3][x3]
 
-
+    minCount=0
     for i in range(4):
         if minVals[i]== -1:
-            minVals[i]= 1000
+            pass
+        elif minVals[i]== val+1 :
+            pass
+        elif minVals[i]== val-1 :
+            minCount+=1
+            pass
 
-    minVal= min(minVals)
+    #minVal= min(minVals)
 
     #return(minVal)
-
-    if (val== minVal+1):
+    
+    if (minCount>0):
         return (True)
     else:
         return (False)
@@ -240,12 +233,33 @@ def makeConsistant(x,y):
     minVal= min(minVals)
     flood[y][x]= minVal+1
 
-def floodFill(x,y):
+def floodFill(x,y,xprev,yprev):
     '''updates the flood matrix such that every square is consistant (current cell is x,y)
     '''
+    if not isConsistant(x,y):
+        flood[y][x]= flood[yprev][xprev]+1
+        
     stack=[]
     stack.append(x)
     stack.append(y)
+    x0,y0,x1,y1,x2,y2,x3,y3= getSurrounds(x,y)
+    if(x0>=0 and y0>=0):
+        if (isAccessible(x,y,x0,y0)):
+            stack.append(x0)
+            stack.append(y0)
+    if(x1>=0 and y1>=0):
+        if (isAccessible(x,y,x1,y1)):
+            stack.append(x1)
+            stack.append(y1)
+    if(x2>=0 and y2>=0):
+        if (isAccessible(x,y,x2,y2)):
+            stack.append(x2)
+            stack.append(y2)
+    if(x3>=0 and y3>=0):
+        if (isAccessible(x,y,x3,y3)):
+            stack.append(x3)
+            stack.append(y3)
+
     while (len(stack)!= 0):
         yrun= stack.pop()
         xrun= stack.pop()
@@ -273,6 +287,7 @@ def floodFill(x,y):
                 if (isAccessible(xrun,yrun,x3,y3)):
                     stack.append(x3)
                     stack.append(y3)
+        #break
 
 
 
@@ -326,36 +341,115 @@ def floodFill(x,y):
                         fill = True
                         makeConsistant(xrun,yrun)  ''' 
                         
-def toMove(x,y,orient):
+def toMove(x,y,xprev,yprev,orient):
     '''returns the direction to turn into L,F,R or B
     '''
     x0,y0,x1,y1,x2,y2,x3,y3 = getSurrounds(x,y)
     val= flood[y][x]
+    prev=0
     minVals=[1000,1000,1000,1000]
 
     if (isAccessible(x,y,x0,y0)):
-        #if (flood[y0][x0]<minVal):
+        if (x0==xprev and y0==yprev):
+            prev=0
         minVals[0]= flood[y0][x0]
-            #minCell= 0
+
     if (isAccessible(x,y,x1,y1)):
-        #if (flood[y1][x1]<minVal):
+        if (x1==xprev and y1==yprev):
+            prev=1
         minVals[1]= flood[y1][x1]
-            #minCell= 1
+
     if (isAccessible(x,y,x2,y2)):
-        #if (flood[y2][x2]<minVal):
+        if (x2==xprev and y2==yprev):
+            prev=2
         minVals[2]= flood[y2][x2]
-            #minCell= 2
+
     if (isAccessible(x,y,x3,y3)):
-        #if (flood[y3][x3]<minVal):
+        if (x3==xprev and y3==yprev):
+            prev=3
         minVals[3]= flood[y3][x3]
-            #minCell= 3
 
     minVal=minVals[0]
     minCell=0
-    for i in range(4):
-        if minVals[i]<minVal:
+    noMovements=0
+    for i in minVals:
+        if (i!=1000):
+            noMovements+=1
+
+    '''for i in range(4):
+        if (minVals[i]<minVal):
             minVal= minVals[i]
-            minCell= i
+            minCell= i'''
+
+    for i in range(4):
+        if (minVals[i]<minVal):
+            if (noMovements==1):
+                minVal= minVals[i]
+                minCell= i
+            else:
+                if(i==prev):
+                    pass
+                else:
+                    minVal= minVals[i]
+                    minCell= i
+
+    if (minCell==orient):
+        return ('F')
+    elif((minCell==orient-1) or (minCell== orient+3)):
+        return('L')
+    elif ((minCell==orient+1) or (minCell== orient-3)):
+        return('R')
+    else:
+        return('B')
+
+
+def toMoveBack(x,y,xprev,yprev,orient):
+    '''returns the direction to turn into L,F,R or B
+    '''
+    x0,y0,x1,y1,x2,y2,x3,y3 = getSurrounds(x,y)
+    val= flood[y][x]
+    prev=0
+    minVals=[1000,1000,1000,1000]
+
+    if (isAccessible(x,y,x0,y0)):
+        if (x0==xprev and y0==yprev):
+            prev=0
+        minVals[0]= flood[y0][x0]
+
+    if (isAccessible(x,y,x1,y1)):
+        if (x1==xprev and y1==yprev):
+            prev=1
+        minVals[1]= flood[y1][x1]
+
+    if (isAccessible(x,y,x2,y2)):
+        if (x2==xprev and y2==yprev):
+            prev=2
+        minVals[2]= flood[y2][x2]
+
+    if (isAccessible(x,y,x3,y3)):
+        if (x3==xprev and y3==yprev):
+            prev=3
+        minVals[3]= flood[y3][x3]
+
+    maxVal=minVals[0]
+    minCell=0
+    noMovements=0
+    for i in minVals:
+        if (i!=1000):
+            noMovements+=1
+
+    for i in range(4):
+        if (minVals[i]!=1000 and minVals[i]> maxVal):
+            if (noMovements==1):
+                minVal= minVals[i]
+                minCell= i
+
+            else:
+                if(i==prev):
+                    pass
+                else:
+                    minVal= minVals[i]
+                    minCell= i
 
     #return(minCell)
     if (minCell==orient):
@@ -367,72 +461,36 @@ def toMove(x,y,orient):
     else:
         return('B')
 
-
-def toMoveBack(x,y,orient):
-    '''returns the direction to turn into L,F,R or B
-    '''
-    x0,y0,x1,y1,x2,y2,x3,y3 = getSurrounds(x,y)
-    val= flood[y][x]
-    minVals=[1000,1000,1000,1000]
-
-    if (isAccessible(x,y,x0,y0)):
-        #if (flood[y0][x0]<minVal):
-        minVals[0]= flood[y0][x0]
-            #minCell= 0
-    if (isAccessible(x,y,x1,y1)):
-        #if (flood[y1][x1]<minVal):
-        minVals[1]= flood[y1][x1]
-            #minCell= 1
-    if (isAccessible(x,y,x2,y2)):
-        #if (flood[y2][x2]<minVal):
-        minVals[2]= flood[y2][x2]
-            #minCell= 2
-    if (isAccessible(x,y,x3,y3)):
-        #if (flood[y3][x3]<minVal):
-        minVals[3]= flood[y3][x3]
-            #minCell= 3
-
-    minVal=minVals[0]
-    minCell=0
-    for i in range(4):
-        if minVals[i]== val+1:
-            minVal= minVals[i]
-            minCell= i
-
-    #return(minCell)
-    if (minCell==orient):
-        return ('F')
-    elif((minCell==orient-1) or (minCell== orient+3)):
-        return('L')
-    elif ((minCell==orient+1) or (minCell== orient-3)):
-        return('R')
-    else:
-        return('B')
-
+#def deadEnd(x,y):
 
 
 def showFlood(xrun,yrun):
     for x in range(16):
         for y in range(16):
-            if (x== xrun and y== yrun):
-                API.setText(x,y,str(flood[y][x])+str(toMove(xrun,yrun,orient)))
             API.setText(x,y,str(flood[y][x]))
 
 def main():
     x=0
     y=0
+    xprev=0
+    yprev=0
     orient=0
 
     while True:
-        '''if(flood[y][x]==1):
-            while(True):
-                pass'''
+
         L= API.wallLeft()
         R= API.wallRight()
         F= API.wallFront()
         updateWalls(x,y,orient,L,R,F)
+
         if (flood[y][x]!=0):
+            floodFill(x,y,xprev,yprev)
+        else:
+            while(True):
+                pass
+        '''if (flood[y][x]!=0):
             floodFill(x,y)
+
         else:    #robot is inside the middle 
             API.turnLeft()
             orient = API.orientation(orient,'L')
@@ -451,7 +509,7 @@ def main():
                 if (flood[y][x]!=0):
                     floodFill(x,y)
 
-                direction= toMoveBack(x,y,orient)
+                direction= toMoveBack(x,y,xprev,yprev,orient)
 
                 if (direction=='L'):
                     API.turnLeft()
@@ -470,13 +528,12 @@ def main():
                 log("moveForward")
                 showFlood(x,y)
                 API.moveForward()
-                x,y = API.updateCoordinates(x,y,orient)
+                xprev=x
+                yprev=y
+                x,y = API.updateCoordinates(x,y,orient)'''
+                
 
-                #pass
-
-        #API.setText(x,y,str(x)+str(y))
-        direction= toMove(x,y,orient)
-        #API.setText(x,y,str(flood[y][x])+str(direction))
+        direction= toMove(x,y,xprev,yprev,orient)
 
         
         if (direction=='L'):
@@ -493,24 +550,12 @@ def main():
             API.turnLeft()
             orient = API.orientation(orient,'L')
 
-        
 
-        '''
-            
-        if not API.wallLeft():
-            log("turnLeft")
-            API.turnLeft()
-            orient = API.orientation(orient,'L')
-
-            
-        while API.wallFront():
-            log("turnRight")
-            API.turnRight()
-            orient= API.orientation(orient,'R')
-        '''
         log("moveForward")
         showFlood(x,y)
         API.moveForward()
+        xprev=x
+        yprev=y
         x,y = API.updateCoordinates(x,y,orient)
         
         
