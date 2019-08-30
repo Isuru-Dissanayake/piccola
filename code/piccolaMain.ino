@@ -18,19 +18,20 @@ void setup()
     motorDiver();
     motorInterrupt();
     attachInterrupt(digitalPinToInterrupt(PB12), countLeftOut1, RISING);
-    //attachInterrupt(digitalPinToInterrupt(PB13), countLeftOut2, RISING);
+    attachInterrupt(digitalPinToInterrupt(PB13), countLeftOut1, RISING);
     attachInterrupt(digitalPinToInterrupt(PB14), countRightOut1, RISING);
-    //attachInterrupt(digitalPinToInterrupt(PB15), countRightOut2, RISING);
+    attachInterrupt(digitalPinToInterrupt(PB15), countRightOut1, RISING);
     Serial2.begin(9600);
 }
 
 void loop()
 {
+    
+    leftBase = 80;
+    rightBase = 85;
     delay(1000);
-    cellStart();
-    cellBrake();
-    cellStart();
     cellForward();
-    cellBrake();
+    brake();
+    delay(1000);
     
 }
