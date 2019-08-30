@@ -1,3 +1,4 @@
+/*
 void countLeftOut1()
 {
     if (digitalRead(leftOut1) == HIGH && digitalRead(leftOut2) == LOW)
@@ -45,6 +46,19 @@ void countRightOut2()
         rightEncoder = rightEncoder + 1;
     }
 }
+
+*/
+
+void countLeftOut1()
+{
+    leftEncoder = leftEncoder + 1;   
+}
+
+void countRightOut1()
+{
+    rightEncoder = rightEncoder + 1;
+}
+
 
 void turnRightEncoder()
 {   
