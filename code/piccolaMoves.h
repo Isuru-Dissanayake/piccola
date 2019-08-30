@@ -38,8 +38,8 @@ void rightTurn()
     encoderLeftCount = 1250;
     while (leftEncoder <= 50)
     {
-        leftBase = int(180+75/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        rightBase = int(176-90/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        leftBase = int(180+75/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        rightBase = int(176-90/(1+pow(2.73,((25-rightEncoder)*0.05))));
         forwardBase();
     }
     leftBase = 255;
