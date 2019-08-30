@@ -27,12 +27,12 @@ void setup()
 void loop()
 {
     
-    leftBase = 80;
-    rightBase = 82;
+    //leftBase = 80;
+    //rightBase = 82;
     delay(1000);
     cellForward();
-    //cellForward();
-    //cellForward();
+    cellForward();
+    cellForward();
     //cellForward();
     //cellForward();
     brake();
