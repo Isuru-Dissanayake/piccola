@@ -12,6 +12,7 @@
 
 
 
+
 void setup()
 {
     tofSetup();
@@ -26,16 +27,7 @@ void setup()
 
 void loop()
 {
-    
-    //leftBase = 80;
-    //rightBase = 82;
-    delay(1000);
-    cellForward();
-    cellForward();
-    cellForward();
+    tofPid();
+    wallFollow();
     //cellForward();
-    //cellForward();
-    brake();
-    delay(1000);
-    
 }
