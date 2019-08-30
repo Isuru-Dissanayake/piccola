@@ -96,3 +96,21 @@ void turnBack()
     encoderRightCount = -930;
     turnRightEncoder();
 }
+
+void rightAboutTurn(){
+  leftBase=180;
+  rightBase=180;
+  encoderRightCount= 500;
+  encoderLeftCount= 500;
+  while(rightEncoder <= encoderRightCount){
+  turnRight();}
+}
+
+void leftAboutTurn(){
+  leftBase=180;
+  rightBase=180;
+  encoderRightCount= 500;
+  encoderLeftCount= 500;
+  while(leftEncoder <= encoderleftCount){
+  turnLeft();}
+}
