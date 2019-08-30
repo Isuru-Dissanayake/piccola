@@ -29,6 +29,8 @@ void setup()
 void loop()
 {
     delay(1000);
-    rightTurn();
+    cellStart();
+    //cellForward();
+    cellBrake();
     brake();
 }
