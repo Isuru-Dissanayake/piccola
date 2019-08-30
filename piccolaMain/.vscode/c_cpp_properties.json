@@ -1,0 +1,47 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\ISURU DISSANAYAKE\\AppData\\Local\\Arduino15\\packages\\stm32duino\\tools**",
+                "C:\\Users\\ISURU DISSANAYAKE\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28**",
+                "C:\\Users\\ISURU DISSANAYAKE\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\variants\\generic_stm32f103c",
+                "${workspaceRoot}",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\**",
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
+                "C:\\Program Files (x86)\\Arduino\\libraries\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\5.4.0\\include",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\VL6180X-1.2.0",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                "C:\\Program Files (x86)\\Arduino/hardware\\arduino\\avr\\variants\\standard",
+                "C:\\Program Files (x86)\\Arduino",
+                "D:\\micromouse\\piccola\\code",
+                "C:\\Users\\ISURU DISSANAYAKE\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\**",
+                "C:\\Users\\ISURU DISSANAYAKE\\AppData\\Local\\Arduino15\\packages\\stm32duino\\tools\\**"
+            ],
+            "forcedInclude": [
+                "C:\\Users\\ISURU DISSANAYAKE\\AppData\\Local\\Arduino15\\packages\\stm32duino\\hardware\\STM32F1\\2019.7.28\\variants\\generic_stm32f103c\\board.cpp"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "${workspaceRoot}",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\lib\\gcc\\avr\\5.4.0\\include",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\VL6180X-1.2.0",
+                    "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\variants\\standard"
+                ]
+            },
+            "intelliSenseMode": "msvc-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "defines": [
+                "USBCON"
+            ]
+        }
+    ],
+    "version": 4
+}
