@@ -1,0 +1,7 @@
+{
+    "port": "COM1",
+    "board": "stm32duino:STM32F1:genericSTM32F103C",
+    "programmer": "ArduinoISP",
+    "sketch": "piccolaMain.ino",
+    "configuration": "device_variant=STM32F103C8,upload_method=STLinkMethod,cpu_speed=speed_72mhz,opt=osstd"
+}
