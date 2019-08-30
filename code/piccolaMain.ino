@@ -28,9 +28,13 @@ void loop()
 {
     
     leftBase = 80;
-    rightBase = 85;
+    rightBase = 82;
     delay(1000);
     cellForward();
+    //cellForward();
+    //cellForward();
+    //cellForward();
+    //cellForward();
     brake();
     delay(1000);
     
