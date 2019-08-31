@@ -1,5 +1,4 @@
 #include <QueueArray.h>
-#include <StackArray.h>
 
 
 byte x=0;
@@ -73,13 +72,13 @@ byte flood[14][14]={{12,11,10,9,8,7,6,6,7,8,9,10,11,12},
 
 byte orientation(byte orient, char turning){
   if (turning== 'L'){
-        orient-=1;
-        if (orient==-1)
+        orient=orient-1;
+        if (orient==-1|| orient== 255)
             orient=3;
   }
     else if(turning== 'R'){
-        orient+=1;
-        if (orient==4)
+        orient=orient+1;
+        if (orient==4|| orient==255)
             orient=0;
     }
     else if(turning== 'B'){
@@ -192,6 +191,9 @@ void updateWalls(byte x, byte y, byte orient, boolean L, boolean R, boolean F){
 }
 
 boolean isAccessible(byte x, byte y, byte xNext, byte yNext){
+  if (xNext==254 || yNext== 254){
+    return(false);
+  }
   if (x==xNext){
         if(y>yNext){
             if(cells[y][x]==4 || cells[y][x]==5 || cells[y][x]==6 || cells[y][x]==10 || cells[y][x]==11 || cells[y][x]==12 || cells[y][x]==14 || cells[yNext][xNext]==2 || cells[yNext][xNext]==7 || cells[yNext][xNext]==8 || cells[yNext][xNext]==10 || cells[yNext][xNext]==12 || cells[yNext][xNext]==13 || cells[yNext][xNext]==14 )
@@ -235,9 +237,13 @@ byte getSurrounds(byte x,byte y){
     x_2=x;
     y_2=y-1;
     if(x_1>= mazeSize){
-        x_1=-1;}
+        x_1=254;}
     if(y_0>= mazeSize){
-        y_0=-1;}
+        y_0=254;}
+    if(x_3== 255){
+        x_3 =254;}
+    if(y_2== 255){
+        y_2=254;}
     return (x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3);  //order of cells- north,east,south,west
 }
 
@@ -378,7 +384,7 @@ void floodFill3(){
 
         x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3= getSurrounds(xrun,yrun);
         if(x_0>=0 && y_0>=0 ){
-            if (flood[y_0][x_0]==255){
+            if (flood[y_0][x_0]==254){
                 if (isAccessible(xrun,yrun,x_0,y_0)){
                     flood[y_0][x_0]=flood[yrun][xrun]+1;
                     queue.enqueue(y_0);
@@ -387,7 +393,7 @@ void floodFill3(){
             }
         }
         if(x_1>=0 and y_1>=0){
-            if (flood[y_1][x_1]==255){
+            if (flood[y_1][x_1]==254){
                 if (isAccessible(xrun,yrun,x_1,y_1)){
                     flood[y_1][x_1]=flood[yrun][xrun]+1;
                     queue.enqueue(y_1);
@@ -396,7 +402,7 @@ void floodFill3(){
             }
         }
         if(x_2>=0 and y_2>=0 ){
-            if (flood[y_2][x_2]==255){
+            if (flood[y_2][x_2]==254){
                 if (isAccessible(xrun,yrun,x_2,y_2)){
                     flood[y_2][x_2]=flood[yrun][xrun]+1;
                     queue.enqueue(y_2);
@@ -405,7 +411,7 @@ void floodFill3(){
             }
         }
         if(x_3>=0 and y_3>=0 ){
-            if (flood[y_3][x_3]==255){
+            if (flood[y_3][x_3]==254){
                 if (isAccessible(xrun,yrun,x_3,y_3)){
                     flood[y_3][x_3]=flood[yrun][xrun]+1;
                     queue.enqueue(y_3);
@@ -456,7 +462,6 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     
     
     for (int i=0; i<4;i++){
-        Serial.println(minVals[i]);
         if (minVals[i]!= 254){
             noMovements+=1;}
     }
@@ -534,7 +539,7 @@ void appendZero(){
 
     for (int i=0; i<16; i++){
         for (int j=0; j<16; j++){
-            flood[i][j]=255;
+            flood[i][j]=254;
         }
     }
 
@@ -574,7 +579,6 @@ char maze(boolean L, boolean R, boolean F){
   
   Serial.print(x);
   Serial.println(y);
-  //Serial.println(orient);
 
   if (flood[y][x]!=0){
 
