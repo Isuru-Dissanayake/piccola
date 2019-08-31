@@ -2,36 +2,47 @@ void cellStart()
 {
     rightEncoder=0;
     leftEncoder=0;
-    encoderRightCount=635;
-    encoderLeftCount=635;
+    encoderRightCount=330;
+    encoderLeftCount=330;
     rightBase=70;
     leftBase=70;
-
-    while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
+    while (rightEncoder <= 300 || leftEncoder <= 300)
     {
-        rightBase = int(70+110/(1+pow(2.73,((317-rightEncoder)*0.012))));
-        leftBase = int(70+110/(1+pow(2.73,((317-leftEncoder)*0.012))));
+        rightBase = int(70+110/(1+pow(2.73,((100-leftEncoder)*0.05))));
+        leftBase = int(70+110/(1+pow(2.73,((100-leftEncoder)*0.05))));
         forwardBase();
     }
     rightBase=176;
     leftBase=180;
-    //forwardBase();
+    rightEncoder=0;
+    leftEncoder=0;
+    while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
+    {
+        tofPid();
+        wallFollow();
+        //forwardBase();
+    }
 }
 
 void cellBrake()
 {
     rightEncoder=0;
     leftEncoder=0;
-    encoderRightCount=635;
-    encoderLeftCount=635;
+    encoderRightCount=330;
+    encoderLeftCount=330;
     rightBase=176;
     leftBase=180;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
-
     {
-        rightBase = int(176-110/(1+pow(2.73,((317-rightEncoder)*0.012))));
-        leftBase = int(180-110/(1+pow(2.73,((317-leftEncoder)*0.012))));
-        forwardBase();  
+        forwardBase();
+    }
+    rightEncoder=0;
+    leftEncoder=0;
+    while (rightEncoder <= 300 || leftEncoder <= 300)
+    {   
+        rightBase = int(176-110/(1+pow(2.73,((150-leftEncoder)*0.05))));
+        leftBase = int(180-110/(1+pow(2.73,((150-leftEncoder)*0.05))));
+        forwardBase();
     }
     brake();
 }
