@@ -1,73 +1,56 @@
-#include <QueueArray.h>
 
 
-byte x=0;
-byte y=0;
-byte xprev=0;
-byte yprev=0;
-byte orient=0;
-byte state=0;
-boolean shortPath= false;
-byte x_0;
-byte y_0;
-byte x_1;
-byte y_1;
-byte x_2;
-byte y_2;
-byte x_3;
-byte y_3;
-byte mazeSize = 16;
-char dir;
-char turning;
-QueueArray <byte> queue;
-boolean  L = true;
-boolean  R= true;
-boolean  F= false; 
+void appendZero(){
 
-byte cells[14][14] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+    for (int i=0; i<14; i++){
+        for (int j=0; j<14; j++){
+            flood[i][j]=254;
+        }
+    }
 
-byte flood2[14][14] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0,0,0,0,0,0}};
+    flood[7][7]=0;
+    flood[6][7]=0;
+    flood[7][6]=0;
+    flood[6][6]=0;
 
-byte flood[14][14]={{12,11,10,9,8,7,6,6,7,8,9,10,11,12},
-        {11,10,9,8,7,6,5,5,6,7,8,9,10,11},
-        {10,9,8,7,6,5,4,4,5,6,7,8,9,10},
-        {9,8,7,6,5,4,3,3,4,5,6,7,8,9},
-        {8,7,6,5,4,3,2,2,3,4,5,6,7,8},
-        {7,6,5,4,3,2,1,1,2,3,4,5,6,7},
-        {6,5,4,3,2,1,0,0,1,2,3,4,5,6},
-        {6,5,4,3,2,1,0,0,1,2,3,4,5,6},
-        {7,6,5,4,3,2,1,1,2,3,4,5,6,7},
-        {8,7,6,5,4,3,2,2,3,4,5,6,7,8},
-        {9,8,7,6,5,4,3,3,4,5,6,7,8,9},
-        {10,9,8,7,6,5,4,4,5,6,7,8,9,10},
-        {11,10,9,8,7,6,5,5,6,7,8,9,10,11},
-        {12,11,10,9,8,7,6,6,7,8,9,10,11,12}};
+    queue.enqueue(7);
+    queue.enqueue(7);
+    queue.enqueue(6);
+    queue.enqueue(7);
+    queue.enqueue(7);
+    queue.enqueue(6);
+    queue.enqueue(6);
+    queue.enqueue(6);
+}
+
+void appendDestination(byte xdes,byte ydes){
+
+    for (int i=0; i<14; i++){
+        for (int j=0; j<14; j++){
+            flood[i][j]=254;
+        }
+    }
+
+    flood[ydes][xdes]=0;
+
+    queue.enqueue(ydes);
+    queue.enqueue(xdes);
+}
+
+void appendDestinationOne(){
+
+    for (int i=0; i<14; i++){
+        for (int j=0; j<14; j++){
+            flood[i][j]=254;
+        }
+    }
+
+    flood[0][13]=0;
+
+    queue.enqueue(0);
+    queue.enqueue(13);
+}
+
 
 
 byte orientation(byte orient, char turning){
@@ -95,17 +78,18 @@ byte orientation(byte orient, char turning){
     return(orient);
 }
 
-byte updateCoordinates(byte x, byte y, byte orient){
-  if (orient==0)
-        y++;
+byte updateCoordinates(){//byte x, byte y, byte orient){
+    
+    if (orient==0)
+        y=y+1;
     if (orient==1)
-        x++;
+        x=x+1;
     if (orient==2)
-        y--;
+        y=y-1;
     if (orient==3)
-        x--;
+        x=x-1;
 
-    return(x,y);
+    //return(x,y);
 }
 
 
@@ -304,33 +288,30 @@ void changeDestination(byte destinationy,byte destinationx){
 
 void floodFill2(){
 
-  for (int i=0;i<16;i++){
-        for (int j=0;j<16;j++){
+  for (int i=0;i<14;i++){
+        for (int j=0;j<14;j++){
             flood2[i][j]=0;
         }
  }
 
     flood2[7][7]=1;
-    flood2[8][7]=1;
-    flood2[7][8]=1;
-    flood2[8][8]=1;
+    flood2[6][7]=1;
+    flood2[7][6]=1;
+    flood2[6][6]=1;
 
     queue.enqueue(7);
     queue.enqueue(7);
-    queue.enqueue(8);
+    queue.enqueue(6);
     queue.enqueue(7);
     queue.enqueue(7);
-    queue.enqueue(8);
-    queue.enqueue(8);
-    queue.enqueue(8);
-
-    byte xrun=0;
-    byte yrun=0;
+    queue.enqueue(6);
+    queue.enqueue(6);
+    queue.enqueue(6);
 
      while (!queue.isEmpty ()){
         yrun=queue.dequeue();
         xrun=queue.dequeue();
-
+        
         x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3= getSurrounds(xrun,yrun);
         if(x_0>=0 && y_0>=0 && cells[y_0][x_0]!=0){
             if (flood2[y_0][x_0]==0){
@@ -341,7 +322,7 @@ void floodFill2(){
                 }
             }
         }
-        if(x_1>=0 && y_1>=0 && flood2[y_1][x_1]!=0){
+        if(x_1>=0 && y_1>=0 && cells[y_1][x_1]!=0){
             if (flood2[y_1][x_1]==0){
                 if (isAccessible(xrun,yrun,x_1,y_1)){
                     flood2[y_1][x_1]= flood2[yrun][xrun]+1;
@@ -374,15 +355,13 @@ void floodFill2(){
 
 
 void floodFill3(){
-
-    byte xrun=0;
-    byte yrun=0;
+  
     while (!queue.isEmpty ()){
-
+        
         yrun=queue.dequeue();
         xrun=queue.dequeue();
-
-        x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3= getSurrounds(xrun,yrun);
+        
+        x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(xrun,yrun);
         if(x_0>=0 && y_0>=0 ){
             if (flood[y_0][x_0]==254){
                 if (isAccessible(xrun,yrun,x_0,y_0)){
@@ -494,9 +473,10 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
 }
 
 
-char toMove2(byte x,byte y,byte xprev,byte yprev,byte orient){
+char toMove2(){
 
     x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
+    
     byte val= flood2[y][x];
     byte minCell=0;
     if (isAccessible(x,y,x_0,y_0)){
@@ -521,65 +501,30 @@ char toMove2(byte x,byte y,byte xprev,byte yprev,byte orient){
 
 
     if (minCell==orient)
-        return ('F');
+        dir= 'F';
     else if((minCell==orient-1) || (minCell== orient+3))
-        return('L');
+        dir= 'L';
     else if ((minCell==orient+1) || (minCell== orient-3))
-        return('R');
+        dir= 'R';
     else
-        return('B');
+        dir= 'B';
 
 }
 
 
 
 
-
-void appendZero(){
-
-    for (int i=0; i<16; i++){
-        for (int j=0; j<16; j++){
-            flood[i][j]=254;
-        }
-    }
-
-    flood[7][7]=0;
-    flood[8][7]=0;
-    flood[7][8]=0;
-    flood[8][8]=0;
-
-    queue.enqueue(7);
-    queue.enqueue(7);
-    queue.enqueue(8);
-    queue.enqueue(7);
-    queue.enqueue(7);
-    queue.enqueue(8);
-    queue.enqueue(8);
-    queue.enqueue(8);
-}
-
-void appendDestination(byte x,byte y){
-
-    for (int i=0; i<16; i++){
-        for (int j=0; j<16; j++){
-            flood[i][j]=255;
-        }
-    }
-
-    flood[y][x]=0;
-
-    queue.enqueue(y);
-    queue.enqueue(x);
-}
 
 
 char maze(boolean L, boolean R, boolean F){
-
-  updateWalls(x,y,orient,L,R,F);
   
-  Serial.print(x);
-  Serial.println(y);
+  //Serial.print(x);
+  //Serial.println(y);
+  updateWalls(x,y,orient,L,R,F);
 
+  //showCells();
+  //showFlood();
+  
   if (flood[y][x]!=0){
 
             if (state==0){
@@ -588,21 +533,25 @@ char maze(boolean L, boolean R, boolean F){
             floodFill3();
   }
 
-        else{
-            if (state==0){
-                //x,y,xprev,yprev,orient= center(x,y,orient)
-                changeDestination(15,0);
-                state+=1;
-            }
+  else{
+      if (state==0){
+          //x,y,xprev,yprev,orient= center(x,y,orient)
+          changeDestination(13,0);
+          state+=1;
+      }
+      floodFill2();
+  }
 
-            floodFill2();
-        }
 
+      if (shortPath){
+          toMove2();}
+      else{
+          
+          dir= toMove(x,y,xprev,yprev,orient);}
 
-        if (shortPath){
-            dir= toMove2(x,y,xprev,yprev,orient);}
-        else{
-            dir= toMove(x,y,xprev,yprev,orient);}
+       //Serial.println(dir);
+       
+
 
         if (dir=='L'){
             orient = orientation(orient,'L');
@@ -616,10 +565,92 @@ char maze(boolean L, boolean R, boolean F){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
         }
+        //Serial.println(orient);
 
         xprev=x;
         yprev=y;
-        x,y = updateCoordinates(x,y,orient);
+        updateCoordinates();
         return(dir);
 
+}
+
+void center(){
+  if (x == 6 && y == 6){
+    cells[7][6] = 8;
+    cells[7][7] = 7;
+    cells[6][7] = 6;
+    if (orient == 0){
+      cells[6][6] = 1;
+    }
+    else if (orient == 1){
+      cells[6][6] = 4;
+    }   
+  }
+  else if (x == 7 && y == 6){
+    cells[7][7] = 7;
+    cells[6][7] = 6;
+    cells[6][6] = 5;
+    if (orient == 1){
+      cells[7][6] = 2;
+    }
+    else if (orient == 2){
+      cells[7][6] = 1;
+    }   
+  }
+  else if (x == 7 && y == 7){
+    cells[6][7] = 6;
+    cells[6][6] = 5;
+    cells[7][6] = 8;
+    if (orient == 2){
+      cells[7][7] = 3;
+    }
+    else if (orient == 3){
+      cells[7][7] = 2;
+    }   
+  }
+  else if (x == 6 && y == 7){
+    cells[6][6] = 5;
+    cells[7][6] = 8;
+    cells[6][7] = 7;
+    if (orient == 0){
+      cells[6][7] = 3;
+    }
+    else if (orient == 3){
+      cells[6][7] = 4;
+    }   
+  }
+}
+
+void traverseToCenter(){
+  
+  while(flood[y][x]!=0){
+
+    
+    cells[y][x]=sliit[y][x];
+    appendZero();
+    //appendDestination(0,13);
+    floodFill3();
+    dir= toMove(x,y,xprev,yprev,orient);
+    
+        if (dir=='L'){
+            orient = orientation(orient,'L');
+        }
+
+        else if (dir=='R'){
+            orient = orientation(orient,'R');
+        }
+
+        else if (dir=='B'){
+            orient = orientation(orient,'L');
+            orient = orientation(orient,'L');
+        }
+     
+        
+        xprev=x;
+        yprev=y;
+        updateCoordinates();
+
+  }
+  center();
+  while(1){}
 }
