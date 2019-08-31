@@ -34,6 +34,6 @@ void loopd()
 void loop()
 {
     delay(1000);
-    rightAboutTurn();
+    leftAboutTurn();
     brake();
 }
