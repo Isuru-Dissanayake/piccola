@@ -101,7 +101,6 @@ void printTof()
     //Serial2.print(",  ");
     
     Serial2.print(tof[4]);
-    
     Serial2.println();
     
 }
