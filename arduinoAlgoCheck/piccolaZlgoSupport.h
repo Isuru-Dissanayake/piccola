@@ -78,12 +78,25 @@ void getWalls(){
     Serial.println(F);
     Serial.println(R);
 
-    //6x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
+    x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
 
     
+    /*Serial.println(' ');
+    Serial.println(x_0);
+    Serial.println(y_0);
+    Serial.println(x_1);
+    Serial.println(y_1);
+    Serial.println(x_2);
+    Serial.println(y_2);
+    Serial.println(x_3);
+    Serial.println(y_3);*/
     Serial.println(' ');
-    Serial.println(toMove(x,y,xprev,yprev,orient));
 
+    x,y= updateCoordinates(0,0,3);
+    Serial.println(x);
+    Serial.println(y);
+    
+    Serial.println(' ');
     
     
    
