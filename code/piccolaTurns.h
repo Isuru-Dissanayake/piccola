@@ -87,8 +87,8 @@ void leftAboutTurn()
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= rightEncoder + 262;
-    encoderLeftCount= leftEncoder + 262;
+    encoderRightCount= rightEncoder + 250;
+    encoderLeftCount= leftEncoder + 250;
     while(rightEncoder <= encoderRightCount)
     {
         turnLeft();
