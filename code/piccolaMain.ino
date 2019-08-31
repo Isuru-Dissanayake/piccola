@@ -10,9 +10,6 @@
 #include "piccolaMoves.h"
 #include "piccolaMazeSolve.h"
 
-
-
-
 void setup()
 {
     tofSetup();
@@ -27,7 +24,11 @@ void setup()
 
 void loop()
 {
-    leftBase = 120;
-    rightBase = 120;
-    forwardBase();
+    delay(1000);
+    
+    cellStart();
+    //leftAboutTurn();
+    cellBrake();
+    //delay(1000);
+    //leftAboutTurn();
 }
