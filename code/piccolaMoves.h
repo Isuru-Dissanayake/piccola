@@ -56,7 +56,7 @@ boolean wallChange(){
   }
   
 }
-
+/*
 
 void cellForward(){
   leftEncoder=0;
@@ -84,10 +84,10 @@ void cellForward(){
     }
   }
 }
+*/
 
 
 
-/*
 void cellForward()
 {
     leftEncoder = 0;
@@ -101,7 +101,7 @@ void cellForward()
     }
 }
 
-
+/*
 
 void rightTurn()
 {
