@@ -10,8 +10,7 @@
 #include "piccolaMoves.h"
 #include "piccolaMazeSolve.h"
 #include "piccolaZlgo.h"
-
-
+#include "piccolaZlgoSupport.h"
 
 
 void setup()
@@ -24,14 +23,24 @@ void setup()
     attachInterrupt(digitalPinToInterrupt(PB14), countRightOut1, RISING);
     attachInterrupt(digitalPinToInterrupt(PB15), countRightOut1, RISING);
     Serial2.begin(9600);
-}
 
-void loop()
-{
-  delay(1000);
-  rightAboutTurn();
-  brake();
-  delay(!000);
-  leftAboutTurn();
-  brake();
+    
+    tofPid();
+    tofPid();
+    checkWallsPid();
+    prevWall();
+    
+  }
+
+
+
+void loop(){
+  getWalls();
+  
+  Serial2.println(' ');
+  Serial2.println(' ');
+  showFlood();
+  Serial2.println(' ');
+  Serial2.println(' ');
+  showCells();
 }
