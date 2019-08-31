@@ -18,18 +18,89 @@ void mazeStart()
     //forwardBase();
 }
 
+void prevWall(){
+  if (wallAvailable[2] == 1){
+    right=true;
+  }
+  else{
+    right=false;
+  }
+  if (wallAvailable[0] == 1){
+    left=true;
+  }
+  else{
+    left=false;
+  }
+}
+
+
+boolean wallChange(){
+  tofPid();
+  checkWallsPid();
+  if((right==true && wallAvailable[2] == 0)||(right==false && wallAvailable[2] == 1)){
+    tofPid();
+    checkWallsPid();
+    prevWall();
+    return true;
+  }
+  if((left==true && wallAvailable[0] == 0)||(left==false && wallAvailable[0] == 1)){
+    tofPid();
+    checkWallsPid();
+    prevWall();
+    return true;
+  }
+  else{
+    //wallFollow();
+    prevWall();
+    return false;
+  }
+  
+}
+
+
+void cellForward(){
+  leftEncoder=0;
+  rightEncoder=0;
+  cell=0;
+  while(cell <1){
+    tofPid();
+    wallFollow();
+    if (leftEncoder <= 100 && rightEncoder <= 100  ){
+      if(wallChange()==true){
+        leftEncoder=0;
+        rightEncoder=0;
+      }}
+    else if (leftEncoder >= 1100 && rightEncoder >= 1100  ){
+      if(wallChange()==true){
+        leftEncoder=0;
+        rightEncoder=0;
+        cell++;
+      }
+      if(leftEncoder >= 1265 && rightEncoder >= 1265 ){
+        leftEncoder=0;
+        rightEncoder=0;
+        cell++;
+      }
+    }
+  }
+}
+
+
+
+/*
 void cellForward()
 {
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = 1275;
-    encoderRightCount = 1275;
+    encoderLeftCount = 1265;
+    encoderRightCount = 1265;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         tofPid();
         wallFollow();
     }
 }
+
 
 
 void rightTurn()
@@ -123,7 +194,20 @@ void leftTurn()
     encoderLeftCount = 0;
     encoderRightCount = 0;
 }
+*/
 
+
+void rightTurn(){
+  cellBrake();
+  rightAboutTurn();
+  cellStart();
+}
+
+void leftTurn(){
+  cellBrake();
+  leftAboutTurn();
+  cellStart();
+}
 void cellBack()
 {
     cellBrake();
