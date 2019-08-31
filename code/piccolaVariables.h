@@ -38,3 +38,10 @@ float correction;
 char nextMove = 'F';
 
 unsigned long time;
+
+
+boolean left,right,front;
+int cell =0;
+boolean  L = true;
+boolean  R= true;
+boolean  F= false; 
