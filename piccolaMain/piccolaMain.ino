@@ -1,6 +1,7 @@
 #include <VL6180X.h>
 #include <Wire.h>
 #include "piccolaPins.h"
+#include "piccolaZlgoVariables.h"
 #include "piccolaVariables.h"
 #include "piccolaTof.h"
 #include "piccolaMotors.h"
@@ -8,10 +9,11 @@
 #include "piccolaWallPid.h"
 #include "piccolaSpeed.h"
 #include "piccolaMoves.h"
+#include "piccolaZlgo.h"
 #include "piccolaMazeSolve.h"
 
 void setup()
-{
+{   stbyHigh();
     tofSetup();
     motorDiver();
     motorInterrupt();
@@ -22,18 +24,8 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loopd()
-{
-    delay(1000);
-    while(1)
-    {
-        mazeSolve();
-    }
-}
 
 void loop()
 {
-    delay(1000);
-    rightAboutTurn();
-    brake();
+    traverseToCenter();
 }
