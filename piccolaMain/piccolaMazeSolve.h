@@ -1,4 +1,4 @@
-void mazeSolve()
+void mazeSolve()  /// a right priority algorithm
 {
     tofPid();
     tofPid();
