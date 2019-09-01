@@ -1,13 +1,5 @@
 void mazeSolve()
 {
-    //time = millis();
-    //tofCell();
-    //tofCell();
-    //checkWallsCell();
-    //printWallState();
-    //delay(1000);
-    //brake();
-    //delay(200);
     tofPid();
     tofPid();
     checkWallsCell();
@@ -30,12 +22,7 @@ void mazeSolve()
     {
         nextMove = 'B';
     }
-    /*
-    Serial2.print(millis() - time);
-    Serial2.print("   ");
-    Serial2.println(nextMove);
-    delay(1000);
-    */
+    
     switch (nextMove)
     {
     case 'F' :      //move forward
@@ -54,4 +41,65 @@ void mazeSolve()
         break;
     }
     
+}
+
+
+void traverseToCenter(){
+  cellStart();
+  brake();
+  delay(1000);
+  x=0;
+  y=1;
+  cells[0][0]= 11;
+  
+  while(flood[y][x]!=0){
+
+    checkWallsCell();
+    updateWalls(x, y, orient, L, R, F);
+    //cells[y][x]=sliit[y][x];
+    appendZero();
+    //appendDestination(0,13);
+    floodFill3();
+    dir= toMove(x,y,xprev,yprev,orient);
+    
+        if (dir=='L'){
+            orient = orientation(orient,'L');
+            leftTurn();
+            //brake();
+            //delay(1000);
+        }
+
+        else if (dir=='R'){
+            orient = orientation(orient,'R');
+            rightTurn();
+            //brake();
+            //delay(1000);
+        }
+
+        else if (dir=='B'){
+            orient = orientation(orient,'L');
+            orient = orientation(orient,'L');
+            cellBack();
+            //brake();
+            //delay(1000);
+        }
+        else{
+          if(x==0 && y==0){
+            cellStart();
+            brake();
+            delay(1000);
+          }
+          else{
+          cellForward();
+          }
+        }
+        
+        
+        xprev=x;
+        yprev=y;
+        updateCoordinates();
+
+  }
+  center();
+  while(1){}
 }

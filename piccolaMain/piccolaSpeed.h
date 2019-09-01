@@ -49,4 +49,3 @@ void cellBrake()
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
 }
-

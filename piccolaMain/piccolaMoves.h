@@ -1,4 +1,4 @@
-void mazeStart()
+void mazeStart()     //// in the very begining of the maze
 {
     rightEncoder=0;
     leftEncoder=0;
@@ -13,7 +13,7 @@ void mazeStart()
         leftBase = int(70+110/(1+pow(2.73,((300-leftEncoder)*0.012))));
         forwardBase();
     }
-    rightBase=177;
+    rightBase=176;
     leftBase=180;
     //forwardBase();
 }
