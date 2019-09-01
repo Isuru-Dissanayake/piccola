@@ -1,8 +1,7 @@
-
 void cellStart()
 {
-    encoderRightCount = rightEncoder + 300;
-    encoderLeftCount = leftEncoder + 300;
+    encoderRightCount = encoderRightCount + 300;
+    encoderLeftCount = encoderLeftCount + 300;
     rightBase=70;
     leftBase=70;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
@@ -14,20 +13,21 @@ void cellStart()
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= rightEncoder + 300;
-    encoderLeftCount= leftEncoder + 100;
+    encoderRightCount= encoderRightCount + 300;
+    encoderLeftCount= encoderLeftCount + 300;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         tofPid();
         wallFollow();
-        //forwardBase();
     }
+    encoderLeftCount = leftEncoder;
+    encoderRightCount = rightEncoder;
 }
 
 void cellBrake()
 {
-    encoderRightCount= rightEncoder + 300;
-    encoderLeftCount= leftEncoder + 300;
+    encoderRightCount= encoderRightCount + 300;
+    encoderLeftCount= encoderLeftCount + 300;
     rightBase=176;
     leftBase=180;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
@@ -36,8 +36,8 @@ void cellBrake()
         wallFollow();
         //forwardBase();
     }
-    encoderRightCount= rightEncoder + 300;
-    encoderLeftCount= leftEncoder + 300;
+    encoderRightCount= encoderRightCount + 300;
+    encoderLeftCount= encoderLeftCount + 300;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {   
         dif = leftEncoder - encoderLeftCount + 300;
@@ -46,5 +46,7 @@ void cellBrake()
         forwardBase();
     }
     brake();
+    encoderLeftCount = leftEncoder;
+    encoderRightCount = rightEncoder;
 }
 
