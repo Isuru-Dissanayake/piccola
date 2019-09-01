@@ -151,7 +151,7 @@ void checkWallsCell()
         F= true; 
     } 
 
-    if (tof[1] <= 135)
+    if (tof[1] <= 160)
     {
         //cellWalls[0] = 1;
         L= true;
@@ -162,7 +162,7 @@ void checkWallsCell()
         L= false; 
     }
 
-    if (tof[3] <= 135)
+    if (tof[3] <= 160)
     {
         //cellWalls[2] = 1;
         R= true;
