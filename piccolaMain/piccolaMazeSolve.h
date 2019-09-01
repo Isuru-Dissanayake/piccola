@@ -53,11 +53,16 @@ void traverseToCenter(){
   cells[0][0]= 11;
   
   while(flood[y][x]!=0){
-
+    
+    tofCell();
+    tofCell();
+    tofCell();
     checkWallsCell();
     updateWalls(x, y, orient, L, R, F);
+    
     //cells[y][x]=sliit[y][x];
     appendZero();
+    
     //appendDestination(0,13);
     floodFill3();
     dir= toMove(x,y,xprev,yprev,orient);
@@ -101,5 +106,5 @@ void traverseToCenter(){
 
   }
   center();
-  while(1){}
+  while(1){brake();}
 }
