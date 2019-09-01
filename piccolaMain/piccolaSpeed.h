@@ -15,7 +15,7 @@ void cellStart()
     rightBase=176;
     leftBase=180;
     encoderRightCount= rightEncoder + 300;
-    encoderLeftCount= leftEncoder + 100;
+    encoderLeftCount= leftEncoder + 300;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         tofPid();
@@ -47,4 +47,3 @@ void cellBrake()
     }
     brake();
 }
-
