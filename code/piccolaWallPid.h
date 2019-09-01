@@ -4,14 +4,14 @@ void leftPid()
     //wallLastError = 0 - (leftError * 2);
     correction = (leftError * leftP) + ((leftError - leftLastError) * leftD);
     leftLastError = leftError;
-    if (correction > 20 )
+    if (correction > 50 )
     {
-        correction = 0;
+        correction = 10;
     }
 
-    else if (correction < -20)
+    else if (correction < -50)
     {
-        correction = 0;
+        correction = -10;
     }
     leftPwm = leftBase + correction;
     rightPwm = rightBase - correction;
@@ -23,14 +23,14 @@ void rightPid()
     //wallLastError = rightError * 2;
     correction  = (rightError * rightP) + ((rightError - rightLastError) * rightD);
     rightLastError = rightError;
-    if (correction > 20 )
+    if (correction > 50 )
     {
-        correction = 0;
+        correction = 10;
     }
 
-    else if (correction < -20)
+    else if (correction < -50)
     {
-        correction = 0;
+        correction = -10;
     }
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
@@ -44,14 +44,14 @@ void wallPid()
     leftLastError = 50 - tof[0];
     correction = (wallError * wallP) + ((wallError - wallLastError) * wallD);
     wallLastError = wallError;
-    if (correction > 20 )
+    if (correction > 50 )
     {
-        correction = 0;
+        correction = 10;
     }
 
-    else if (correction < -20)
+    else if (correction < -50)
     {
-        correction = 0;
+        correction = -10;
     }
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
