@@ -90,12 +90,14 @@ void cellForward()
 {
     encoderLeftCount = encoderLeftCount + 1260;
     encoderRightCount = encoderRightCount + 1260;
+    test = leftEncoder;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         tofPid();
         wallFollow();
         //forwardBase();
     }
+    test = leftEncoder - test;
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
 }
