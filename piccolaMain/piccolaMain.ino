@@ -27,5 +27,11 @@ void setup()
 
 void loop()
 {
-    traverseToCenter();
+    delay(1000);
+    while(1)
+    {
+        tofPid();
+        wallFollow();
+    }
+    
 }
