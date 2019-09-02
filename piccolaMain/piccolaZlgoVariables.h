@@ -6,7 +6,7 @@ byte y=0;
 byte xprev=0;
 byte yprev=0;
 byte orient=0;
-//byte state=0;
+byte state=0;
 boolean shortPath= false;
 byte x_0;
 byte y_0;
