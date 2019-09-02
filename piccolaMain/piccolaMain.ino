@@ -51,9 +51,5 @@ void loopt(){
 }
 
 void loop(){
-  delay(1000);
-  while(1)
-  {
-    traverseToCenter();
-  }
+wallFollow();
 }
