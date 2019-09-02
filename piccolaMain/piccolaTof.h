@@ -83,9 +83,9 @@ void tofCell()
 
 void tofPid()
 {
-    tof[0] = tof1.readRangeSingleMillimeters();
-    //tof[2] = tof3.readRangeSingleMillimeters();
-    tof[4] = tof5.readRangeSingleMillimeters();
+    tof[0] = tof2.readRangeSingleMillimeters();
+    tof[2] = tof3.readRangeSingleMillimeters();
+    tof[4] = tof4.readRangeSingleMillimeters();
 }
 
 void printTof()
@@ -149,7 +149,7 @@ void checkWallsCell()
         cellWalls[1] =  1;
         F = true;
     } 
-    if (leftWallAvailable >=0)
+    if (leftWallAvailable >= 0)
     {
         cellWalls[0] = 1;
         L = true;
@@ -161,7 +161,7 @@ void checkWallsCell()
         L = false;
         leftWallAvailable = 0;
     }
-    if (rightWallAvailable >=0)
+    if (rightWallAvailable >= 0)
     {
         cellWalls[2] = 1;
         R = true;
@@ -185,6 +185,3 @@ void printWallState()
     }
     Serial2.println("");
 }
-
-
-
