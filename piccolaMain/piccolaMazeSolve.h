@@ -54,9 +54,9 @@ void traverseToCenter(){
   
   while(flood[y][x]!=0){
     
-    tofCell();
-    tofCell();
-    tofCell();
+    tofPid();
+    tofPid();
+    tofPid();
     checkWallsCell();
     updateWalls(x, y, orient, L, R, F);
     
