@@ -34,6 +34,9 @@ void loopd()
 void loop()
 {
     delay(1000);
-    leftAboutTurn();
-    brake();
+    while(1)
+    {
+        tofPid();
+        wallFollow();
+    }
 }
