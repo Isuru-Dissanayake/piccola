@@ -20,21 +20,27 @@ int leftWall = 1;
 
 float leftP = 0.8;
 float leftD = 3.4;
+//float leftI=0.01;
 
 float leftError = 0;
 float leftLastError = 0;
+//float leftSumError=0;
 
 float rightP = 0.8;
 float rightD = 3.4;
+//float rightI=0.01;
 
 float rightError = 0;
 float rightLastError = 0;
+//float rightSumError=0;
 
 float wallP = 0.8;
 float wallD = 2.7;
+//float wallI=0.01;
 
 float wallError = 0;
 float wallLastError = 0;
+//float wallSumError=0;
 
 float correction;
 
