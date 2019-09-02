@@ -31,10 +31,12 @@ float rightError = 0;
 float rightLastError = 0;
 
 float wallP = 0.8;
+float wallI = 0;
 float wallD = 2.7;
 
 float wallError = 0;
 float wallLastError = 0;
+float wallSumError = 0;
 
 float correction;
 
