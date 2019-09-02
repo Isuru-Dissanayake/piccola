@@ -51,6 +51,8 @@ void loopt(){
 }
 
 void loop(){
-//traverseToCenter();
-wallPid();
+traverseToCenter();
+//wallFollow();
+//tofPid();
+//printTof();
 }
