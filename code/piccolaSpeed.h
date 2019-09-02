@@ -13,8 +13,8 @@ void cellStart()
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= encoderRightCount + 300;
-    encoderLeftCount= encoderLeftCount + 300;
+    encoderRightCount= encoderRightCount + 310;
+    encoderLeftCount= encoderLeftCount + 310;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         tofPid();
@@ -26,8 +26,8 @@ void cellStart()
 
 void cellBrake()
 {
-    encoderRightCount= encoderRightCount + 300;
-    encoderLeftCount= encoderLeftCount + 300;
+    encoderRightCount= encoderRightCount + 310;
+    encoderLeftCount= encoderLeftCount + 310;
     rightBase=176;
     leftBase=180;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
@@ -49,4 +49,3 @@ void cellBrake()
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
 }
-

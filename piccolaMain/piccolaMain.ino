@@ -25,7 +25,35 @@ void setup()
 }
 
 
-void loop()
+void loopy()
 {
+    delay(1000);
+    while(1)
+    {
+        tofPid();
+        wallFollow();
+    }
+    
+}
+
+void loopt(){
+  delay(10000);
+  cellStart();
+  //cellForward();
+  cellBrake();
+  brake();
+  delay(1000);
+  Serial2.println(test);
+  while(1)
+  {
+    
+  }
+}
+
+void loop(){
+  delay(1000);
+  while(1)
+  {
     traverseToCenter();
+  }
 }

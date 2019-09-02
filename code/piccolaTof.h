@@ -90,17 +90,17 @@ void tofPid()
 void printTof()
 {
     
-    Serial2.print(tof[0]);
+    //Serial2.print(tof[0]);
+    //Serial2.print(",  ");
+    
+    Serial2.print(tof[1]);
     Serial2.print(",  ");
-    
-    //Serial2.print(tof[1]);
-    //Serial2.print(",  ");
-    //Serial2.print(tof[2]);
-    //Serial2.print(",  ");
-    //Serial2.print(tof[3]);
+    Serial2.print(tof[2]);
+    Serial2.print(",  ");
+    Serial2.print(tof[3]);
     //Serial2.print(",  ");
     
-    Serial2.print(tof[4]);
+    //Serial2.print(tof[4]);
     Serial2.println();
     
 }

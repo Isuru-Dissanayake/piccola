@@ -1,4 +1,4 @@
-int leftBase =176;
+int leftBase =180;
 int rightBase = 176;
 int leftPwm;
 int rightPwm;
@@ -9,6 +9,7 @@ unsigned long encoderLeftCount = 0;
 unsigned long encoderRightCount = 0;
 
 int dif = 0;
+int test = 0;
 
 float tof[5];
 int wallAvailable[3];
@@ -30,10 +31,12 @@ float rightError = 0;
 float rightLastError = 0;
 
 float wallP = 0.8;
+float wallI = 0;
 float wallD = 2.7;
 
 float wallError = 0;
 float wallLastError = 0;
+float wallSumError = 0;
 
 float correction;
 

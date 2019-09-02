@@ -90,17 +90,17 @@ void tofPid()
 void printTof()
 {
     
-    Serial2.print(tof[0]);
+    //Serial2.print(tof[0]);
+    //Serial2.print(",  ");
+    
+    Serial2.print(tof[1]);
     Serial2.print(",  ");
-    
-    //Serial2.print(tof[1]);
-    //Serial2.print(",  ");
-    //Serial2.print(tof[2]);
-    //Serial2.print(",  ");
-    //Serial2.print(tof[3]);
+    Serial2.print(tof[2]);
+    Serial2.print(",  ");
+    Serial2.print(tof[3]);
     //Serial2.print(",  ");
     
-    Serial2.print(tof[4]);
+    //Serial2.print(tof[4]);
     Serial2.println();
     
 }
@@ -138,38 +138,37 @@ void checkWallsPid()
 
 void checkWallsCell()
 {
-    tofCell();
-    tofCell();
-    if (tof[2] > 160)
+    
+    if (tof[2] > 200)
     {
-        //cellWalls[1] =  0;
+        cellWalls[1] =  0;
         F= false;
     }
     else
     {
-        //cellWalls[1] =  1;
+        cellWalls[1] =  1;
         F= true; 
     } 
 
-    if (tof[1] <= 135)
+    if (tof[1] <= 150)
     {
-        //cellWalls[0] = 1;
+        cellWalls[0] = 1;
         L= true;
     }
     else
     {
-        //cellWalls[0] = 0;
+        cellWalls[0] = 0;
         L= false; 
     }
 
-    if (tof[3] <= 135)
+    if (tof[3] <= 150)
     {
-        //cellWalls[2] = 1;
+        cellWalls[2] = 1;
         R= true;
     }
     else
     {
-        //cellWalls[2] = 0;
+        cellWalls[2] = 0;
         R= false; 
     }
 }

@@ -22,21 +22,8 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loopd()
-{
-    delay(1000);
-    while(1)
-    {
-        mazeSolve();
-    }
-}
-
 void loop()
 {
-    delay(1000);
-    while(1)
-    {
-        tofPid();
-        wallFollow();
-    }
+    tofCell();
+    printTof();
 }
