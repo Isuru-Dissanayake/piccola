@@ -59,12 +59,34 @@ boolean wallChange(){
 
 void cellForward()
 {
-    encoderLeftCount = encoderLeftCount + 1260;
-    encoderRightCount = encoderRightCount + 1260;
+    encoderLeftCount = encoderLeftCount + 1160;
+    encoderRightCount = encoderRightCount + 1160;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        tofPid();
         wallFollow();
+    }
+    encoderLeftCount = encoderLeftCount + 100;
+    encoderRightCount = encoderRightCount + 100;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        wallFollow();
+        tofCell();
+        if (tof[1] <= 150)
+        {
+          leftWallAvailable = leftWallAvailable + 1;
+        }
+        else
+        {
+          leftWallAvailable = leftWallAvailable - 1;
+        }
+        if (tof[3] <= 150)
+        {
+          rightWallAvailable = rightWallAvailable + 1;
+        }
+        else
+        {
+          rightWallAvailable = rightWallAvailable - 1;
+        }
     }
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
@@ -74,8 +96,8 @@ void cellForward()
 
 void rightSmoothTurn()
 {
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
+    encoderLeftCount = encoderLeftCount + 50;
+    encoderRightCount = encoderRightCount + 50;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         forwardBase();
@@ -91,8 +113,8 @@ void rightSmoothTurn()
     }
     leftBase = 255;
     rightBase = 101;
-    encoderLeftCount = encoderLeftCount + 1100;
-    encoderRightCount = encoderRightCount + 1100;
+    encoderLeftCount = encoderLeftCount + 550;
+    encoderRightCount = encoderRightCount + 550;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         forwardBase();
@@ -108,8 +130,8 @@ void rightSmoothTurn()
     }
     leftBase = 180;
     rightBase = 176;
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
+    encoderLeftCount = encoderLeftCount + 50;
+    encoderRightCount = encoderRightCount + 50;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         forwardBase();
