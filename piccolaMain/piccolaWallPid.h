@@ -54,6 +54,7 @@ void rightPid()
 
 }
 
+/*
 void wallPid()
 {
     wallError = tof[0] - (tof[4]-8);
@@ -69,7 +70,7 @@ void wallPid()
     else if (wallSumError<-4000){
       wallSumError= -4000;
     }
-    /*if (correction > 50 )
+    if (correction > 50 )
     {
         correction = 10;
     }
@@ -77,58 +78,122 @@ void wallPid()
     else if (correction < -50)
     {
         correction = -10;
-    }*/
+    }
     
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
 
 }
 
-/*
+*/
 
 void wallPid()
 {
     tofCell();
+    tofPid();
+    
     if (tof[1] < 255 && tof[3] < 255)
     {
         wallError = tof[1] - tof[3];
+        state= 0;
     }
     else
-    {
+    {    
         if (tof[1] >= 255 && tof[3] >= 255)
         {
             wallError = 0;
+            state=1;
         }
         else
         {
             if (tof[1] >= 255)
             {
                 wallError = 170 - (2*tof[3]);
+                state=2;
             }
             else if (tof[3] >= 255)
             {
                 wallError = (2*tof[1]) - 170;
+                state=3;
             }
         }
     }
+
+
+    if (tof[0] < 255 && tof[4] < 255)
+    {
+        wallError2 = tof[0] - tof[4];
+    }
+    else
+    {    
+        if (tof[0] >= 255 && tof[4] >= 255)
+        {
+            wallError2 = 0;
+        }
+        else
+        {
+            if (tof[0] >= 255)
+            {
+                wallError2 = 102 - (2*tof[3]);
+            }
+            else if (tof[4] >= 255)
+            {
+                wallError2 = (2*tof[1]) - 102;
+            }
+        }
+    }
+
+
+    if(state!= prevState){
+      jump= 500;
+    }
+    jump--;
+    state= prevState;
+    
     correction = (wallError * wallP) + (wallSumError * wallI) + ((wallError - wallLastError) * wallD);
     wallLastError = wallError;
     wallSumError = wallSumError + wallError;
+
+
+    correction2 = (wallError2 * wallP2) + (wallSumError2 * wallI2) + ((wallError2 - wallLastError2) * wallD2);
+    wallLastError2 = wallError2;
+    wallSumError2 = wallSumError2 + wallError2;
     
-    if (correction > 30 )
+    if (correction > 50 )
     {
-        correction = 8;
+        correction = 10;
     }
 
-    else if (correction < -30)
+    else if (correction < -50)
     {
-        correction = -8;
+        correction = -10;
     }
 
+
+    if (correction2 > 50 )
+    {
+        correction2 = 10;
+    }
+
+    else if (correction2 < -50)
+    {
+        correction2 = -10;
+    }
+
+    if(jump>0){
+      leftPwm = leftBase - correction2;
+      rightPwm = rightBase + correction2;
+      forward();
+    }
+    else{
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
     forward();
-}*/
+    }
+    
+}
+
+/*
 
 void wallFollow()
 {
@@ -155,4 +220,4 @@ void wallFollow()
     {
         forwardBase();
     }
-}  
+}  */
