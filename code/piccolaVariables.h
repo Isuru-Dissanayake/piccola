@@ -1,4 +1,4 @@
-int leftBase =176;
+int leftBase =180;
 int rightBase = 176;
 int leftPwm;
 int rightPwm;
@@ -9,6 +9,7 @@ unsigned long encoderLeftCount = 0;
 unsigned long encoderRightCount = 0;
 
 int dif = 0;
+int test = 0;
 
 float tof[5];
 int wallAvailable[3];
