@@ -1,3 +1,4 @@
+
 void leftPid()
 {
     leftError = 50 - tof[0];
@@ -113,15 +114,17 @@ void wallPid()
     correction = (wallError * wallP) + (wallSumError * wallI) + ((wallError - wallLastError) * wallD);
     wallLastError = wallError;
     wallSumError = wallSumError + wallError;
-    if (correction > 50 )
+    
+    if (correction > 30 )
     {
-        correction = 10;
+        correction = 8;
     }
 
-    else if (correction < -50)
+    else if (correction < -30)
     {
-        correction = -10;
+        correction = -8;
     }
+
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
     forward();

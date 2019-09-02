@@ -34,10 +34,9 @@ float rightError = 0;
 float rightLastError = 0;
 float rightSumError=0;
 
-float wallP = 0.8;
-//float wallI = 0;
-float wallD = 0;// 2.7;
-float wallI=0.01;
+float wallP = 0.9;
+float wallI = 0;
+float wallD = 0.8;
 
 float wallError = 0;
 float wallLastError = 0;
