@@ -56,35 +56,6 @@ boolean wallChange(){
   }
   
 }
-/*
-
-void cellForward(){
-  leftEncoder=0;
-  rightEncoder=0;
-  cell=0;
-  while(cell <1){
-    tofPid();
-    wallFollow();
-    if (leftEncoder <= 100 && rightEncoder <= 100  ){
-      if(wallChange()==true){
-        leftEncoder=0;
-        rightEncoder=0;
-      }}
-    else if (leftEncoder >= 1100 && rightEncoder >= 1100  ){
-      if(wallChange()==true){
-        leftEncoder=0;
-        rightEncoder=0;
-        cell++;
-      }
-      if(leftEncoder >= 1265 && rightEncoder >= 1265 ){
-        leftEncoder=0;
-        rightEncoder=0;
-        cell++;
-      }
-    }
-  }
-}
-*/
 
 void cellForward()
 {
@@ -94,7 +65,6 @@ void cellForward()
     {
         tofPid();
         wallFollow();
-        //forwardBase();
     }
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
@@ -196,16 +166,18 @@ void leftTurn()
 */
 
 
-void rightTurn(){
-  cellBrake();
-  rightAboutTurn();
-  cellStart();
+void rightTurn()
+{
+    cellBrake();
+    rightAboutTurn();
+    cellStart();
 }
 
-void leftTurn(){
-  cellBrake();
-  leftAboutTurn();
-  cellStart();
+void leftTurn()
+{
+    cellBrake();
+    leftAboutTurn();
+    cellStart();
 }
 void cellBack()
 {
