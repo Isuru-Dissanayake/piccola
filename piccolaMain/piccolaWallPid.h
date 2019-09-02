@@ -2,16 +2,16 @@ void leftPid()
 {
     leftError = 50 - tof[0];
     //wallLastError = 0 - (leftError * 2);
-    correction = (leftError * leftP) + ((leftError - leftLastError) * leftD);
+    correction = (leftError * leftP) + ((leftError - leftLastError) * leftD +  +(leftSumError*leftI));
     leftLastError = leftError;
-    //leftSumError = leftSumError + leftError;
-    /*if (leftSumError> 2000){
-      leftSumError=2000;
+    leftSumError = leftSumError + leftError;
+    if (leftSumError> 4000){
+      leftSumError= 4000;
     }
-    else if (leftSumError<-2000){
-      leftSumError= -2000;
-    }*/
-    if (correction > 50 )
+    else if (leftSumError<- 4000){
+      leftSumError= -4000;
+    }
+    /*if (correction > 50 )
     {
         correction = 10;
     }
@@ -19,7 +19,8 @@ void leftPid()
     else if (correction < -50)
     {
         correction = -10;
-    }
+    }*/
+    
     leftPwm = leftBase + correction;
     rightPwm = rightBase - correction;
 }
@@ -28,16 +29,16 @@ void rightPid()
 {
     rightError = 58 - tof[4];
     //wallLastError = rightError * 2;
-    correction  = (rightError * rightP) + ((rightError - rightLastError) * rightD);
+    correction  = (rightError * rightP) + ((rightError - rightLastError) * rightD   +(rightSumError*rightI));
     rightLastError = rightError;
-    //rightSumError = rightSumError + rightError;
-    /*if (rightSumError> 2000){
-      rightSumError=2000;
+    rightSumError = rightSumError + rightError;
+    if (rightSumError> 4000){
+      rightSumError= 4000;
     }
-    else if (rightSumError<-2000){
-      rightSumError= -2000;
-    }*/
-    if (correction > 50 )
+    else if (rightSumError<-4000){
+      rightSumError= -4000;
+    }
+   /* if (correction > 50 )
     {
         correction = 10;
     }
@@ -45,27 +46,29 @@ void rightPid()
     else if (correction < -50)
     {
         correction = -10;
-    }
+    }*/
+    
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
 
 }
-/*
+
 void wallPid()
 {
     wallError = tof[0] - (tof[4]-8);
     rightLastError = 58 - tof[4];
     leftLastError = 50 - tof[0];
-    correction = (wallError * wallP) + ((wallError - wallLastError) * wallD);
+    correction = (wallError * wallP) + ((wallError - wallLastError) * wallD  +(wallSumError*wallI));
     wallLastError = wallError;
-    //wallSumError = wallSumError + wallError;
-    /*if (wallSumError> 2000){
-      wallSumError=2000;
+    wallSumError = wallSumError + wallError;
+    
+    if (wallSumError> 4000){
+      wallSumError=4000;
     }
-    else if (wallSumError<-2000){
-      wallSumError= -2000;
-    }*/
-    if (correction > 50 )
+    else if (wallSumError<-4000){
+      wallSumError= -4000;
+    }
+    /*if (correction > 50 )
     {
         correction = 10;
     }
@@ -73,12 +76,14 @@ void wallPid()
     else if (correction < -50)
     {
         correction = -10;
-    }
+    }*/
+    
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
 
 }
-*/
+
+/*
 
 void wallPid()
 {
@@ -120,10 +125,11 @@ void wallPid()
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
     forward();
-}
+}*/
 
 void wallFollow()
 {
+    tofPid();
     checkWallsPid();
     if (wallAvailable[0] == 1 && wallAvailable[2] == 1)
     {
