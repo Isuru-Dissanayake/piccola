@@ -36,7 +36,7 @@ void rightPid()
     rightPwm = rightBase + correction;
 
 }
-
+/*
 void wallPid()
 {
     wallError = tof[0] - (tof[4]-8);
@@ -56,6 +56,40 @@ void wallPid()
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
 
+}
+*/
+
+void wallPid()
+{
+    tofCell();
+    if (tof[1] < 255 && tof[3] < 255)
+    {
+        wallError = tof[1] - tof[3];
+    }
+    else
+    {
+        if (tof[1] >= 255 && tof[3] >= 255)
+        {
+            wallError = 0;
+        }
+        else
+        {
+            if (tof[1] >= 255)
+            {
+                wallError = 200 - (2*tof[3]);
+            }
+            else if (tof[3] >= 255)
+            {
+                wallError = (2*tof[1]) - 200;
+            }
+        }
+    }
+    correction = (wallError * wallP) + (wallSumError * wallI) + ((wallError - wallLastError) * wallD);
+    wallLastError = wallError;
+    wallSumError = wallSumError + wallError;
+    leftPwm = leftBase - correction;
+    rightPwm = rightBase + correction;
+    forward();
 }
 
 void wallFollow()
