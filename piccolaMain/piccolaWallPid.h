@@ -1,7 +1,7 @@
 
 void leftPid()
 {
-    leftError = 50 - tof[0];
+    leftError = 85 - tof[0];
     leftDiff = leftError - leftLastError;
     
     if (leftDiff > 50 )
@@ -35,7 +35,7 @@ void leftPid()
 
 void rightPid()
 {
-    rightError = 58 - tof[4];
+    rightError = 80 - tof[4];
     rightDiff = rightError - rightLastError;
     if (rightDiff > 50 )
     {
@@ -111,23 +111,68 @@ void wallFollow()
     checkWallsPid();
     if (wallAvailable[0] == 1 && wallAvailable[2] == 1)
     {
-        wallPid();
-        forward();
+        state = 0;
+        if (state != preState)
+        {
+          jump = 5;
+          wallLastError = 0;
+        }
+        if (jump>0)
+        {
+          forwardBase();
+          jump = jump-1;
+        }
+        else
+        {
+          wallPid();
+          forward();
+        }
     }
 
     else if (wallAvailable[0] == 0 && wallAvailable[2] == 1)
     {
-        rightPid();
-        forward();
+        state = 1;
+        if (state != preState)
+        {
+          jump = 5;
+          rightLastError = 0;
+        }
+        if (jump>0)
+        {
+          forwardBase();
+          jump = jump-1;
+        }
+        else
+        {
+          rightPid();
+          forward();
+        }
     }
 
     else if (wallAvailable[0] == 1 && wallAvailable[2] == 0)
     {
-        leftPid();
-        forward();
+        state = 2;
+        if (state != preState)
+        {
+          jump = 5;
+          leftLastError = 0;
+        }
+        if (jump>0)
+        {
+          forwardBase();
+          jump = jump-1;
+        }
+        else
+        {
+          leftPid();
+          forward();
+        }
     }
     else if(wallAvailable[0] == 0 && wallAvailable[2] == 0)
     {
+        state = 3;
         forwardBase();
+        wallLastError = 0;
     }
+    preState = state;
 }  
