@@ -4,7 +4,6 @@ void cellStart()
     encoderLeftCount = encoderLeftCount + 300;
     rightBase=70;
     leftBase=70;
-    test = leftEncoder;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         dif = leftEncoder - encoderLeftCount + 300;
@@ -47,7 +46,6 @@ void cellBrake()
         forwardBase();
     }
     brake();
-    test = leftEncoder - test;
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
 }
