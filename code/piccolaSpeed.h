@@ -13,12 +13,34 @@ void cellStart()
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= encoderRightCount + 310;
-    encoderLeftCount= encoderLeftCount + 310;
+    encoderRightCount= encoderRightCount + 210;
+    encoderLeftCount= encoderLeftCount + 210;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
-        tofPid();
         wallFollow();
+    }
+    encoderLeftCount = encoderLeftCount + 100;
+    encoderRightCount = encoderRightCount + 100;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+      wallFollow();
+      tofCell();
+      if (tof[1] <= 145)
+      {
+        leftWallAvailable = leftWallAvailable + 1;
+      }
+      else
+      {
+        leftWallAvailable = leftWallAvailable - 1;
+      }
+      if (tof[3] <= 145)
+      {
+        rightWallAvailable = rightWallAvailable + 1;
+      }
+      else
+      {
+        rightWallAvailable = rightWallAvailable - 1;
+      }
     }
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
@@ -32,9 +54,7 @@ void cellBrake()
     leftBase=180;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
-        tofPid();
         wallFollow();
-        //forwardBase();
     }
     encoderRightCount= encoderRightCount + 300;
     encoderLeftCount= encoderLeftCount + 300;
