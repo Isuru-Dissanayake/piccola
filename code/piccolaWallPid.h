@@ -76,17 +76,26 @@ void wallPid()
         {
             if (tof[1] >= 255)
             {
-                wallError = 200 - (2*tof[3]);
+                wallError = 170 - (2*tof[3]);
             }
             else if (tof[3] >= 255)
             {
-                wallError = (2*tof[1]) - 200;
+                wallError = (2*tof[1]) - 170;
             }
         }
     }
     correction = (wallError * wallP) + (wallSumError * wallI) + ((wallError - wallLastError) * wallD);
     wallLastError = wallError;
     wallSumError = wallSumError + wallError;
+    if (correction > 50 )
+    {
+        correction = 10;
+    }
+
+    else if (correction < -50)
+    {
+        correction = -10;
+    }
     leftPwm = leftBase - correction;
     rightPwm = rightBase + correction;
     forward();
