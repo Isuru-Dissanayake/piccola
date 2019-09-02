@@ -70,100 +70,101 @@ void cellForward()
     encoderRightCount = rightEncoder;
 }
 
-/*
 
-void rightTurn()
+
+void rightSmoothTurn()
 {
-    leftEncoder = 0;
-    encoderLeftCount = 1250;
-    while (leftEncoder <= 50)
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        leftBase = int(180+75/(1+pow(2.73,((25-leftEncoder)*0.05))));
-        rightBase = int(176-90/(1+pow(2.73,((25-rightEncoder)*0.05))));
+        forwardBase();
+    }
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        dif = leftEncoder - encoderLeftCount + 75;
+        rightBase = rightBase - dif;
+        leftBase = leftBase + dif;
         forwardBase();
     }
     leftBase = 255;
-    rightBase = 86;
-    leftEncoder = 0;
-    while (leftEncoder <= encoderLeftCount)
+    rightBase = 101;
+    encoderLeftCount = encoderLeftCount + 1100;
+    encoderRightCount = encoderRightCount + 1100;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         forwardBase();
     }
-    leftEncoder = 0;
-    while (leftEncoder <= 60)
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        leftBase = int(255-75/(1+pow(2.73,((30-rightEncoder)*0.05))));
-        rightBase = int(86+90/(1+pow(2.73,((30-leftEncoder)*0.05))));
+        dif = leftEncoder - encoderLeftCount + 75;
+        rightBase = rightBase + dif;
+        leftBase = leftBase - dif;
         forwardBase();
     }
-    leftEncoder = 0;
     leftBase = 180;
     rightBase = 176;
-    while (leftEncoder <= 50)
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         forwardBase();
     }
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderLeftCount = 0;
-    encoderRightCount = 0;
+    encoderLeftCount = leftEncoder;
+    encoderRightCount = rightEncoder;
 }
 
 
-void leftTurn()
+void leftSmoothTurn()
 {
-    leftEncoder = 0;
-    rightEncoder = 0;
-    encoderRightCount = 1340;
-    while (rightEncoder <= 50)
-    {
-        rightBase = int(176+70/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        leftBase = int(180-95/(1+pow(2.73,((25-leftEncoder)*0.05))));
-        forwardBase();
-    }
-    leftBase = 85;
-    rightBase = 246;
-    leftEncoder = 0;
-    rightEncoder = 0;
-    while (rightEncoder <= encoderRightCount)
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         forwardBase();
     }
-
-    leftEncoder = 0;
-    rightEncoder = 0;
-    while (rightEncoder <= 50)
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        rightBase = int(246-70/(1+pow(2.73,((25-rightEncoder)*0.05))));
-        leftBase = int(85+95/(1+pow(2.73,((25-leftEncoder)*0.05))));
+        dif = leftEncoder - encoderLeftCount + 75;
+        rightBase = rightBase + dif;
+        leftBase = leftBase - dif;
         forwardBase();
     }
-
-    leftEncoder = 0;
-    rightEncoder = 0;
+    leftBase = 105;
+    rightBase = 255;
+    encoderLeftCount = encoderLeftCount + 1100;
+    encoderRightCount = encoderRightCount + 1100;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        forwardBase();
+    }
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        dif = leftEncoder - encoderLeftCount + 75;
+        rightBase = rightBase - dif;
+        leftBase = leftBase + dif;
+        forwardBase();
+    }
     leftBase = 180;
     rightBase = 176;
-    while (rightEncoder <= 60)
+    encoderLeftCount = encoderLeftCount + 75;
+    encoderRightCount = encoderRightCount + 75;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        tof[2] = tof3.readRangeSingleMillimeters();
-        if (tof[2] <= 138)
-        {
-            //brake();
-            break;
-        }
-        else
-        {
-            forwardBase();
-        }
+        forwardBase();
     }
-    leftEncoder = 0;
-    rightEncoder = 0;
-    leftBase = 180;
-    rightBase = 176;
-    encoderLeftCount = 0;
-    encoderRightCount = 0;
+    encoderLeftCount = leftEncoder;
+    encoderRightCount = rightEncoder;
 }
-*/
+
 
 
 void rightTurn()
