@@ -31,7 +31,7 @@ void loopy()
     while(1)
     {
         tofPid();
-        wallFollow();
+        //wallFollow();
     }
     
 }
@@ -51,5 +51,6 @@ void loopt(){
 }
 
 void loop(){
-wallFollow();
+//traverseToCenter();
+wallPid();
 }
