@@ -4,6 +4,13 @@ void leftPid()
     //wallLastError = 0 - (leftError * 2);
     correction = (leftError * leftP) + ((leftError - leftLastError) * leftD);
     leftLastError = leftError;
+    //leftSumError = leftSumError + leftError;
+    /*if (leftSumError> 2000){
+      leftSumError=2000;
+    }
+    else if (leftSumError<-2000){
+      leftSumError= -2000;
+    }*/
     if (correction > 50 )
     {
         correction = 10;
@@ -23,6 +30,13 @@ void rightPid()
     //wallLastError = rightError * 2;
     correction  = (rightError * rightP) + ((rightError - rightLastError) * rightD);
     rightLastError = rightError;
+    //rightSumError = rightSumError + rightError;
+    /*if (rightSumError> 2000){
+      rightSumError=2000;
+    }
+    else if (rightSumError<-2000){
+      rightSumError= -2000;
+    }*/
     if (correction > 50 )
     {
         correction = 10;
@@ -44,6 +58,13 @@ void wallPid()
     leftLastError = 50 - tof[0];
     correction = (wallError * wallP) + ((wallError - wallLastError) * wallD);
     wallLastError = wallError;
+    //wallSumError = wallSumError + wallError;
+    /*if (wallSumError> 2000){
+      wallSumError=2000;
+    }
+    else if (wallSumError<-2000){
+      wallSumError= -2000;
+    }*/
     if (correction > 50 )
     {
         correction = 10;
