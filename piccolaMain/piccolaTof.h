@@ -35,6 +35,7 @@ void tofSetup()
     delay(10);
     tof1.init();
     tof1.configureDefault();
+    //tof1.startRangeContinuous();
     tof1.setTimeout(10);
     tof1.setAddress(tofAddress1);
 
@@ -42,7 +43,7 @@ void tofSetup()
     delay(10);
     tof2.init();
     tof2.configureDefault();
-    //tof2.startInterleavedContinuous();
+    //tof2.startRangeContinuous();
     tof2.setTimeout(10);
     tof2.setAddress(tofAddress2);
 
@@ -50,7 +51,7 @@ void tofSetup()
     delay(10);
     tof3.init();
     tof3.configureDefault();
-    //tof2.startInterleavedContinuous();
+    //tof3.startRangeContinuous();
     tof3.setTimeout(10);
     tof3.setAddress(tofAddress3);
 
@@ -58,7 +59,7 @@ void tofSetup()
     delay(10);
     tof4.init();
     tof4.configureDefault();
-    //tof2.startInterleavedContinuous();
+    //tof4.startRangeContinuous();
     tof4.setTimeout(10);
     tof4.setAddress(tofAddress4);
 
@@ -66,7 +67,7 @@ void tofSetup()
     delay(10);
     tof5.init();
     tof5.configureDefault();
-    //Sensor1.startRangeContinuous();
+    //tof5.startRangeContinuous();
     tof5.setTimeout(10);
     tof5.setAddress(tofAddress5);
 }
@@ -83,24 +84,24 @@ void tofCell()
 void tofPid()
 {
     tof[0] = tof1.readRangeSingleMillimeters();
-    tof[2] = tof3.readRangeSingleMillimeters();
+    //tof[2] = tof3.readRangeSingleMillimeters();
     tof[4] = tof5.readRangeSingleMillimeters();
 }
 
 void printTof()
 {
     
-    //Serial2.print(tof[0]);
-    //Serial2.print(",  ");
-    
-    Serial2.print(tof[1]);
+    Serial2.print(tof[0]);
     Serial2.print(",  ");
+    
+    //Serial2.print(tof[1]);
+    //Serial2.print(",  ");
     Serial2.print(tof[2]);
     Serial2.print(",  ");
-    Serial2.print(tof[3]);
+    //Serial2.print(tof[3]);
     //Serial2.print(",  ");
     
-    //Serial2.print(tof[4]);
+    Serial2.print(tof[4]);
     Serial2.println();
     
 }
@@ -138,42 +139,42 @@ void checkWallsPid()
 
 void checkWallsCell()
 {
-    
-    if (tof[2] > 200)
+    if (tof[2] > 160)
     {
         cellWalls[1] =  0;
-        F= false;
+        F = false;
     }
     else
     {
         cellWalls[1] =  1;
-        F= true; 
+        F = true;
     } 
-
-    if (tof[1] <= 150)
+    if (leftWallAvailable >=0)
     {
         cellWalls[0] = 1;
-        L= true;
+        L = true;
+        leftWallAvailable = 0;
     }
     else
     {
         cellWalls[0] = 0;
-        L= false; 
+        L = false;
+        leftWallAvailable = 0;
     }
-
-    if (tof[3] <= 150)
+    if (rightWallAvailable >=0)
     {
         cellWalls[2] = 1;
-        R= true;
+        R = true;
+        rightWallAvailable = 0;
     }
     else
     {
         cellWalls[2] = 0;
-        R= false; 
+        R = false;
+        rightWallAvailable = 0;
     }
+    
 }
-
-
 
 void printWallState()
 {
@@ -184,3 +185,6 @@ void printWallState()
     }
     Serial2.println("");
 }
+
+
+
