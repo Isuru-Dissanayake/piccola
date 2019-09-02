@@ -35,6 +35,7 @@ void tofSetup()
     delay(10);
     tof1.init();
     tof1.configureDefault();
+    //tof1.startRangeContinuous();
     tof1.setTimeout(10);
     tof1.setAddress(tofAddress1);
 
@@ -42,7 +43,7 @@ void tofSetup()
     delay(10);
     tof2.init();
     tof2.configureDefault();
-    //tof2.startInterleavedContinuous();
+    //tof2.startRangeContinuous();
     tof2.setTimeout(10);
     tof2.setAddress(tofAddress2);
 
@@ -50,7 +51,7 @@ void tofSetup()
     delay(10);
     tof3.init();
     tof3.configureDefault();
-    //tof2.startInterleavedContinuous();
+    //tof3.startRangeContinuous();
     tof3.setTimeout(10);
     tof3.setAddress(tofAddress3);
 
@@ -58,7 +59,7 @@ void tofSetup()
     delay(10);
     tof4.init();
     tof4.configureDefault();
-    //tof2.startInterleavedContinuous();
+    //tof4.startRangeContinuous();
     tof4.setTimeout(10);
     tof4.setAddress(tofAddress4);
 
@@ -66,7 +67,7 @@ void tofSetup()
     delay(10);
     tof5.init();
     tof5.configureDefault();
-    //Sensor1.startRangeContinuous();
+    //tof5.startRangeContinuous();
     tof5.setTimeout(10);
     tof5.setAddress(tofAddress5);
 }
