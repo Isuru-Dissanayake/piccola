@@ -46,42 +46,40 @@ void mazeSolve()  /// a right priority algorithm
 
 void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
   
+
+  if (shortPath== false){
+  appendDestination(xdes,ydes,middleSquare);
+  floodFill3();
+
+  tofPid();
+  tofPid();
+  checkWallsCell();
+  updateWalls(x, y, orient, L, R, F);
+  
   while(flood[y][x]!=0){
     
-    tofPid();
-    tofPid();
-    tofPid();
-    checkWallsCell();
-    updateWalls(x, y, orient, L, R, F);
+    //cells[y][x]= sliit[y][x];
     
     appendDestination(xdes,ydes,middleSquare);
     floodFill3();
-    if (shortPath== true){
-      toMove2();
-    }
-    else{
-    dir= toMove(x,y,xprev,yprev,orient);}
+    dir= toMove(x,y,xprev,yprev,orient);
+
+    //Serial.println(dir);
     
         if (dir=='L'){
             orient = orientation(orient,'L');
             leftTurn();
-            //brake();
-            //delay(1000);
         }
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
             rightTurn();
-            //brake();
-            //delay(1000);
         }
 
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
             cellBack();
-            //brake();
-            //delay(1000);
         }
         else{
           if(x==0 && y==0){
@@ -98,8 +96,54 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
         xprev=x;
         yprev=y;
         updateCoordinates();
+        
 
   }
-  //center();
-  //while(1){brake();}
+  }
+
+  else{
+      while(flood2[y][x]!=1){
+
+
+    tofPid();
+    tofPid();
+    checkWallsCell();
+    updateWalls(x, y, orient, L, R, F);
+    toMove2();
+
+    //Serial.println(dir);
+    
+        if (dir=='L'){
+            orient = orientation(orient,'L');
+            leftTurn();
+        }
+
+        else if (dir=='R'){
+            orient = orientation(orient,'R');
+            rightTurn();
+        }
+
+        else if (dir=='B'){
+            orient = orientation(orient,'L');
+            orient = orientation(orient,'L');
+            cellBack();
+        }
+        else{
+          if(x==0 && y==0){
+            cellStart();
+            brake();
+            delay(1000);
+          }
+          else{
+          cellForward();
+          }
+        }
+        
+        
+        xprev=x;
+        yprev=y;
+        updateCoordinates();
+        
+  }
+  }
 }
