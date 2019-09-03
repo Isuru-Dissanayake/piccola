@@ -65,29 +65,30 @@ void cellForward()
     {
         wallFollow();
     }
+    
     encoderLeftCount = encoderLeftCount + 100;
     encoderRightCount = encoderRightCount + 100;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
-        tofCell();
-        if (tof[1] <= 150)
+        if (tof[0] <= 145)
         {
-          leftWallAvailable = leftWallAvailable + 1;
+          leftWallAvailable= leftWallAvailable + 1;
         }
         else
         {
-          leftWallAvailable = leftWallAvailable - 1;
+          leftWallAvailable= leftWallAvailable - 1;
         }
-        if (tof[3] <= 150)
+        if (tof[4] <= 145)
         {
-          rightWallAvailable = rightWallAvailable + 1;
+          rightWallAvailable= rightWallAvailable + 1;
         }
         else
         {
-          rightWallAvailable = rightWallAvailable - 1;
+          rightWallAvailable= rightWallAvailable - 1;
         }
     }
+    
     encoderLeftCount = leftEncoder;
     encoderRightCount = rightEncoder;
 }
