@@ -51,27 +51,16 @@ void loopt(){
 }
 
 void loop(){
-
-  cellStart();
-  brake();
-  delay(1000);
-  x=0;
-  y=1;
-  cells[0][0]= 11;
   
 //traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath)
 traverse(0,0,true,false);  // traverses to center
-cellBrake();
-delay(1000);
 center();  //saves the walls of the middle square
-brake();
-delay(1000);
-traverse(0,0,false,false);  // traverses back to the starting square
-floodFill2();  //fills the shortest path flood
-traverse(0,0,true,true);   // goes to the center in the shortest path  (when middleSquare == true , xdes and ydes doesnt matter.so just set them zero
 
 
-//wallFollow();
-//tofPid();
-//printTof();
+traverse(0,13,false,false);  // traverses back to the starting square
+traverse(0,0,false,false);
+floodFill2();
+traverse(0,0,true,true);
+while(1){}
+
 }
