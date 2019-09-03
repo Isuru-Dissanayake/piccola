@@ -1,4 +1,4 @@
-#include <QueueArray.h>
+//#include <QueueArray.h>
 
 byte x=0;
 byte y=0;
@@ -19,7 +19,7 @@ byte y_3;
 byte mazeSize = 16;
 char dir;
 char turning;
-QueueArray <byte> queue;
+//QueueArray <byte> queue;
 boolean  L = true;
 boolean  R= true;
 boolean  F= false; 
