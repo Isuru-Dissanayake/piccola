@@ -61,6 +61,8 @@ void loop(){
   
 //traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath)
 traverse(0,0,true,false);  // traverses to center
+cellBrake();
+delay(1000);
 center();  //saves the walls of the middle square
 brake();
 delay(1000);
