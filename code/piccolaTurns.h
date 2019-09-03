@@ -10,6 +10,10 @@ void countRightOut1()
 
 void turnBack()
 {
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
     encoderRightCount= encoderRightCount + 100;
     encoderLeftCount= encoderLeftCount + 100;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
@@ -48,6 +52,10 @@ void turnBack()
 void rightAboutTurn()
 {
     // checked
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
     encoderRightCount= encoderRightCount + 100;
     encoderLeftCount= encoderLeftCount + 100;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
@@ -85,6 +93,10 @@ void rightAboutTurn()
 
 void leftAboutTurn()
 {
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
     encoderRightCount= encoderRightCount + 100;
     encoderLeftCount= encoderLeftCount + 100;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
