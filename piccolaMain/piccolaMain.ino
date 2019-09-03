@@ -51,7 +51,14 @@ void loopt(){
 }
 
 void loop(){
-traverseToCenter();
+//traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath)
+traverse(0,0,true,false);  // traverses to center
+center();  //saves the walls of the middle square
+traverse(0,0,false,false);  // traverses back to the starting square
+floodFill2();  //fills the shortest path flood
+traverse(0,0,true,true);   // goes to the center in the shortest path  (when middleSquare == true , xdes and ydes doesnt matter.so just set them zero
+
+
 //wallFollow();
 //tofPid();
 //printTof();
