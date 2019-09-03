@@ -1,4 +1,4 @@
-/*
+
 
 void showCells(){
   for (int i=13; i>=0; i--){
@@ -29,5 +29,3 @@ void showFlood2(){
     Serial.println(' ');
   }
 }
-
-*/
