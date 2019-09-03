@@ -51,6 +51,10 @@ unsigned long time;
 
 boolean left,right,front;
 int cell =0;
+
+int jump = 0;
+int preState = 0;
+/*
 boolean  L = true;
 boolean  R= true;
-boolean  F= false; 
+boolean  F= false; */
