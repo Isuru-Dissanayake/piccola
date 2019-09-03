@@ -1,5 +1,5 @@
 
-
+/*
 void appendZero(){
 
     for (int i=0; i<14; i++){
@@ -21,10 +21,32 @@ void appendZero(){
     queue.enqueue(6);
     queue.enqueue(6);
     queue.enqueue(6);
-}
+}*/
 
-void appendDestination(byte xdes,byte ydes){
+void appendDestination(byte xdes,byte ydes, boolean middleSquare){
+    if (middleSquare == true){
+      for (int i=0; i<14; i++){
+        for (int j=0; j<14; j++){
+            flood[i][j]=254;
+        }
+    }
 
+    flood[7][7]=0;
+    flood[6][7]=0;
+    flood[7][6]=0;
+    flood[6][6]=0;
+
+    queue.enqueue(7);
+    queue.enqueue(7);
+    queue.enqueue(6);
+    queue.enqueue(7);
+    queue.enqueue(7);
+    queue.enqueue(6);
+    queue.enqueue(6);
+    queue.enqueue(6);
+    }
+
+    else{
     for (int i=0; i<14; i++){
         for (int j=0; j<14; j++){
             flood[i][j]=254;
@@ -35,6 +57,7 @@ void appendDestination(byte xdes,byte ydes){
 
     queue.enqueue(ydes);
     queue.enqueue(xdes);
+    }
 }
 
 void appendDestinationOne(){
@@ -168,8 +191,8 @@ void updateWalls(byte x, byte y, byte orient, boolean L, boolean R, boolean F){
             cells[y][x]= 2;
     }
 
-    //else
-    //    cells[y][x]= 15;
+    else
+        cells[y][x]= 15;
 
 
 }
@@ -231,6 +254,7 @@ byte getSurrounds(byte x,byte y){
     return (x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3);  //order of cells- north,east,south,west
 }
 
+/*
 void changeDestination(byte destinationy,byte destinationx){
   byte yrun=0;
   byte xrun=0;
@@ -284,7 +308,7 @@ void changeDestination(byte destinationy,byte destinationx){
 
 }
 }
-
+*/
 
 void floodFill2(){
 
@@ -515,7 +539,7 @@ char toMove2(){
 
 
 
-
+/*
 char maze(boolean L, boolean R, boolean F){
   updateWalls(x,y,orient,L,R,F);
   
@@ -558,7 +582,7 @@ char maze(boolean L, boolean R, boolean F){
         updateCoordinates();
         return(dir);
 
-}
+}*/
 
 void center(){
   if (x == 6 && y == 6){
