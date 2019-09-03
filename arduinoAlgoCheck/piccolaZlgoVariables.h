@@ -21,6 +21,7 @@ byte mazeSize = 16;
 char dir;
 char turning;
 QueueArray <byte> queue;
+QueueArray <byte> pathQueue;
 boolean  L = true;
 boolean  R= true;
 boolean  F= false; 
