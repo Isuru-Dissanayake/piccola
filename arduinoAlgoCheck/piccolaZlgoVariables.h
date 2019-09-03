@@ -8,6 +8,7 @@ byte yprev=0;
 byte orient=0;
 byte state=0;
 boolean shortPath= false;
+boolean middleSquare= true;
 byte x_0;
 byte y_0;
 byte x_1;
