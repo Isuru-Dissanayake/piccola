@@ -45,12 +45,6 @@ void mazeSolve()  /// a right priority algorithm
 
 
 void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
-  cellStart();
-  brake();
-  delay(1000);
-  x=0;
-  y=1;
-  cells[0][0]= 11;
   
   while(flood[y][x]!=0){
     
@@ -106,6 +100,6 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
         updateCoordinates();
 
   }
-  center();
+  //center();
   //while(1){brake();}
 }
