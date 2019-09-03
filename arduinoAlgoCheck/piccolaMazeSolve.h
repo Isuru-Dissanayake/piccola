@@ -44,16 +44,102 @@
 }
 */
 
-void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
+void calculatePath(){
+  floodFill2();
+  x=0;
+  y=0;
+  char prevDir;
+  byte oldOrient= orient;
+  int forwardCellCount =0;
+  toMove2();
+  prevDir= dir;
   
+    while(flood2[y][x]!=1){
+
+        toMove2();
+    
+        //Serial.println(dir);
+
+        if (prevDir=='F' && prevDir== dir){
+          forwardCellCount++;
+        }
+        else if( prevDir=='F' && prevDir!=dir){
+          pathQueue.enqueue(char(forwardCellCount+1));
+        }
+        else{
+          pathQueue.enqueue(prevDir);
+          forwardCellCount=0;
+        }
+
+    
+        if (prevDir=='L'){
+            orient = orientation(orient,'L');
+        }
+
+        else if (prevDir=='R'){
+            orient = orientation(orient,'R');
+        }
+
+        else if (prevDir=='B'){
+            orient = orientation(orient,'L');
+            orient = orientation(orient,'L');
+        }
+
+        
+        xprev=x;
+        yprev=y;
+        updateCoordinates();
+        prevDir= dir;
+        
+  }
+  if (prevDir =='F')
+    pathQueue.enqueue(char(forwardCellCount+1));
+  else
+    pathQueue.enqueue(prevDir);
+
+  
+        if (prevDir=='L'){
+            orient = orientation(orient,'L');
+        }
+
+        else if (prevDir=='R'){
+            orient = orientation(orient,'R');
+        }
+
+        else if (prevDir=='B'){
+            orient = orientation(orient,'L');
+            orient = orientation(orient,'L');
+        }
+
+        
+        xprev=x;
+        yprev=y;
+        updateCoordinates();
+
+        x=0;
+        y=0;
+        orient=oldOrient;
+
+    
+}
+
+
+
+
+
+
+
+
+void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
+  int forwardCellCount=0;
 
   if (shortPath== false){
   appendDestination(xdes,ydes,middleSquare);
   floodFill3();
 
-  tofPid();
-  tofPid();
-  checkWallsCell();
+  //tofPid();
+  //tofPid();
+  //checkWallsCell();
   updateWalls(x, y, orient, L, R, F);
   
   while(flood[y][x]!=0){
@@ -68,27 +154,27 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
     
         if (dir=='L'){
             orient = orientation(orient,'L');
-            leftTurn();
+            //leftTurn();
         }
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
-            rightTurn();
+            //rightTurn();
         }
 
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            cellBack();
+            //cellBack();
         }
         else{
           if(x==0 && y==0){
-            cellStart();
-            brake();
-            delay(1000);
+            //cellStart();
+            //brake();
+            //delay(1000);
           }
           else{
-          cellForward();
+          //cellForward();
           }
         }
         
@@ -102,41 +188,34 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
   }
 
   else{
-      while(flood2[y][x]!=1){
 
+    calculatePath();
+    
+    while (!pathQueue.isEmpty ()){
 
-    tofPid();
-    tofPid();
-    checkWallsCell();
-    updateWalls(x, y, orient, L, R, F);
-    toMove2();
-
-    Serial.println(dir);
+    dir= pathQueue.dequeue();
     
         if (dir=='L'){
             orient = orientation(orient,'L');
-            leftTurn();
+            //////////////////////////////// turnLeft
         }
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
-            rightTurn();
+            //////////////////////////////turnRight
         }
 
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            cellBack();
+            ///////////////////////////turnBack
         }
         else{
-          if(x==0 && y==0){
-            cellStart();
-            brake();
-            delay(1000);
-          }
-          else{
-          cellForward();
-          }
+          forwardCellCount= String(dir).toInt();
+          ///////////////////////you have to move this much of cells forward. accelarate as you wish
+
+          // but call xprev=x; yprev=y; updateCoordinates(); every time you run a cell.
+          
         }
         
         
