@@ -18,45 +18,6 @@ void mazeStart()
     //forwardBase();
 }
 
-void prevWall(){
-  if (wallAvailable[2] == 1){
-    right=true;
-  }
-  else{
-    right=false;
-  }
-  if (wallAvailable[0] == 1){
-    left=true;
-  }
-  else{
-    left=false;
-  }
-}
-
-
-boolean wallChange(){
-  tofPid();
-  checkWallsPid();
-  if((right==true && wallAvailable[2] == 0)||(right==false && wallAvailable[2] == 1)){
-    tofPid();
-    checkWallsPid();
-    prevWall();
-    return true;
-  }
-  if((left==true && wallAvailable[0] == 0)||(left==false && wallAvailable[0] == 1)){
-    tofPid();
-    checkWallsPid();
-    prevWall();
-    return true;
-  }
-  else{
-    //wallFollow();
-    prevWall();
-    return false;
-  }
-  
-}
-
 void cellForward()
 {
     encoderLeftCount = encoderLeftCount + 1160;
@@ -89,8 +50,8 @@ void cellForward()
         }
     }
     
-    encoderLeftCount = leftEncoder;
-    encoderRightCount = rightEncoder;
+    //encoderLeftCount = leftEncoder;
+    //encoderRightCount = rightEncoder;
 }
 
 
