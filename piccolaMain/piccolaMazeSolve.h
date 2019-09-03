@@ -44,7 +44,7 @@ void mazeSolve()  /// a right priority algorithm
 }
 
 
-void traverseToCenter(){
+void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
   cellStart();
   brake();
   delay(1000);
@@ -60,12 +60,13 @@ void traverseToCenter(){
     checkWallsCell();
     updateWalls(x, y, orient, L, R, F);
     
-    //cells[y][x]=sliit[y][x];
-    appendZero();
-    
-    //appendDestination(0,13);
+    appendDestination(xdes,ydes,middleSquare);
     floodFill3();
-    dir= toMove(x,y,xprev,yprev,orient);
+    if (shortPath== true){
+      toMove2();
+    }
+    else{
+    dir= toMove(x,y,xprev,yprev,orient);}
     
         if (dir=='L'){
             orient = orientation(orient,'L');
@@ -106,5 +107,5 @@ void traverseToCenter(){
 
   }
   center();
-  while(1){brake();}
+  //while(1){brake();}
 }
