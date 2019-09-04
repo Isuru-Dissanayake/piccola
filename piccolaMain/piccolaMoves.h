@@ -15,63 +15,30 @@ void mazeStart()
     }
     rightBase=177;
     leftBase=180;
-    //forwardBase();
-}
-
-void prevWall(){
-  if (wallAvailable[2] == 1){
-    right=true;
-  }
-  else{
-    right=false;
-  }
-  if (wallAvailable[0] == 1){
-    left=true;
-  }
-  else{
-    left=false;
-  }
-}
-
-
-boolean wallChange(){
-  tofPid();
-  checkWallsPid();
-  if((right==true && wallAvailable[2] == 0)||(right==false && wallAvailable[2] == 1)){
-    tofPid();
-    checkWallsPid();
-    prevWall();
-    return true;
-  }
-  if((left==true && wallAvailable[0] == 0)||(left==false && wallAvailable[0] == 1)){
-    tofPid();
-    checkWallsPid();
-    prevWall();
-    return true;
-  }
-  else{
-    //wallFollow();
-    prevWall();
-    return false;
-  }
-  
 }
 
 void cellForward()
 {
-    encoderLeftCount = encoderLeftCount + 1160;
-    encoderRightCount = encoderRightCount + 1160;
+    encoderLeftCount = encoderLeftCount + 1173;
+    encoderRightCount = encoderRightCount + 1173;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
     }
-    
     encoderLeftCount = encoderLeftCount + 100;
     encoderRightCount = encoderRightCount + 100;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
-        if (tof[0] <= 145)
+        if (tof[2] <= 180)
+        {
+          frontWallAvailable = frontWallAvailable + 1;
+        }
+        else
+        {
+          frontWallAvailable = frontWallAvailable - 1;
+        }
+        if (tof[0] <= 150)
         {
           leftWallAvailable= leftWallAvailable + 1;
         }
@@ -79,7 +46,7 @@ void cellForward()
         {
           leftWallAvailable= leftWallAvailable - 1;
         }
-        if (tof[4] <= 145)
+        if (tof[4] <= 150)
         {
           rightWallAvailable= rightWallAvailable + 1;
         }
@@ -88,104 +55,143 @@ void cellForward()
           rightWallAvailable= rightWallAvailable - 1;
         }
     }
-    
-    encoderLeftCount = leftEncoder;
-    encoderRightCount = rightEncoder;
 }
 
 
 
 void rightSmoothTurn()
 {
-    encoderLeftCount = encoderLeftCount + 50;
-    encoderRightCount = encoderRightCount + 50;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-    {
-        forwardBase();
-    }
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-    {
-        dif = leftEncoder - encoderLeftCount + 75;
-        rightBase = rightBase - dif;
-        leftBase = leftBase + dif;
-        forwardBase();
-    }
-    leftBase = 255;
-    rightBase = 101;
-    encoderLeftCount = encoderLeftCount + 550;
-    encoderRightCount = encoderRightCount + 550;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-    {
-        forwardBase();
-    }
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-    {
-        dif = leftEncoder - encoderLeftCount + 75;
-        rightBase = rightBase + dif;
-        leftBase = leftBase - dif;
-        forwardBase();
-    }
     leftBase = 180;
     rightBase = 176;
     encoderLeftCount = encoderLeftCount + 50;
     encoderRightCount = encoderRightCount + 50;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
+        wallFollow();
+    }
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = encoderLeftCount + 50;
+    while (leftEncoder <= encoderLeftCount)
+    {
+        dif = leftEncoder - encoderLeftCount + 50;
+        rightBase = rightBase - 6 - int(dif * 1.2);
+        leftBase = leftBase + dif;
         forwardBase();
     }
-    encoderLeftCount = leftEncoder;
-    encoderRightCount = rightEncoder;
+    leftBase = 230;
+    rightBase = 60;
+    encoderLeftCount = encoderLeftCount + 1132;
+    encoderRightCount = rightEncoder + 290;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        if (leftEncoder <= encoderLeftCount)
+        {
+          leftForwardBase();
+        }
+        else
+        {
+          leftBrake();
+        }
+        if (rightEncoder <= encoderRightCount)
+        {
+          rightForwardBase();
+        }
+        else
+        {
+          rightBrake();
+        }
+    }
+    encoderLeftCount = encoderLeftCount + 50;
+    while (leftEncoder <= encoderLeftCount)
+    {
+        dif = leftEncoder - encoderLeftCount + 50;
+        rightBase = rightBase + 6 + (dif * 2);
+        leftBase = leftBase - dif;
+        forwardBase();
+    }
+    leftBase = 180;
+    rightBase = 176;
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = encoderLeftCount + 160;
+    encoderRightCount = encoderRightCount + 160;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        wallFollow();
+    }
 }
 
 
 void leftSmoothTurn()
 {
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
+    leftBase = 180;
+    rightBase = 176;
+    encoderLeftCount = encoderLeftCount + 55;
+    encoderRightCount = encoderRightCount + 55;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
+        wallFollow();
+    }
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderRightCount = encoderRightCount + 50;
+    while (rightEncoder <= encoderRightCount)
+    {
+        dif = rightEncoder - encoderRightCount + 50;
+        rightBase = rightBase + 4 + dif;
+        leftBase = leftBase - int(dif * 1.2) - 10;
         forwardBase();
     }
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
+    rightBase = 240;
+    leftBase = 55;
+    encoderRightCount = encoderRightCount + 1078;
+    encoderLeftCount = leftEncoder + 260;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        dif = leftEncoder - encoderLeftCount + 75;
-        rightBase = rightBase + dif;
-        leftBase = leftBase - dif;
-        forwardBase();
+        if (leftEncoder <= encoderLeftCount)
+        {
+          leftForwardBase();
+        }
+        else
+        {
+          leftBrake();
+        }
+        if (rightEncoder <= encoderRightCount)
+        {
+          rightForwardBase();
+        }
+        else
+        {
+          rightBrake();
+        }
     }
-    leftBase = 105;
-    rightBase = 255;
-    encoderLeftCount = encoderLeftCount + 1100;
-    encoderRightCount = encoderRightCount + 1100;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    encoderRightCount = encoderRightCount + 50;
+    while (leftEncoder <= encoderLeftCount)
     {
-        forwardBase();
-    }
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
-    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
-    {
-        dif = leftEncoder - encoderLeftCount + 75;
-        rightBase = rightBase - dif;
-        leftBase = leftBase + dif;
+        dif = rightEncoder - encoderRightCount + 50;
+        leftBase = leftBase + 10 + (dif * 2);
+        rightBase = rightBase - dif - 4;
         forwardBase();
     }
     leftBase = 180;
     rightBase = 176;
-    encoderLeftCount = encoderLeftCount + 75;
-    encoderRightCount = encoderRightCount + 75;
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
+    encoderLeftCount = encoderLeftCount + 200;
+    encoderRightCount = encoderRightCount + 200;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
-        forwardBase();
+        wallFollow();
     }
-    encoderLeftCount = leftEncoder;
-    encoderRightCount = rightEncoder;
 }
 
 
