@@ -1,5 +1,8 @@
 void cellStart()
 {
+    leftWallAvailable = 0;
+    rightWallAvailable = 0;
+    frontWallAvailable = 0;
     encoderRightCount = encoderRightCount + 220;
     encoderLeftCount = encoderLeftCount + 220;
     rightBase=70;
@@ -66,18 +69,27 @@ void cellBrake()
     encoderLeftCount= encoderLeftCount + 220;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {   
-        dif = leftEncoder - encoderLeftCount + 220;
-        rightBase = 176 - int(dif/2);
-        leftBase = 180 - int((dif*3)/5);
-        if (rightBase <= 70)
+        tofPid();
+        if (tof[2] <= 52)
         {
-          rightBase = 70;
+          break;
         }
-        if (leftBase <= 70)
+
+        else
         {
-          leftBase = 70;
+          dif = leftEncoder - encoderLeftCount + 220;
+          rightBase = 176 - int(dif/2);
+          leftBase = 180 - int((dif*3)/5);
+          if (rightBase <= 70)
+          {
+            rightBase = 70;
+          }
+          if (leftBase <= 70)
+          {
+            leftBase = 70;
+          }
+          forwardBase();
         }
-        forwardBase();
     }
     brake();
 }
