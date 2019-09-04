@@ -1,29 +1,6 @@
 
-/*
-void appendZero(){
-
-    for (int i=0; i<14; i++){
-        for (int j=0; j<14; j++){
-            flood[i][j]=254;
-        }
-    }
-
-    flood[7][7]=0;
-    flood[6][7]=0;
-    flood[7][6]=0;
-    flood[6][6]=0;
-
-    queue.enqueue(7);
-    queue.enqueue(7);
-    queue.enqueue(6);
-    queue.enqueue(7);
-    queue.enqueue(7);
-    queue.enqueue(6);
-    queue.enqueue(6);
-    queue.enqueue(6);
-}*/
-
 void appendDestination(byte xdes,byte ydes, boolean middleSquare){
+  
     if (middleSquare == true){
       for (int i=0; i<14; i++){
         for (int j=0; j<14; j++){
@@ -59,21 +36,6 @@ void appendDestination(byte xdes,byte ydes, boolean middleSquare){
     queue.enqueue(xdes);
     }
 }
-
-void appendDestinationOne(){
-
-    for (int i=0; i<14; i++){
-        for (int j=0; j<14; j++){
-            flood[i][j]=254;
-        }
-    }
-
-    flood[0][13]=0;
-
-    queue.enqueue(0);
-    queue.enqueue(13);
-}
-
 
 
 byte orientation(byte orient, char turning){
@@ -254,61 +216,6 @@ byte getSurrounds(byte x,byte y){
     return (x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3);  //order of cells- north,east,south,west
 }
 
-/*
-void changeDestination(byte destinationy,byte destinationx){
-  byte yrun=0;
-  byte xrun=0;
-  for (int i=0;i<16;i++){
-        for (int j=0;j<16;j++){
-            flood2[i][j]=0;
-        }
- }
-
-
-    flood[destinationy][destinationx]=0;
-
-    queue.enqueue(destinationy);
-    queue.enqueue(destinationx);
-
-
-    while (!queue.isEmpty ()){
-        yrun=queue.dequeue();
-        xrun=queue.dequeue();
-
-        x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3= getSurrounds(xrun,yrun);
-
-        if(x_0>=0 && y_0>=0 ){
-            if (flood[y_0][x_0]==255){
-                flood[y_0][x_0]= flood[yrun][xrun]+1;
-                queue.enqueue(y_0);
-                queue.enqueue(x_0);
-        }
-        }
-        if(x_1>=0 && y_1>=0 ){
-            if (flood[y_1][x_1]==255){
-                flood[y_1][x_1]= flood[yrun][xrun]+1;
-                queue.enqueue(y_1);
-                queue.enqueue(x_1);
-            }
-        }
-        if(x_2>=0 && y_2>=0 ){
-            if (flood[y_2][x_2]==255){
-                flood[y_2][x_2]= flood[yrun][xrun]+1;
-                queue.enqueue(y_2);
-                queue.enqueue(x_2);
-            }
-        }
-        if(x_3>=0 && y_3>=0 ){
-            if (flood[y_3][x_3]==255){
-                flood[y_3][x_3]= flood[yrun][xrun]+1;
-                queue.enqueue(y_3);
-                queue.enqueue(x_3);
-            }
-        }
-
-}
-}
-*/
 
 void floodFill2(){
 
@@ -432,43 +339,67 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
     
     byte val= flood[y][x];
-    byte prev=0;
+    byte prev=254;
     byte minVals[4]={254,254,254,254};
+
+      /*for (int i=0; i<4;i++){
+          Serial.print(minVals[i]);
+          Serial.print(' ');
+        }
+      Serial.println(' ');*/
+
+
 
     if (isAccessible(x,y,x_0,y_0)){
         if (x_0==xprev && y_0==yprev)
             prev=0;
         minVals[0]= flood[y_0][x_0];
+        //Serial.println(1000);
     }
-
+    else
+      minVals[0]=254;
+    
     if (isAccessible(x,y,x_1,y_1)){
         if (x_1==xprev && y_1==yprev)
             prev=1;
         minVals[1]= flood[y_1][x_1];
+        //Serial.println(2000);
     }
-
+    else
+      minVals[1]=254;
+      
     if (isAccessible(x,y,x_2,y_2)){
         if (x_2==xprev && y_2==yprev)
             prev=2;
         minVals[2]= flood[y_2][x_2];
+        //Serial.println(3000);
     }
-
+    else
+      minVals[2]=254;
+      
     if (isAccessible(x,y,x_3,y_3)){
         if (x_3==xprev && y_3==yprev)
             prev=3;
         minVals[3]= flood[y_3][x_3];
+        //Serial.println(4000);
     }
+    else
+      minVals[3]=254;
 
+    
+    //Serial.println(prev);
     byte minVal=254;
     byte minCell=0;
     byte noMovements=0;
     
     
     for (int i=0; i<4;i++){
+      //Serial.print(minVals[i]);
+      //Serial.print(' ');
         if (minVals[i]!= 254){
             noMovements+=1;}
     }
-
+    //Serial.println(' ');
     for (int i=0; i<4;i++){
         if (minVals[i]<minVal){
             if (noMovements==1){
@@ -479,11 +410,16 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
                 if(i!=prev){
                     minVal= minVals[i];
                     minCell= i;
+                    //Serial.print(minVals[i]);
+                    //Serial.print(' ');
+                    //Serial.println(minCell);
+                    
                 }
             }
         }
     }
 
+    
     if (minCell==orient)
         return ('F');
     else if((minCell==orient-1) || (minCell== orient+3))
@@ -502,7 +438,9 @@ char toMove2(){
     x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
     
     byte val= flood2[y][x];
-    byte minCell=0;
+    byte minCell=254;
+
+    
     if (isAccessible(x,y,x_0,y_0)){
         if (flood2[y_0][x_0]==val-1)
             minCell=0;
@@ -522,8 +460,9 @@ char toMove2(){
         if (flood2[y_3][x_3]==val-1)
             minCell=3;
     }
+    
 
-
+    
     if (minCell==orient)
         dir= 'F';
     else if((minCell==orient-1) || (minCell== orient+3))
@@ -538,51 +477,6 @@ char toMove2(){
 
 
 
-
-/*
-char maze(boolean L, boolean R, boolean F){
-  updateWalls(x,y,orient,L,R,F);
-  
-  if (flood[y][x]!=0){
-
-            if (state==0){
-                appendZero();}
-
-            floodFill3();
-  }
-
-  else{
-      if (state==0){
-          changeDestination(13,0);
-          state+=1;
-      }
-      floodFill2();
-  }
-
-
-      if (shortPath){
-          toMove2();}
-      else{
-          dir= toMove(x,y,xprev,yprev,orient);}
-   
-        if (dir=='L'){
-            orient = orientation(orient,'L');
-        }
-
-        else if (dir=='R'){
-            orient = orientation(orient,'R');
-        }
-
-        else if (dir=='B'){
-            orient = orientation(orient,'L');
-            orient = orientation(orient,'L');
-        }
-        xprev=x;
-        yprev=y;
-        updateCoordinates();
-        return(dir);
-
-}*/
 
 void center(){
   if (x == 6 && y == 6){
