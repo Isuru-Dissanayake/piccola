@@ -78,7 +78,6 @@ void tofPid()
     tof[2] = tof3.readRangeSingleMillimeters();
     tof[4] = tof4.readRangeSingleMillimeters();
 }
-
 void printTof()
 {
     
