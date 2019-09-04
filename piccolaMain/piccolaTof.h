@@ -72,41 +72,24 @@ void tofSetup()
     tof5.setAddress(tofAddress5);
 }
 
-void tofCell()
-{
-    
-    tof[1] = tof2.readRangeSingleMillimeters();
-    tof[2] = tof3.readRangeSingleMillimeters();
-    tof[3] = tof4.readRangeSingleMillimeters();
-    
-}
-
 void tofPid()
 {
     tof[0] = tof2.readRangeSingleMillimeters();
     tof[2] = tof3.readRangeSingleMillimeters();
     tof[4] = tof4.readRangeSingleMillimeters();
 }
-
 void printTof()
 {
     
     Serial2.print(tof[0]);
     Serial2.print(",  ");
-    
-    //Serial2.print(tof[1]);
-    //Serial2.print(",  ");
     Serial2.print(tof[2]);
     Serial2.print(",  ");
-    //Serial2.print(tof[3]);
-    //Serial2.print(",  ");
-    
     Serial2.print(tof[4]);
     Serial2.println();
-    
 }
 
-
+/*
 void checkWallsPid()
 {
     if (tof[2] > 170)
@@ -136,18 +119,21 @@ void checkWallsPid()
         wallAvailable[2] = 0; 
     }
 }
+*/
 
 void checkWallsCell()
 {
-    if (tof[2] > 160)
+    if (frontWallAvailable >=0 )
     {
         cellWalls[1] =  0;
-        F = false;
+        F = true;
+        frontWallAvailable = 0;
     }
     else
     {
         cellWalls[1] =  1;
-        F = true;
+        F = false;
+        frontWallAvailable = 0;
     } 
     if (leftWallAvailable >= 0)
     {
