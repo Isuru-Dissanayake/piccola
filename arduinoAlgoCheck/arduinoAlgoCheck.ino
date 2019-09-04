@@ -1,12 +1,13 @@
-
+#include <EEPROM.h>
 #include "piccolaZlgoVariables.h"
 #include "piccolaZlgo.h"
 #include "piccolaZlgoSupport.h"
 #include "piccolaMazeSolve.h"
 
+
 void setup()
 {   
-    Serial.begin(9600);
+    Serial2.begin(9600);
 }
 
 void loopt(){
@@ -17,8 +18,8 @@ void loopt(){
   }
 }
 
-void loop(){
-  
+void loopq(){
+/*  
 //traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath)
 traverse(0,0,true,false);  // traverses to center
 Serial.println(' ');
@@ -40,5 +41,15 @@ showCells();
 Serial.println(' ');
 
 while(1){}
+*/
+}
 
+void loop(){
+  for (int i=0; i<100; i++){
+    EEPROM.write(i,'F');
+  }
+
+  for(int i=0 ; i<100; i++){
+    Serial2.println(EEPROM.read(i));
+  }
 }
