@@ -78,6 +78,13 @@ void tofPid()
     tof[2] = tof3.readRangeSingleMillimeters();
     tof[4] = tof4.readRangeSingleMillimeters();
 }
+
+void tofPid()
+{
+    tof[1] = tof1.readRangeSingleMillimeters();
+    tof[2] = tof3.readRangeSingleMillimeters();
+    tof[3] = tof5.readRangeSingleMillimeters();
+}
 void printTof()
 {
     
@@ -127,37 +134,37 @@ void checkWallsCell()
     {
         cellWalls[1] =  0;
         F = true;
-        frontWallAvailable = 0;
+        //frontWallAvailable = 0;
     }
     else
     {
         cellWalls[1] =  1;
         F = false;
-        frontWallAvailable = 0;
+        //frontWallAvailable = 0;
     } 
     if (leftWallAvailable >= 0)
     {
         cellWalls[0] = 1;
         L = true;
-        leftWallAvailable = 0;
+        //leftWallAvailable = 0;
     }
     else
     {
         cellWalls[0] = 0;
         L = false;
-        leftWallAvailable = 0;
+        //leftWallAvailable = 0;
     }
     if (rightWallAvailable >= 0)
     {
         cellWalls[2] = 1;
         R = true;
-        rightWallAvailable = 0;
+        //rightWallAvailable = 0;
     }
     else
     {
         cellWalls[2] = 0;
         R = false;
-        rightWallAvailable = 0;
+        //rightWallAvailable = 0;
     }
     
 }

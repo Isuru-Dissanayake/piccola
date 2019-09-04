@@ -1,24 +1,18 @@
 void mazeStart()
 {
-    rightEncoder=0;
-    leftEncoder=0;
-    encoderRightCount=820;
-    encoderLeftCount=820;
-    rightBase=60;
-    leftBase=60;
-
-    while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
+    tofStart();
+    if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
     {
-        rightBase = int(70+110/(1+pow(2.73,((300-rightEncoder)*0.012))));
-        leftBase = int(70+110/(1+pow(2.73,((300-leftEncoder)*0.012))));
-        forwardBase();
+      delay(2000);
+      
     }
-    rightBase=177;
-    leftBase=180;
 }
 
 void cellForward()
 {
+    leftWallAvailable = 0;
+    rightWallAvailable = 0;
+    frontWallAvailable = 0;
     encoderLeftCount = encoderLeftCount + 1173;
     encoderRightCount = encoderRightCount + 1173;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
