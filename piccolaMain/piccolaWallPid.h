@@ -92,12 +92,12 @@ void wallPid()
     
     if (correction > 50 )
     {
-        correction = 15;
+        correction = 10;
     }
 
     else if (correction < -50)
     {
-        correction = -15;
+        correction = -10;
     }
     
     leftPwm = leftBase - correction;
@@ -105,11 +105,20 @@ void wallPid()
 
 }
 
+void encoderPid()
+{
+    encoderError = leftEncoder - rightEncoder;
+    encoderCorrection = float(encoderError * encoderP) + float(encoderLastError * encoderD);
+    encoderLastError = encoderError;
+    leftPwm = leftBase - encoderCorrection;
+    rightPwm = rightBase + encoderCorrection;
+    forward();
+}
+
 void wallFollow()
 {
     tofPid();
-    checkWallsPid();
-    if (wallAvailable[0] == 1 && wallAvailable[2] == 1)
+    if (tof[0] <= 135 && tof[4] <= 135)
     {
         state = 0;
         if (state != preState)
@@ -129,7 +138,7 @@ void wallFollow()
         }
     }
 
-    else if (wallAvailable[0] == 0 && wallAvailable[2] == 1)
+    else if (tof[0] > 135 && tof[4] <= 135)
     {
         state = 1;
         if (state != preState)
@@ -149,7 +158,7 @@ void wallFollow()
         }
     }
 
-    else if (wallAvailable[0] == 1 && wallAvailable[2] == 0)
+    else if (tof[0] <= 135 && tof[4] > 135)
     {
         state = 2;
         if (state != preState)
@@ -168,7 +177,7 @@ void wallFollow()
           forward();
         }
     }
-    else if(wallAvailable[0] == 0 && wallAvailable[2] == 0)
+    else if(tof[0] > 135 && tof[4] > 135)
     {
         state = 3;
         forwardBase();
