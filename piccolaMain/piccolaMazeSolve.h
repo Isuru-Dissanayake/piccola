@@ -36,15 +36,18 @@ void calculatePath(boolean runningNext,boolean eeprom){
         xprev=x;
         yprev=y;
         updateCoordinates();
-        //prevDir= dir;
+        
         
   }
+
+        
         x=0;
         y=0;
         orient=oldOrient;   
+        EEPROM.write(0,cellCount);
 }
 
-void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
+void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boolean eeprom){
 
   if (shortPath== false){
   appendDestination(xdes,ydes,middleSquare);
@@ -115,7 +118,71 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
 
   else{
 
+    if (eeprom== true){
+      cellCount= EEPROM.read(0);
+      char shortestPath[cellCount];
+
+      for( int i=0; i<cellCount;i++){
+
+        shortestPath[i]= char(EEPROM.read(i+1));
+      }
+
+      for (int i=0; i<cellCount; i++){
+        dir = shortestPath[i];
+
+        if (dir=='L'){
+            orient = orientation(orient,'L');
+            if(x==0 && y==0){
+              leftAboutTurn();
+              cellStart();
+            }
+            else{
+            leftTurn();}
+            
+        }
+
+        else if (dir=='R'){
+            orient = orientation(orient,'R');
+            if(x==0 && y==0){
+              rightAboutTurn();
+              cellStart();
+            }
+            else{
+            rightTurn();}
+        }
+
+        else if (dir=='B'){
+            orient = orientation(orient,'L');
+            orient = orientation(orient,'L');
+            if(x==0 && y==0){
+              turnBack();
+              cellStart();
+            }
+            else{
+            cellBack();}
+          }
+        
+        else{
+          if(x==0 && y==0){
+              cellStart();
+            }
+            else{
+            cellForward();}
+          }
+
+          xprev=x;
+          yprev=y;
+          updateCoordinates();
+        
+      }
+
+      
+    }
+
+    else{
+      
     calculatePath(true,false);
+    
     while (!pathQueue.isEmpty ()){
     dir= pathQueue.dequeue();
     
@@ -164,5 +231,6 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
           updateCoordinates();
           
         }   
+    }
   }
   }
