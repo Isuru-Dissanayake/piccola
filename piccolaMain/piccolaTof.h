@@ -79,7 +79,7 @@ void tofPid()
     tof[4] = tof4.readRangeSingleMillimeters();
 }
 
-void tofPid()
+void tofStart()
 {
     tof[1] = tof1.readRangeSingleMillimeters();
     tof[2] = tof3.readRangeSingleMillimeters();
