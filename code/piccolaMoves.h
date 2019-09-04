@@ -25,7 +25,6 @@ void cellForward()
     {
         wallFollow();
     }
-    
     encoderLeftCount = encoderLeftCount + 100;
     encoderRightCount = encoderRightCount + 100;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
@@ -64,8 +63,8 @@ void rightSmoothTurn()
 {
     leftBase = 180;
     rightBase = 176;
-    encoderLeftCount = encoderLeftCount + 80;
-    encoderRightCount = encoderRightCount + 80;
+    encoderLeftCount = encoderLeftCount + 50;
+    encoderRightCount = encoderRightCount + 50;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
@@ -84,7 +83,7 @@ void rightSmoothTurn()
     }
     leftBase = 230;
     rightBase = 60;
-    encoderLeftCount = encoderLeftCount + 1140;
+    encoderLeftCount = encoderLeftCount + 1132;
     encoderRightCount = rightEncoder + 290;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
@@ -132,8 +131,8 @@ void leftSmoothTurn()
 {
     leftBase = 180;
     rightBase = 176;
-    encoderLeftCount = encoderLeftCount + 80;
-    encoderRightCount = encoderRightCount + 80;
+    encoderLeftCount = encoderLeftCount + 55;
+    encoderRightCount = encoderRightCount + 55;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
@@ -152,7 +151,7 @@ void leftSmoothTurn()
     }
     rightBase = 240;
     leftBase = 55;
-    encoderRightCount = encoderRightCount + 1075;
+    encoderRightCount = encoderRightCount + 1078;
     encoderLeftCount = leftEncoder + 260;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
@@ -187,8 +186,8 @@ void leftSmoothTurn()
     encoderRightCount = 0;
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = encoderLeftCount + 175;
-    encoderRightCount = encoderRightCount + 175;
+    encoderLeftCount = encoderLeftCount + 200;
+    encoderRightCount = encoderRightCount + 200;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
