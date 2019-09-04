@@ -1,22 +1,20 @@
 void cellStart()
 {
-    encoderRightCount = encoderRightCount + 110;
-    encoderLeftCount = encoderLeftCount + 110;
+    encoderRightCount = encoderRightCount + 220;
+    encoderLeftCount = encoderLeftCount + 220;
     rightBase=70;
     leftBase=70;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
-        dif = leftEncoder - encoderLeftCount + 110;
-        //rightBase = int(70+110/(1+pow(2.73,((150-dif)*0.05))));
-        //leftBase = int(70+110/(1+pow(2.73,((150-dif)*0.05))));
-        rightBase = 70 + dif;
-        leftBase = 70 +dif;
+        dif = leftEncoder - encoderLeftCount + 220;
+        rightBase = 70 + int(dif/2);
+        leftBase = 70 + int(dif/2);
         forwardBase();
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= encoderRightCount + 400;
-    encoderLeftCount= encoderLeftCount + 400;
+    encoderRightCount= encoderRightCount + 317;
+    encoderLeftCount= encoderLeftCount + 317;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         wallFollow();
@@ -27,7 +25,15 @@ void cellStart()
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
-        if (tof[0] <= 145)
+        if (tof[2] <= 180)
+        {
+          frontWallAvailable = frontWallAvailable + 1;
+        }
+        else
+        {
+          frontWallAvailable = frontWallAvailable - 1;
+        }
+        if (tof[0] <= 150)
         {
           leftWallAvailable= leftWallAvailable + 1;
         }
@@ -35,7 +41,7 @@ void cellStart()
         {
           leftWallAvailable= leftWallAvailable - 1;
         }
-        if (tof[4] <= 145)
+        if (tof[4] <= 150)
         {
           rightWallAvailable= rightWallAvailable + 1;
         }
@@ -44,33 +50,34 @@ void cellStart()
           rightWallAvailable= rightWallAvailable - 1;
         }
     }
-    
-    //encoderLeftCount = leftEncoder;
-    //encoderRightCount = rightEncoder;
 }
 
 void cellBrake()
 {
-    encoderRightCount= encoderRightCount + 500;
-    encoderLeftCount= encoderLeftCount + 500;
+    encoderRightCount= encoderRightCount + 417;
+    encoderLeftCount= encoderLeftCount + 417;
     rightBase=176;
     leftBase=180;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         wallFollow();
     }
-    encoderRightCount= encoderRightCount + 110;
-    encoderLeftCount= encoderLeftCount + 110;
+    encoderRightCount= encoderRightCount + 220;
+    encoderLeftCount= encoderLeftCount + 220;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {   
-        dif = leftEncoder - encoderLeftCount + 110;
-        //rightBase = int(180-110/(1+pow(2.73,((150-dif)*0.05))));
-        //leftBase = int(180-110/(1+pow(2.73,((150-dif)*0.09))));
-        rightBase = 70 + dif;
-        leftBase = 70 +dif;
+        dif = leftEncoder - encoderLeftCount + 220;
+        rightBase = 176 - int(dif/2);
+        leftBase = 180 - int((dif*3)/5);
+        if (rightBase <= 70)
+        {
+          rightBase = 70;
+        }
+        if (leftBase <= 70)
+        {
+          leftBase = 70;
+        }
         forwardBase();
     }
     brake();
-    //encoderLeftCount = leftEncoder;
-    //encoderRightCount = rightEncoder;
 }

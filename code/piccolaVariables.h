@@ -1,7 +1,7 @@
 int leftBase =180;
 int rightBase = 176;
-int leftPwm;
-int rightPwm;
+int leftPwm ;
+int rightPwm ;
 
 unsigned long leftEncoder = 0;
 unsigned long rightEncoder = 0;
@@ -17,6 +17,7 @@ int cellWalls[3];
 
 int leftWallAvailable = 0;
 int rightWallAvailable = 0;
+int frontWallAvailable = 0;
 
 int rightWall  = 1;
 int leftWall = 1;
@@ -42,9 +43,19 @@ float wallError = 0;
 float wallLastError = 0;
 float wallDiff = 0;
 
+float encoderP = 0.2 ;
+float encoderD = 0; 
+
+float encoderError = 0;
+float encoderLastError = 0;
+float encoderDiff = 0;
+
+float encoderCorrection = 0;
 float correction;
 
 char nextMove = 'F';
+
+int start = 0;
 
 unsigned long time;
 
