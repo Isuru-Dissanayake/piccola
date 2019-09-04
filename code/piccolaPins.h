@@ -42,26 +42,26 @@ void buzz()
 
 void buzzTwice()
 {
-    tone(buzzer,2500,1000);
+    digitalWrite(buzzer, HIGH);
     delay(75);
-    noTone(buzzer);
-    delay(75);
-    tone(buzzer,2500,1000);
-    delay(150);
-    noTone(buzzer);
+    digitalWrite(buzzer, LOW);
+    delay(50);
+    digitalWrite(buzzer, HIGH);
+    delay(100);
+    digitalWrite(buzzer, LOW);
 }
 
 void buzzDone()
 {
-    tone(buzzer,2500,1000);
-    delay(50);
-    noTone(buzzer);
+    digitalWrite(buzzer, HIGH);
+    delay(75);
+    digitalWrite(buzzer, LOW);
     delay(30);
-    tone(buzzer,2500,1000);
-    delay(50);
-    noTone(buzzer);
+    digitalWrite(buzzer, HIGH);
+    delay(75);
+    digitalWrite(buzzer, LOW);
     delay(30);
-    tone(buzzer,2500,1000);
-    delay(50);
-    noTone(buzzer);
+    digitalWrite(buzzer, HIGH);
+    delay(150);
+    digitalWrite(buzzer, LOW);
 }
