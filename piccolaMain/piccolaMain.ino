@@ -35,35 +35,15 @@ void loop()
     if (start == 1)
     {
         delay(1000);
-        //cellStart();
-        //x=0;
-        //y=1;
-        cells[0][0]= 11;
-        traverse(0,0,true,false);
+        traverse(0,0,true,false, false);
         center();
+        calculatePath(false,true);
         brake();
         delay(5000);
-        traverse(13,0,false,false);
-        brake();
-        delay(5000);
-
-        traverse(0,0,false,false); 
+        traverse(0,0,false,false,false);
         floodFill2();
-        traverse(0,0,true,true);
+        traverse(0,0,true,true,true);
         brake();
-        delay(5000);
-        traverse(0,13,false,false);
-        brake();
-        delay(5000);
-
-        traverse(0,0,false,false); 
         while(1){brake();} 
     }
-}
-
-
-void loopllll()
-{
-    tofPid();
-    printTof();
 }
