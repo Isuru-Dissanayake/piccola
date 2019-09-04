@@ -8,6 +8,7 @@ byte yprev=0;
 byte orient=0;
 byte state=0;
 boolean shortPath= false;
+boolean middleSquare= true;
 byte x_0;
 byte y_0;
 byte x_1;
@@ -20,12 +21,14 @@ byte mazeSize = 16;
 char dir;
 char turning;
 QueueArray <byte> queue;
+QueueArray <byte> pathQueue;
 boolean  L = true;
 boolean  R= true;
 boolean  F= false; 
 byte xdes;
 byte ydes;
 unsigned long timer;
+int cellCount =0;
 
 
 byte cells[14][14] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
