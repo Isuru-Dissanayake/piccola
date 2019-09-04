@@ -11,7 +11,7 @@
 #define rightOut1 PB14
 #define rightOut2 PB15
 
-#define led PB11
+#define buzzer PB11
 
 void motorDiver()
 {
@@ -30,4 +30,38 @@ void motorInterrupt()
     pinMode(leftOut2, INPUT);
     pinMode(rightOut1, INPUT);
     pinMode(rightOut2, INPUT);
+}
+
+void buzz()
+{
+    digitalWrite(buzzer, HIGH);
+    delay(200);
+    digitalWrite(buzzer, LOW);
+    delay(200);
+}
+
+void buzzTwice()
+{
+    tone(buzzer,2500,1000);
+    delay(75);
+    noTone(buzzer);
+    delay(75);
+    tone(buzzer,2500,1000);
+    delay(150);
+    noTone(buzzer);
+}
+
+void buzzDone()
+{
+    tone(buzzer,2500,1000);
+    delay(50);
+    noTone(buzzer);
+    delay(30);
+    tone(buzzer,2500,1000);
+    delay(50);
+    noTone(buzzer);
+    delay(30);
+    tone(buzzer,2500,1000);
+    delay(50);
+    noTone(buzzer);
 }
