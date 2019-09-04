@@ -151,7 +151,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
     floodFill3();
     dir= toMove(x,y,xprev,yprev,orient);
 
-    Serial.println(dir);
+    //Serial.println(dir);
     
         if (dir=='L'){
             orient = orientation(orient,'L');
