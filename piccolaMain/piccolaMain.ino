@@ -1,5 +1,6 @@
 #include <VL6180X.h>
 #include <Wire.h>
+#include "EEPROM.h"
 #include "piccolaPins.h"
 #include "piccolaZlgoVariables.h"
 #include "piccolaVariables.h"
@@ -24,43 +25,45 @@ void setup()
     Serial2.begin(9600);
 }
 
-
-void loopy()
+void loop()
 {
-    delay(1000);
-    while(1)
+    tofPid();
+    if (tof[2] <80)
     {
-        tofPid();
-        //wallFollow();
+        start = 1;
     }
-    
+    if (start == 1)
+    {
+        delay(1000);
+        cellStart();
+        x=0;
+        y=1;
+        cells[0][0]= 11;
+        traverse(0,0,true,false);
+        center();
+        brake();
+        delay(5000);
+        traverse(13,0,false,false);
+        brake();
+        delay(5000);
+
+        traverse(0,0,false,false); 
+        floodFill2();
+        traverse(0,0,true,true);
+        brake();
+        delay(5000);
+        traverse(0,13,false,false);
+        brake();
+        delay(5000);
+
+        traverse(0,0,false,false); 
+        while(1){brake();} 
+    }
 }
 
-void loopt(){
-  delay(10000);
-  cellStart();
-  //cellForward();
-  cellBrake();
-  brake();
-  delay(1000);
-  Serial2.println(test);
-  while(1)
-  {
-    
-  }
-}
 
-void loop(){
-  
-//traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath)
-traverse(0,0,true,false);  // traverses to center
-center();  //saves the walls of the middle square
-
-
-traverse(0,13,false,false);  // traverses back to the starting square
-traverse(0,0,false,false);
-floodFill2();
-traverse(0,0,true,true);
-while(1){}
-
+void loopllll()
+{
+    tofPid();
+    printTof();
 }
