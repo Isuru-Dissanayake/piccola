@@ -108,6 +108,14 @@ void brake()
     delay(100);
 }
 
+void brakeNo()
+{
+    stbyHigh();
+    leftBrake();
+    rightBrake();
+    //delay(100);
+}
+
 void forwardBase()
 {
     stbyHigh();
