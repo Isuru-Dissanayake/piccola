@@ -18,6 +18,7 @@ void setup()
     tofSetup();
     motorDiver();
     motorInterrupt();
+    pinMode(buzzer, OUTPUT);
     attachInterrupt(digitalPinToInterrupt(PB12), countLeftOut1, RISING);
     attachInterrupt(digitalPinToInterrupt(PB13), countLeftOut1, RISING);
     attachInterrupt(digitalPinToInterrupt(PB14), countRightOut1, RISING);
@@ -30,40 +31,31 @@ void loop()
     tofPid();
     if (tof[2] <80)
     {
+        buzz();
+        delay(500);
         start = 1;
     }
     if (start == 1)
     {
         delay(1000);
-        cellStart();
-        x=0;
-        y=1;
-        cells[0][0]= 11;
-        traverse(0,0,true,false);
+        traverse(0,0,true,false,false);
         center();
+        
         brake();
+        
         delay(5000);
-        traverse(13,0,false,false);
-        brake();
-        delay(5000);
+        calculatePath(false,true);
 
-        traverse(0,0,false,false); 
+        traverse(0,0,false,false,false);
+        cellBrake();
+        delay(1000);
+        F= false;
+        R= false;
+        L= false;
+
         floodFill2();
-        traverse(0,0,true,true);
-        brake();
-        delay(5000);
-        traverse(0,13,false,false);
-        brake();
-        delay(5000);
-
-        traverse(0,0,false,false); 
+        traverse(0,0,true,true,true);
         while(1){brake();} 
     }
 }
 
-
-void loopllll()
-{
-    tofPid();
-    printTof();
-}
