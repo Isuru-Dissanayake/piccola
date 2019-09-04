@@ -22,7 +22,6 @@ void cellStart()
     {
         wallFollow();
     }
-    
     encoderLeftCount = encoderLeftCount + 100;
     encoderRightCount = encoderRightCount + 100;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
@@ -67,16 +66,11 @@ void cellBrake()
     }
     encoderRightCount= encoderRightCount + 220;
     encoderLeftCount= encoderLeftCount + 220;
-    while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
-    {   
-        tofPid();
-        if (tof[2] <= 52)
-        {
-          break;
-        }
-
-        else
-        {
+    if (F == true)
+    {
+      tof[2] = tof3.readRangeSingleMillimeters();
+      while (tof[2] <= 52)
+      {   
           dif = leftEncoder - encoderLeftCount + 220;
           rightBase = 176 - int(dif/2);
           leftBase = 180 - int((dif*3)/5);
@@ -89,7 +83,25 @@ void cellBrake()
             leftBase = 70;
           }
           forwardBase();
-        }
+      }
+    }
+    else
+    {
+      while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
+      {   
+          dif = leftEncoder - encoderLeftCount + 220;
+          rightBase = 176 - int(dif/2);
+          leftBase = 180 - int((dif*3)/5);
+          if (rightBase <= 70)
+          {
+            rightBase = 70;
+          }
+          if (leftBase <= 70)
+          {
+            leftBase = 70;
+          }
+          forwardBase();
+      }
     }
     brake();
 }
