@@ -1,23 +1,30 @@
 void calculatePath(boolean runningNext,boolean eeprom){
   floodFill2();
+  
+  byte xprevious=x;
+  byte yprevious=y;
   x=0;
   y=0;
-  //char prevDir;
   byte oldOrient= orient;
+  orient=0;
   
   cellCount=0;
-  //prevDir= dir;
   
     while(flood2[y][x]!=1){
 
         toMove2();
-        if (runningNext){
+        //pathQueue.enqueue(dir);
+
+        
+        if (runningNext== true){
         pathQueue.enqueue(dir);
         }
+        
         if(eeprom){
         cellCount++;
-        EEPROM.write(cellCount,dir);}
-        
+        EEPROM.write(cellCount,dir);
+        }
+        //Serial2.println(dir);
     
         if (dir=='L'){
             orient = orientation(orient,'L');
@@ -41,19 +48,26 @@ void calculatePath(boolean runningNext,boolean eeprom){
   }
 
         
-        x=0;
-        y=0;
+        x= xprevious;
+        y= yprevious;
         orient=oldOrient;   
         EEPROM.write(0,cellCount);
+        buzz();
 }
+
 
 void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boolean eeprom){
 
+  byte currentx= x;
+  byte currenty= y;
+  
   if (shortPath== false){
+    
   appendDestination(xdes,ydes,middleSquare);
   floodFill3();
   checkWallsCell();
   updateWalls(x, y, orient, L, R, F);
+  
   while(flood[y][x]!=0){
     
     checkWallsCell();
@@ -61,12 +75,15 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
     appendDestination(xdes,ydes,middleSquare);
     floodFill3();
     dir= toMove(x,y,xprev,yprev,orient);
+    
         if (dir=='L'){
             orient = orientation(orient,'L');
-            if(x==0){
-              if(y==0){
+            if(x==0 || x== currentx){
+              if(y==0 || y== currenty){
                 leftAboutTurn();
                 cellStart();
+                currentx=0;
+                currenty=0;
               }
               else{
                 leftTurn();
@@ -78,10 +95,12 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
 
         else if (dir=='R'){
           orient = orientation(orient,'R');
-            if(x==0){
-              if(y==0){
+            if(x==0 || x== currentx){
+              if(y==0 || y== currenty){
                 rightAboutTurn();
                 cellStart();
+                currentx=0;
+                currenty=0;
               }
               else{
                 rightTurn();
@@ -94,17 +113,21 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            if(x==0 && y==0){
+            if((x==0 && y==0)||(x== currentx && y== currenty)){
               turnBack();
               cellStart();
+              currentx=0;
+                currenty=0;
               }
               else{
               cellBack();
               }
         }
         else{
-          if(x==0 && y==0){
+          if((x==0 && y==0)||(x== currentx && y== currenty)){
             cellStart();
+            currentx=0;
+                currenty=0;
           }
           else{
           cellForward();
@@ -118,7 +141,12 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
 
   else{
 
+        F= false;
+        R= false;
+        L= false;
+
     if (eeprom== true){
+
       cellCount= EEPROM.read(0);
       char shortestPath[cellCount];
 
@@ -132,39 +160,47 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
 
         if (dir=='L'){
             orient = orientation(orient,'L');
-            if(x==0 && y==0){
+            if((x==0 && y==0)||(x== currentx && y== currenty)){
               leftAboutTurn();
               cellStart();
+              currentx=0;
+                currenty=0;
             }
             else{
-            leftTurn();}
+            leftSmoothTurn();}
             
         }
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
-            if(x==0 && y==0){
+            if((x==0 && y==0)||(x== currentx && y== currenty)){
               rightAboutTurn();
               cellStart();
+              currentx=0;
+                currenty=0;
             }
             else{
-            rightTurn();}
+            rightSmoothTurn();}
         }
 
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            if(x==0 && y==0){
+            if((x==0 && y==0)||(x== currentx && y== currenty)){
               turnBack();
               cellStart();
+              currentx=0;
+                currenty=0;
             }
             else{
             cellBack();}
           }
         
         else{
-          if(x==0 && y==0){
+          if((x==0 && y==0)||(x== currentx && y== currenty)){
               cellStart();
+              currentx=0;
+                currenty=0;
             }
             else{
             cellForward();}
@@ -184,11 +220,12 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
     calculatePath(true,false);
     
     while (!pathQueue.isEmpty ()){
+
     dir= pathQueue.dequeue();
     
         if (dir=='L'){
             orient = orientation(orient,'L');
-            if(x==0 && y==0){
+            if((x==0 && y==0)){
               leftAboutTurn();
               cellStart();
             }
@@ -199,7 +236,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
-            if(x==0 && y==0){
+            if((x==0 && y==0)){
               rightAboutTurn();
               cellStart();
             }
@@ -210,7 +247,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            if(x==0 && y==0){
+            if((x==0 && y==0)){
               turnBack();
               cellStart();
             }
@@ -219,7 +256,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
           }
         
         else{
-          if(x==0 && y==0){
+          if((x==0 && y==0)){
               cellStart();
             }
             else{
@@ -234,3 +271,10 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
     }
   }
   }
+
+void fixOrientation(){
+  while(orient!=0){
+    leftAboutTurn();
+    orient = orientation(orient,'L');
+  }
+}
