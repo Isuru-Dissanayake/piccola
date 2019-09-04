@@ -57,7 +57,7 @@ char nextMove = 'F';
 
 int start = 0;
 
-unsigned long time;
+int time;
 
 
 boolean left,right,front;
@@ -65,4 +65,5 @@ int cell =0;
 
 int jump = 0;
 int preState = 0;
+int select = -1;
 
