@@ -47,41 +47,39 @@
 
 void calculatePath(){
   floodFill2();
+  showFlood2();
+  
   x=0;
   y=0;
   char prevDir;
   byte oldOrient= orient;
   int forwardCellCount =0;
-  toMove2();
+  
+  //toMove2();
   prevDir= dir;
   
     while(flood2[y][x]!=1){
 
         toMove2();
-    
-        //Serial.println(dir);
 
-        if (prevDir=='F' && prevDir== dir){
-          forwardCellCount++;
-        }
-        else if( prevDir=='F' && prevDir!=dir){
-          pathQueue.enqueue(char(forwardCellCount+1));
-        }
-        else{
-          pathQueue.enqueue(prevDir);
-          forwardCellCount=0;
-        }
+        //Serial.println(20);
+        Serial.print(x); Serial.print(' '); Serial.println(y);
+        Serial.println(dir);
+
+        
+        pathQueue.enqueue(dir);
+        
 
     
-        if (prevDir=='L'){
+        if (dir=='L'){
             orient = orientation(orient,'L');
         }
 
-        else if (prevDir=='R'){
+        else if (dir=='R'){
             orient = orientation(orient,'R');
         }
 
-        else if (prevDir=='B'){
+        else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
         }
@@ -93,34 +91,14 @@ void calculatePath(){
         prevDir= dir;
         
   }
-  if (prevDir =='F')
-    pathQueue.enqueue(char(forwardCellCount+1));
-  else
-    pathQueue.enqueue(prevDir);
-
   
-        if (prevDir=='L'){
-            orient = orientation(orient,'L');
-        }
-
-        else if (prevDir=='R'){
-            orient = orientation(orient,'R');
-        }
-
-        else if (prevDir=='B'){
-            orient = orientation(orient,'L');
-            orient = orientation(orient,'L');
-        }
-
-        
-        xprev=x;
-        yprev=y;
-        updateCoordinates();
 
         x=0;
         y=0;
         orient=oldOrient;
-
+        Serial.print(x); Serial.print(' '); Serial.println(y);
+        Serial.println(orient);
+        
     
 }
 
@@ -141,17 +119,17 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
   //tofPid();
   //tofPid();
   //checkWallsCell();
-  updateWalls(x, y, orient, L, R, F);
+  //updateWalls(x, y, orient, L, R, F);
   
   while(flood[y][x]!=0){
     
-    //cells[y][x]= sliit[y][x];
+    cells[y][x]= sliit[y][x];
     
     appendDestination(xdes,ydes,middleSquare);
     floodFill3();
     dir= toMove(x,y,xprev,yprev,orient);
 
-    //Serial.println(dir);
+    Serial.println(dir);
     
         if (dir=='L'){
             orient = orientation(orient,'L');
@@ -191,6 +169,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
   else{
 
     calculatePath();
+    showFlood2();
     
     while (!pathQueue.isEmpty ()){
 
@@ -198,7 +177,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
     
         if (dir=='L'){
             orient = orientation(orient,'L');
-            leftSmoothTurn();
+            //leftSmoothTurn();
             xprev=x;
             yprev=y;
             updateCoordinates();
@@ -206,7 +185,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
-            rightSmoothTurn();
+            //rightSmoothTurn();
             xprev=x;
             yprev=y;
             updateCoordinates();
@@ -215,7 +194,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            cellBack();
+            //cellBack();
             xprev=x;
             yprev=y;
             updateCoordinates();
@@ -226,13 +205,15 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
 
           // but call xprev=x; yprev=y; updateCoordinates(); every time you run a cell.
           for (int i= forwardCellCount; i>0; i--){
-            cellForward();
+            //cellForward();
             xprev=x;
             yprev=y;
             updateCoordinates();
           }
           
         }
+        Serial.print(x); Serial.print(' '); Serial.println(y);
+        Serial.println(dir);
         
         
         
