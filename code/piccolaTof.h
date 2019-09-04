@@ -101,9 +101,9 @@ void checkWallsCell()
     if (x == 0 && y == 0)
     {
         time = 0;
-        while(time <5)
+        while(time <10)
         {
-            tofPid();
+            tofStart();
             if (tof[2] <= 180)
             {
             frontWallAvailable = frontWallAvailable + 1;
@@ -112,7 +112,7 @@ void checkWallsCell()
             {
             frontWallAvailable = frontWallAvailable - 1;
             }
-            if (tof[0] <= 150)
+            if (tof[1] <= 150)
             {
             leftWallAvailable= leftWallAvailable + 1;
             }
@@ -120,7 +120,7 @@ void checkWallsCell()
             {
             leftWallAvailable= leftWallAvailable - 1;
             }
-            if (tof[4] <= 150)
+            if (tof[3] <= 150)
             {
             rightWallAvailable= rightWallAvailable + 1;
             }
