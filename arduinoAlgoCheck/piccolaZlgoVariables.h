@@ -28,7 +28,7 @@ boolean  F= false;
 byte xdes;
 byte ydes;
 unsigned long timer;
-int cellCount =0;
+int cellCount =1;
 
 
 byte cells[14][14] = {{0,0,0,0,0,0,0,0,0,0,0,0,0,0},
