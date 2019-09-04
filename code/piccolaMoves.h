@@ -1,11 +1,50 @@
 void mazeStart()
 {
-    tofStart();
-    if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
+    buzz();
+    while(1)
     {
-      delay(2000);
-      
+      tofStart();
+      if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
+      {
+        buzzTwice();
+        select = 1;
+        delay(1000);
+        break;
+      }
     }
+    buzz();
+    time = 0;
+    while(time < 200)
+    {
+      tofStart();
+      if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
+      {
+        buzzTwice();
+        select = 2;
+        delay(2000);
+        break;
+      }
+      time = time + 1;
+    }
+
+    if (select == 2)
+    {
+      buzz();
+      time = 0;
+      while(time < 200)
+      {
+        tofStart();
+        if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
+        {
+          buzzTwice();
+          select = 3;
+          delay(1000);
+          break;
+        }
+        time = time + 1;
+      }
+    }
+    buzzDone();
 }
 
 void cellForward()
