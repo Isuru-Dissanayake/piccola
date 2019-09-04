@@ -69,11 +69,12 @@ void cellBrake()
     if (F == true)
     {
       tof[2] = tof3.readRangeSingleMillimeters();
-      while (tof[2] <= 52)
+      while (tof[2] > 52)
       {   
+          tof[2] = tof3.readRangeSingleMillimeters();
           dif = leftEncoder - encoderLeftCount + 220;
-          rightBase = 176 - int(dif/2);
-          leftBase = 180 - int((dif*3)/5);
+          rightBase = 176 - int(dif*0.75);
+          leftBase = 180 - int(dif*0.85);
           if (rightBase <= 70)
           {
             rightBase = 70;
