@@ -96,40 +96,42 @@ void printTof()
     Serial2.println();
 }
 
-/*
-void checkWallsPid()
-{
-    if (tof[2] > 170)
-    {
-        wallAvailable[1] =  0;
-    }
-    else
-    {
-        wallAvailable[1] =  1;
-    } 
-
-    if (tof[0] <= 135)
-    {
-        wallAvailable[0] = 1;
-    }
-    else
-    {
-        wallAvailable[0] = 0; 
-    }
-
-    if (tof[4] <= 135)
-    {
-        wallAvailable[2] = 1;
-    }
-    else
-    {
-        wallAvailable[2] = 0; 
-    }
-}
-*/
-
 void checkWallsCell()
 {
+    if (x == 0 && y == 0)
+    {
+        time = 0;
+        while(time <10)
+        {   
+            
+            tofStart();
+            if (tof[2] <= 180)
+            {
+            frontWallAvailable = frontWallAvailable + 1;
+            }
+            else
+            {
+            frontWallAvailable = frontWallAvailable - 1;
+            }
+            if (tof[1] <= 150)
+            {
+            leftWallAvailable= leftWallAvailable + 1;
+            }
+            else
+            {
+            leftWallAvailable= leftWallAvailable - 1;
+            }
+            if (tof[3] <= 150)
+            {
+            rightWallAvailable= rightWallAvailable + 1;
+            }
+            else
+            {
+            rightWallAvailable= rightWallAvailable - 1;
+            }
+            time = time + 1;
+        }
+    }
     if (frontWallAvailable >=0 )
     {
         cellWalls[1] =  0;
