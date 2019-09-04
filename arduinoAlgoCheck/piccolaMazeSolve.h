@@ -5,11 +5,9 @@ void calculatePath(boolean runningNext,boolean eeprom){
   
   x=0;
   y=0;
-  //char prevDir;
   byte oldOrient= orient;
   
   cellCount=0;
-  //prevDir= dir;
   
     while(flood2[y][x]!=1){
 
@@ -21,6 +19,7 @@ void calculatePath(boolean runningNext,boolean eeprom){
         
         if (runningNext){
         pathQueue.enqueue(dir);
+        
         }
         if(eeprom){
         cellCount++;
@@ -55,7 +54,9 @@ void calculatePath(boolean runningNext,boolean eeprom){
         Serial.print(x); Serial.print(' '); Serial.println(y);
         Serial.println(orient);
         
-    
+    if(eeprom){
+        EEPROM.write(0,1);
+        EEPROM.write(1,cellCount-1);}
 }
 
 
@@ -123,7 +124,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
   }
 
   else{
-
+    //calculatePath (runningNext, eeprom)
     calculatePath(true,false);
     showFlood2();
     
