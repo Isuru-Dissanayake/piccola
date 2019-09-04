@@ -44,6 +44,7 @@
 }
 */
 
+
 void calculatePath(){
   floodFill2();
   x=0;
@@ -197,31 +198,44 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath){
     
         if (dir=='L'){
             orient = orientation(orient,'L');
-            //////////////////////////////// turnLeft
+            leftSmoothTurn();
+            xprev=x;
+            yprev=y;
+            updateCoordinates();
         }
 
         else if (dir=='R'){
             orient = orientation(orient,'R');
-            //////////////////////////////turnRight
+            rightSmoothTurn();
+            xprev=x;
+            yprev=y;
+            updateCoordinates();
         }
 
         else if (dir=='B'){
             orient = orientation(orient,'L');
             orient = orientation(orient,'L');
-            ///////////////////////////turnBack
+            cellBack();
+            xprev=x;
+            yprev=y;
+            updateCoordinates();
         }
         else{
           forwardCellCount= String(dir).toInt();
           ///////////////////////you have to move this much of cells forward. accelarate as you wish
 
           // but call xprev=x; yprev=y; updateCoordinates(); every time you run a cell.
+          for (int i= forwardCellCount; i>0; i--){
+            cellForward();
+            xprev=x;
+            yprev=y;
+            updateCoordinates();
+          }
           
         }
         
         
-        xprev=x;
-        yprev=y;
-        updateCoordinates();
+        
         
   }
   }
