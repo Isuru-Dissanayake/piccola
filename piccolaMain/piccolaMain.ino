@@ -35,9 +35,9 @@ void loop()
     if (start == 1)
     {
         delay(1000);
-        cellStart();
-        x=0;
-        y=1;
+        //cellStart();
+        //x=0;
+        //y=1;
         cells[0][0]= 11;
         traverse(0,0,true,false);
         center();
