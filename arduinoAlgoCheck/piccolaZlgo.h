@@ -1,28 +1,4 @@
 
-/*
-void appendZero(){
-
-    for (int i=0; i<14; i++){
-        for (int j=0; j<14; j++){
-            flood[i][j]=254;
-        }
-    }
-
-    flood[7][7]=0;
-    flood[6][7]=0;
-    flood[7][6]=0;
-    flood[6][6]=0;
-
-    queue.enqueue(7);
-    queue.enqueue(7);
-    queue.enqueue(6);
-    queue.enqueue(7);
-    queue.enqueue(7);
-    queue.enqueue(6);
-    queue.enqueue(6);
-    queue.enqueue(6);
-}*/
-
 void appendDestination(byte xdes,byte ydes, boolean middleSquare){
   
     if (middleSquare == true){
@@ -240,61 +216,6 @@ byte getSurrounds(byte x,byte y){
     return (x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3);  //order of cells- north,east,south,west
 }
 
-/*
-void changeDestination(byte destinationy,byte destinationx){
-  byte yrun=0;
-  byte xrun=0;
-  for (int i=0;i<16;i++){
-        for (int j=0;j<16;j++){
-            flood2[i][j]=0;
-        }
- }
-
-
-    flood[destinationy][destinationx]=0;
-
-    queue.enqueue(destinationy);
-    queue.enqueue(destinationx);
-
-
-    while (!queue.isEmpty ()){
-        yrun=queue.dequeue();
-        xrun=queue.dequeue();
-
-        x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3= getSurrounds(xrun,yrun);
-
-        if(x_0>=0 && y_0>=0 ){
-            if (flood[y_0][x_0]==255){
-                flood[y_0][x_0]= flood[yrun][xrun]+1;
-                queue.enqueue(y_0);
-                queue.enqueue(x_0);
-        }
-        }
-        if(x_1>=0 && y_1>=0 ){
-            if (flood[y_1][x_1]==255){
-                flood[y_1][x_1]= flood[yrun][xrun]+1;
-                queue.enqueue(y_1);
-                queue.enqueue(x_1);
-            }
-        }
-        if(x_2>=0 && y_2>=0 ){
-            if (flood[y_2][x_2]==255){
-                flood[y_2][x_2]= flood[yrun][xrun]+1;
-                queue.enqueue(y_2);
-                queue.enqueue(x_2);
-            }
-        }
-        if(x_3>=0 && y_3>=0 ){
-            if (flood[y_3][x_3]==255){
-                flood[y_3][x_3]= flood[yrun][xrun]+1;
-                queue.enqueue(y_3);
-                queue.enqueue(x_3);
-            }
-        }
-
-}
-}
-*/
 
 void floodFill2(){
 
@@ -517,7 +438,7 @@ char toMove2(){
     x_0,y_0,x_1,y_1,x_2,y_2,x_3,y_3 = getSurrounds(x,y);
     
     byte val= flood2[y][x];
-    byte minCell=0;
+    byte minCell=254;
 
     
     if (isAccessible(x,y,x_0,y_0)){
@@ -539,8 +460,9 @@ char toMove2(){
         if (flood2[y_3][x_3]==val-1)
             minCell=3;
     }
+    
 
-
+    
     if (minCell==orient)
         dir= 'F';
     else if((minCell==orient-1) || (minCell== orient+3))
@@ -555,51 +477,6 @@ char toMove2(){
 
 
 
-
-/*
-char maze(boolean L, boolean R, boolean F){
-  updateWalls(x,y,orient,L,R,F);
-  
-  if (flood[y][x]!=0){
-
-            if (state==0){
-                appendZero();}
-
-            floodFill3();
-  }
-
-  else{
-      if (state==0){
-          changeDestination(13,0);
-          state+=1;
-      }
-      floodFill2();
-  }
-
-
-      if (shortPath){
-          toMove2();}
-      else{
-          dir= toMove(x,y,xprev,yprev,orient);}
-   
-        if (dir=='L'){
-            orient = orientation(orient,'L');
-        }
-
-        else if (dir=='R'){
-            orient = orientation(orient,'R');
-        }
-
-        else if (dir=='B'){
-            orient = orientation(orient,'L');
-            orient = orientation(orient,'L');
-        }
-        xprev=x;
-        yprev=y;
-        updateCoordinates();
-        return(dir);
-
-}*/
 
 void center(){
   if (x == 6 && y == 6){
