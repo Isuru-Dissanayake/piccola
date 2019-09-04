@@ -22,28 +22,23 @@ void loop(){
 //traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath)
 traverse(0,0,true,false);  // traverses to center
 Serial.println(' ');
-//showCells();
 Serial.println(' ');
 center();  //saves the walls of the middle square
 showCells();
 Serial.println(' ');
-//showFlood();
 Serial.println(' ');
 
 
-traverse(0,13,false,false);  // traverses back to the starting square
-//showFlood();
-showCells();
-//appendDestination(0,0,false);
-//floodFill3();
-traverse(0,0,false,false);
-//showFlood();
+traverse(0,0,false,false);  // traverses back to the starting square
+Serial.println(' ');
+Serial.println(' ');
 showCells();
 Serial.println(' ');
-floodFill2();
-//traverse(0,0,true,true);
-showFlood2();
+Serial.println(' ');
 traverse(0,0,true,true);
+showCells();
+Serial.println(' ');
+
 while(1){}
 
 }
