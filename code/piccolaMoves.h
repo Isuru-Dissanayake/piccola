@@ -16,7 +16,7 @@ void mazeStart()
     }
     buzz();
     time = 0;
-    while(time < 100)
+    while(time < 50)
     {
       tofStart();
       tofStart();
@@ -34,7 +34,7 @@ void mazeStart()
     {
       buzz();
       time = 0;
-      while(time < 100)
+      while(time < 50)
       {
         tofStart();
         tofStart();
@@ -56,17 +56,18 @@ void cellForward()
     leftWallAvailable = 0;
     rightWallAvailable = 0;
     frontWallAvailable = 0;
-    encoderLeftCount = encoderLeftCount + 1173;
-    encoderRightCount = encoderRightCount + 1173;
+    encoderLeftCount = encoderLeftCount + 1123;
+    encoderRightCount = encoderRightCount + 1123;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
     }
-    encoderLeftCount = encoderLeftCount + 100;
-    encoderRightCount = encoderRightCount + 100;
+    encoderLeftCount = encoderLeftCount + 150;
+    encoderRightCount = encoderRightCount + 150;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
+        encoderPid();
         if (tof[2] <= 180)
         {
           frontWallAvailable = frontWallAvailable + 1;
