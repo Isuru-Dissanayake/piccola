@@ -276,5 +276,6 @@ void fixOrientation(){
   while(orient!=0){
     leftAboutTurn();
     orient = orientation(orient,'L');
+    delay(500);
   }
 }
