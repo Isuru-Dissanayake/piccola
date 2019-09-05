@@ -1,15 +1,15 @@
 void mazeStart()
 {
-    select = 0;
+    selectMode = 0;
     buzz();
     while(1)
     {
       tofStart();
-      tofStart();
+      tofStart();s
       if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
       {
         buzzTwice();
-        select = 1;
+        selectMode = 1;
         delay(1000);
         break;
       }
@@ -23,14 +23,14 @@ void mazeStart()
       if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
       {
         buzzTwice();
-        select = 2;
+        selectMode = 2;
         delay(1000);
         break;
       }
       time = time + 1;
     }
 
-    if (select == 2)
+    if (selectMode == 2)
     {
       buzz();
       time = 0;
@@ -41,7 +41,7 @@ void mazeStart()
         if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
         {
           buzzTwice();
-          select = 3;
+          selectMode = 3;
           delay(1000);
           break;
         }
