@@ -167,7 +167,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
                 currenty=0;
             }
             else{
-            leftSmoothTurn();}
+            leftTurn();}
             
         }
 
@@ -180,7 +180,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
                 currenty=0;
             }
             else{
-            rightSmoothTurn();}
+            rightTurn();}
         }
 
         else if (dir=='B'){
