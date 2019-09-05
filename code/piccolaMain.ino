@@ -1,6 +1,6 @@
 #include <VL6180X.h>
 #include <Wire.h>
-#include "EEPROM.h"
+#include <EEPROM.h>
 #include "piccolaPins.h"
 #include "piccolaZlgoVariables.h"
 #include "piccolaVariables.h"
@@ -26,7 +26,7 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loop()
+void loopaaaa()
 {
     tofPid();
     if (tof[2] <80)
@@ -59,3 +59,9 @@ void loop()
     }
 }
 
+void loop()
+{
+    delay(1000);
+    mazeStart();
+    Serial2.println(select);
+}
