@@ -65,5 +65,4 @@ int cell =0;
 
 int jump = 0;
 int preState = 0;
-int select = -1;
-
+int selectMode = -1;
