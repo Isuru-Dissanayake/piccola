@@ -108,6 +108,14 @@ void wallPid()
 void encoderPid()
 {
     encoderError = leftEncoder - rightEncoder;
+    if (encoderError > 50 )
+    {
+        encoderError = 10;
+    }
+    else if (encoderError < -50)
+    {
+        encoderError = -10;
+    }
     encoderCorrection = float(encoderError * encoderP) + float(encoderLastError * encoderD);
     encoderLastError = encoderError;
     leftPwm = leftBase - encoderCorrection;
@@ -128,7 +136,8 @@ void wallFollow()
         }
         if (jump>0)
         {
-          forwardBase();
+          //forwardBase();
+          encoderPid();
           jump = jump-1;
         }
         else
@@ -148,7 +157,8 @@ void wallFollow()
         }
         if (jump>0)
         {
-          forwardBase();
+          encoderPid();
+          //forwardBase();
           jump = jump-1;
         }
         else
@@ -168,7 +178,8 @@ void wallFollow()
         }
         if (jump>0)
         {
-          forwardBase();
+          encoderPid();
+          //forwardBase();
           jump = jump-1;
         }
         else
@@ -180,7 +191,8 @@ void wallFollow()
     else if(tof[0] > 135 && tof[4] > 135)
     {
         state = 3;
-        forwardBase();
+        encoderPid();
+        //forwardBase();
         wallLastError = 0;
     }
     preState = state;
