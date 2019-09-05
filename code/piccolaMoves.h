@@ -5,7 +5,7 @@ void mazeStart()
     while(1)
     {
       tofStart();
-      tofStart();s
+      tofStart();
       if (tof[1] <= 120 && tof[2] <= 120 && tof[3] <= 120)
       {
         buzzTwice();
