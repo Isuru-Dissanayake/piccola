@@ -16,17 +16,18 @@ void cellStart()
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= encoderRightCount + 317;
-    encoderLeftCount= encoderLeftCount + 317;
+    encoderRightCount= encoderRightCount + 267;
+    encoderLeftCount= encoderLeftCount + 267;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         wallFollow();
     }
-    encoderLeftCount = encoderLeftCount + 100;
-    encoderRightCount = encoderRightCount + 100;
+    encoderLeftCount = encoderLeftCount + 150;
+    encoderRightCount = encoderRightCount + 150;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
+        //encoderPid();
         if (tof[2] <= 180)
         {
           frontWallAvailable = frontWallAvailable + 1;
