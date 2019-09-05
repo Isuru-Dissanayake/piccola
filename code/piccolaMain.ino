@@ -1,6 +1,6 @@
 #include <VL6180X.h>
 #include <Wire.h>
-#include "EEPROM.h"
+#include <EEPROM.h>
 #include "piccolaPins.h"
 #include "piccolaZlgoVariables.h"
 #include "piccolaVariables.h"
@@ -26,36 +26,31 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loop()
+void loopaaaa()
 {
-    tofPid();
-    if (tof[2] <80)
-    {
-        buzz();
-        delay(500);
-        start = 1;
-    }
-    if (start == 1)
+     mazeStart();
+    if (selectMode == 1)
     {
         delay(1000);
         traverse(0,0,true,false,false);
+        checkWallsCell();
+        updateWalls(x, y, orient, L, R, F);
+        cellBrake();
+        
         center();
         
-        brake();
-        
-        delay(5000);
         calculatePath(false,true);
+        delay(3000);
 
         traverse(0,0,false,false,false);
         cellBrake();
+        fixOrientation();
+        
         delay(1000);
-        F= false;
-        R= false;
-        L= false;
-
+    }
+    
+    else if(selectMode==2){
         floodFill2();
         traverse(0,0,true,true,true);
-        while(1){brake();} 
-    }
+        } 
 }
-
