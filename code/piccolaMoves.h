@@ -95,6 +95,34 @@ void cellForward()
     }
 }
 
+void cellFastForward()
+{
+    leftBase = 200;
+    rightBase = 200;
+    leftWallAvailable = 0;
+    rightWallAvailable = 0;
+    frontWallAvailable = 0;
+    encoderLeftCount = encoderLeftCount + 1273;
+    encoderRightCount = encoderRightCount + 1273;
+    while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
+    {
+        wallFollow();
+        //encoderPid();
+        //tof[2] = tof3.readRangeSingleMillimeters();
+        //tof[2] = tof3.readRangeSingleMillimeters();
+        if (tof[2] <=240)
+        {
+          while (tof[2] > 150)
+          {   
+              wallFollow();
+          }
+          leftEncoder = encoderLeftCount + 1;
+          rightEncoder = encoderRightCount + 1;
+          test = 2;
+          break;
+        }
+    }
+}
 
 
 void rightSmoothTurn()
@@ -156,12 +184,27 @@ void rightSmoothTurn()
     encoderRightCount = 0;
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = encoderLeftCount + 160;
-    encoderRightCount = encoderRightCount + 160;
+    encoderLeftCount = encoderLeftCount + 200;
+    encoderRightCount = encoderRightCount + 200;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
+        tof[2] = tof3.readRangeSingleMillimeters();
+        tof[2] = tof3.readRangeSingleMillimeters();
+        if (tof[2] <=240)
+        {
+          while (tof[2] > 133)
+          {   
+              wallFollow();
+          }
+          test = 2;
+          break;
+        }
     }
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
 }
 
 
@@ -224,12 +267,27 @@ void leftSmoothTurn()
     encoderRightCount = 0;
     leftEncoder = 0;
     rightEncoder = 0;
-    encoderLeftCount = encoderLeftCount + 200;
-    encoderRightCount = encoderRightCount + 200;
+    encoderLeftCount = encoderLeftCount + 180;
+    encoderRightCount = encoderRightCount + 180;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
+        tof[2] = tof3.readRangeSingleMillimeters();
+        tof[2] = tof3.readRangeSingleMillimeters();
+        if (tof[2] <=240)
+        {
+          while (tof[2] > 135)
+          {   
+              wallFollow();
+          }
+          test = 2;
+          break;
+        }
     }
+    encoderLeftCount = 0;
+    encoderRightCount = 0;
+    leftEncoder = 0;
+    rightEncoder = 0;
 }
 
 
