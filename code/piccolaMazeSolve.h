@@ -81,6 +81,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             if(x==0 || x== currentx){
               if(y==0 || y== currenty){
                 leftAboutTurn();
+                delay(500);
                 cellStart();
                 currentx=0;
                 currenty=0;
@@ -98,6 +99,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             if(x==0 || x== currentx){
               if(y==0 || y== currenty){
                 rightAboutTurn();
+                delay(500);
                 cellStart();
                 currentx=0;
                 currenty=0;
@@ -115,6 +117,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               turnBack();
+              delay(500);
               cellStart();
               currentx=0;
                 currenty=0;
@@ -162,6 +165,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               leftAboutTurn();
+              delay(500);
               cellStart();
               currentx=0;
                 currenty=0;
@@ -175,6 +179,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'R');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               rightAboutTurn();
+              delay(500);
               cellStart();
               currentx=0;
                 currenty=0;
@@ -188,6 +193,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               turnBack();
+              delay(500);
               cellStart();
               currentx=0;
                 currenty=0;
@@ -227,6 +233,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)){
               leftAboutTurn();
+              delay(500);
               cellStart();
             }
             else{
@@ -238,6 +245,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'R');
             if((x==0 && y==0)){
               rightAboutTurn();
+              delay(500);
               cellStart();
             }
             else{
@@ -249,6 +257,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)){
               turnBack();
+              delay(500);
               cellStart();
             }
             else{
@@ -276,5 +285,71 @@ void fixOrientation(){
   while(orient!=0){
     leftAboutTurn();
     orient = orientation(orient,'L');
+    delay(500);
+  }
+}
+
+void loadCells(){
+  for (int i=0;i<14;i++){
+    for (int j=0; j<14;j++){
+      cells[j][i]= EEPROM.read(i*14+j);
+    }
+  }
+}
+
+void writeCells(){
+  for (int i=0;i<14;i++){
+    for (int j=0; j<14;j++){
+      EEPROM.write(i*14+j ,sliit[j][i]);
+    }
+  }
+}
+
+
+void searchStates(){
+  byte searchState= EEPROM.read(0);
+  if (searchState>0){
+    loadCells();
+    if (searchState==1){
+      mazeStart();
+      if (selectMode==1){
+        traverse(0,13,false,false,false);
+        cellBrake();
+        buzz();
+        traverse(0,0,true,false,false);
+        L=0; R=0; F=0;
+        cellBrake();
+        center();
+        traverse(0,0,flase,false,false);
+        cellBrake();
+        fixOrientation();
+      }
+
+    }
+    else if(searchState==2){
+      mazeStart();
+
+    }
+    else if(searchState==3){
+      mazeStart();
+
+    }
+  }
+  else{
+      mazeStart();
+      traverse(0,0,true,false,false);
+      center();
+      cellBrake();
+      traverse(0,0,false,false,false);
+      cellBrake();
+      fixOrientation();
+  }
+
+
+}
+
+void eepromClear(){
+  for (int i=0 ;i< 250; i++){
+    EEPROM.write(i,0);
   }
 }
