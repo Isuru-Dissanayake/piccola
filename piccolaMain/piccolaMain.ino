@@ -29,17 +29,11 @@ void setup()
 
 void loop()
 {
-    tofPid();
-    if (tof[2] <80)
-    {
-        buzz();
-        delay(500);
-        start = 1;
-    }
-    if (start == 1)
+    mazeStart();
+    if (selectMode == 1)
     {
         delay(1000);
-        /*traverse(0,0,true,false,false);
+        traverse(0,0,true,false,false);
         checkWallsCell();
         updateWalls(x, y, orient, L, R, F);
         cellBrake();
@@ -54,12 +48,14 @@ void loop()
         fixOrientation();
         
         delay(1000);
-       
-        floodFill2();*/
-        traverse(0,0,true,true,true);
-        while(1){brake();} 
     }
-}
+    
+    else if(selectMode==2){
+        floodFill2();
+        traverse(0,0,true,true,true);
+        } 
+    }
+
 void loopu(){
   for (int i=0; i<14;i++){
     for (int j=0; j<14;j++){
