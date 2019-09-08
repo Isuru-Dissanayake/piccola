@@ -26,31 +26,10 @@ void setup()
     Serial2.begin(9600);
 }
 
-void loopaaaa()
-{
-     mazeStart();
-    if (selectMode == 1)
-    {
-        delay(1000);
-        traverse(0,0,true,false,false);
-        checkWallsCell();
-        updateWalls(x, y, orient, L, R, F);
-        cellBrake();
-        
-        center();
-        
-        calculatePath(false,true);
-        delay(3000);
 
-        traverse(0,0,false,false,false);
-        cellBrake();
-        fixOrientation();
-        
-        delay(1000);
-    }
-    
-    else if(selectMode==2){
-        floodFill2();
-        traverse(0,0,true,true,true);
-        } 
+void loop()
+{
+    delay(1000);
+    searchStates();
+    //eepromClear();
 }
