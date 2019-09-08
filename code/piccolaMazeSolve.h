@@ -11,7 +11,6 @@ void calculatePath(boolean runningNext){
   cellCount=0;
   
     while(flood2[y][x]!=1){
-
         toMove2();
         //pathQueue.enqueue(dir);
 
@@ -290,7 +289,7 @@ void loadCells(){
 void writeCells(){
   for (int i=0;i<14;i++){
     for (int j=0; j<14;j++){
-      EEPROM.write(i*14+j ,sliit[j][i]);
+      EEPROM.write(i*14+j ,cells[j][i]);
     }
   }
 }
@@ -299,8 +298,9 @@ void writeCells(){
 void searchStates(){
   byte searchState= EEPROM.read(200);
   if (searchState==3){ searchState=0; }
+  loadCells();
+
   if (searchState>0){
-    loadCells();
     if (searchState==1){
       mazeStart();
       if (selectMode==1){
@@ -351,8 +351,8 @@ void searchStates(){
         center();
         buzz();
         delay(500);
-        traverse(0,13,false,false,false);
-        cellBrake();
+        //traverse(0,13,false,false,false);
+        //cellBrake();
         buzz();
         traverse(0,0,false,false,false);
         cellBrake();
@@ -438,11 +438,18 @@ void searchStates(){
   else{
       mazeStart();
       traverse(0,0,true,false,false);
+      L= false; R= false; F= false;
       center();
       cellBrake();
+      buzz();
+      delay(3000);
+      traverse(13,0,false,false,false);
+      cellBrake();
+      buzz();
       traverse(0,0,false,false,false);
       cellBrake();
       fixOrientation();
+      delay(3000);
       mazeStart();
       if (selectMode==2){
         writeCells();
