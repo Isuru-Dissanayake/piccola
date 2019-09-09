@@ -105,7 +105,7 @@ void brake()
     stbyHigh();
     leftBrake();
     rightBrake();
-    delay(100);
+    delay(75);
 }
 
 void brakeNo()
