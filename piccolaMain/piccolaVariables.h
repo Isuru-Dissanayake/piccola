@@ -22,14 +22,14 @@ int frontWallAvailable = 0;
 int rightWall  = 1;
 int leftWall = 1;
 
-float leftP = 0.8;
+float leftP = 0.9;
 float leftD = 3.4;
 
 float leftError = 0;
 float leftLastError = 0;
 float leftDiff = 0;
 
-float rightP = 0.8;
+float rightP = 0.9;
 float rightD = 3.4;
 
 float rightError = 0;
@@ -66,3 +66,4 @@ int cell =0;
 int jump = 0;
 int preState = 0;
 int selectMode = -1;
+
