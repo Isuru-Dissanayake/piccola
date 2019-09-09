@@ -102,8 +102,7 @@ void checkWallsCell()
     {
         time = 0;
         while(time <10)
-        {   
-            
+        {
             tofStart();
             if (tof[2] <= 180)
             {
