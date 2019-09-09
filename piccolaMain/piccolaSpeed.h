@@ -16,17 +16,18 @@ void cellStart()
     }
     rightBase=176;
     leftBase=180;
-    encoderRightCount= encoderRightCount + 317;
-    encoderLeftCount= encoderLeftCount + 317;
+    encoderRightCount= encoderRightCount + 267;
+    encoderLeftCount= encoderLeftCount + 267;
     while (rightEncoder <= encoderRightCount || leftEncoder <= encoderLeftCount)
     {
         wallFollow();
     }
-    encoderLeftCount = encoderLeftCount + 100;
-    encoderRightCount = encoderRightCount + 100;
+    encoderLeftCount = encoderLeftCount + 150;
+    encoderRightCount = encoderRightCount + 150;
     while (leftEncoder <= encoderLeftCount || rightEncoder <= encoderRightCount)
     {
         wallFollow();
+        //encoderPid();
         if (tof[2] <= 180)
         {
           frontWallAvailable = frontWallAvailable + 1;
@@ -35,7 +36,7 @@ void cellStart()
         {
           frontWallAvailable = frontWallAvailable - 1;
         }
-        if (tof[0] <= 150)
+        if (tof[0] <= 160)
         {
           leftWallAvailable= leftWallAvailable + 1;
         }
@@ -43,7 +44,7 @@ void cellStart()
         {
           leftWallAvailable= leftWallAvailable - 1;
         }
-        if (tof[4] <= 150)
+        if (tof[4] <= 160)
         {
           rightWallAvailable= rightWallAvailable + 1;
         }
@@ -84,6 +85,15 @@ void cellBrake()
             leftBase = 70;
           }
           forwardBase();
+      }
+
+      leftBase = 70;
+      rightBase = 70;
+      tof[2] = tof3.readRangeSingleMillimeters();
+      while (tof[2] < 50)
+      {   
+          reverseBase();
+          tof[2] = tof3.readRangeSingleMillimeters();
       }
     }
     else
