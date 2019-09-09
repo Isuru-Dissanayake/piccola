@@ -524,26 +524,3 @@ void center(){
     }   
   }
 }
-
-void relativeWall(byte x, byte y, byte orient){
-  if (orient == 0){
-    if (cells[y][x] = 2 || cells[y][x] = 7 || cells[y][x] = 8 || cells[y][x] = 10 || cells[y][x] = 12 || cells[y][x] = 13 || cells[y][x] = 14){
-      F == true;
-    }
-  }
-  else if (orient == 1)
-    else if (cells[y][x] = 3 || cells[y][x] = 6 || cells[y][x] = 7 || cells[y][x] = 9 || cells[y][x] = 11 || cells[y][x] = 12 || cells[y][x] = 13){
-      F == true;
-    }
-  }
-  else if (orient == 2)
-    else if (cells[y][x] = 4 || cells[y][x] = 5 || cells[y][x] = 6 || cells[y][x] = 10 || cells[y][x] = 11 || cells[y][x] = 12 || cells[y][x] = 14){
-      F == true;
-    }
-  }
-  else if (orient == 2)
-    else if (cells[y][x] = 1 || cells[y][x] = 5 || cells[y][x] = 8 || cells[y][x] = 9 || cells[y][x] = 11 || cells[y][x] = 13 || cells[y][x] = 14){
-      F == true;
-    }
-  }
-}
