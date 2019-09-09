@@ -24,67 +24,12 @@ void setup()
     attachInterrupt(digitalPinToInterrupt(PB14), countRightOut1, RISING);
     attachInterrupt(digitalPinToInterrupt(PB15), countRightOut1, RISING);
     Serial2.begin(9600);
-    delay(1000);
 }
+
 
 void loop()
 {
-    mazeStart();
-    if (selectMode == 1)
-    {
-        delay(1000);
-        traverse(0,0,true,false,false);
-        checkWallsCell();
-        updateWalls(x, y, orient, L, R, F);
-        cellBrake();
-        
-        center();
-        
-        calculatePath(false,true);
-        delay(3000);
-
-        traverse(0,0,false,false,false);
-        cellBrake();
-        fixOrientation();
-        
-        delay(1000);
-    }
-    
-    else if(selectMode==2){
-        floodFill2();
-        traverse(0,0,true,true,true);
-        } 
-    }
-
-void loopu(){
-  for (int i=0; i<14;i++){
-    for (int j=0; j<14;j++){
-      cells[j][i]=sliit[j][i];
-    }
-  }
-
-  Serial2.println(1000);
-  calculatePath(false,true);
-  /*for (int j=0; j<14;j++){
-      EEPROM.write(j,j);
-    }
-
-  for (int j=0; j<14;j++){
-      Serial2.println(EEPROM.read(j));
-    }*/
-
-  cellCount= EEPROM.read(0);
-  char shortestPath[cellCount];
-
-  for( int i=0; i<cellCount;i++){
-
-        shortestPath[i]= char(EEPROM.read(i+1));
-  }
-
-for (int i=0; i<cellCount; i++){
-  dir = shortestPath[i];
-  Serial2.println(dir);
-  }
-  while(1){}
-  
+    delay(1000);
+    searchStates();
+    //eepromClear();
 }
