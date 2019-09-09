@@ -1,4 +1,11 @@
-void calculatePath(boolean runningNext,boolean eeprom){
+void eepromClear(){
+  for (int i=0 ;i< 250; i++){
+    EEPROM.write(i,0);
+  }
+}
+
+
+void calculatePath(boolean runningNext){
   floodFill2();
   
   byte xprevious=x;
@@ -11,7 +18,6 @@ void calculatePath(boolean runningNext,boolean eeprom){
   cellCount=0;
   
     while(flood2[y][x]!=1){
-
         toMove2();
         //pathQueue.enqueue(dir);
 
@@ -20,10 +26,6 @@ void calculatePath(boolean runningNext,boolean eeprom){
         pathQueue.enqueue(dir);
         }
         
-        if(eeprom){
-        cellCount++;
-        EEPROM.write(cellCount,dir);
-        }
         //Serial2.println(dir);
     
         if (dir=='L'){
@@ -51,12 +53,11 @@ void calculatePath(boolean runningNext,boolean eeprom){
         x= xprevious;
         y= yprevious;
         orient=oldOrient;   
-        EEPROM.write(0,cellCount);
         buzz();
 }
 
 
-void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boolean eeprom){
+void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boolean smooth){
 
   byte currentx= x;
   byte currenty= y;
@@ -81,6 +82,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             if(x==0 || x== currentx){
               if(y==0 || y== currenty){
                 leftAboutTurn();
+                delay(500);
                 cellStart();
                 currentx=0;
                 currenty=0;
@@ -98,6 +100,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             if(x==0 || x== currentx){
               if(y==0 || y== currenty){
                 rightAboutTurn();
+                delay(500);
                 cellStart();
                 currentx=0;
                 currenty=0;
@@ -115,6 +118,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               turnBack();
+              delay(500);
               cellStart();
               currentx=0;
                 currenty=0;
@@ -145,29 +149,24 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
         R= false;
         L= false;
 
-    if (eeprom== true){
+    if (smooth == true){
+        calculatePath(true);
+    
+        while (!pathQueue.isEmpty ()){
 
-      cellCount= EEPROM.read(0);
-      char shortestPath[cellCount];
-
-      for( int i=0; i<cellCount;i++){
-
-        shortestPath[i]= char(EEPROM.read(i+1));
-      }
-
-      for (int i=0; i<cellCount; i++){
-        dir = shortestPath[i];
+        dir= pathQueue.dequeue();
 
         if (dir=='L'){
             orient = orientation(orient,'L');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               leftAboutTurn();
+              delay(500);
               cellStart();
               currentx=0;
-                currenty=0;
+              currenty=0;
             }
             else{
-            leftTurn();}
+            leftSmoothTurn();}
             
         }
 
@@ -175,12 +174,13 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'R');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               rightAboutTurn();
+              delay(500);
               cellStart();
               currentx=0;
-                currenty=0;
+              currenty=0;
             }
             else{
-            rightTurn();}
+            rightSmoothTurn();}
         }
 
         else if (dir=='B'){
@@ -188,9 +188,10 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)||(x== currentx && y== currenty)){
               turnBack();
+              delay(500);
               cellStart();
               currentx=0;
-                currenty=0;
+              currenty=0;
             }
             else{
             cellBack();}
@@ -200,7 +201,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
           if((x==0 && y==0)||(x== currentx && y== currenty)){
               cellStart();
               currentx=0;
-                currenty=0;
+              currenty=0;
             }
             else{
             cellForward();}
@@ -217,16 +218,17 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
 
     else{
       
-    calculatePath(true,false);
+    calculatePath(true);
     
     while (!pathQueue.isEmpty ()){
-
+    checkWallsCell();
     dir= pathQueue.dequeue();
     
         if (dir=='L'){
             orient = orientation(orient,'L');
             if((x==0 && y==0)){
               leftAboutTurn();
+              delay(500);
               cellStart();
             }
             else{
@@ -238,6 +240,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'R');
             if((x==0 && y==0)){
               rightAboutTurn();
+              delay(500);
               cellStart();
             }
             else{
@@ -249,6 +252,7 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
             orient = orientation(orient,'L');
             if((x==0 && y==0)){
               turnBack();
+              delay(500);
               cellStart();
             }
             else{
@@ -272,9 +276,232 @@ void traverse(byte xdes, byte ydes, boolean middleSquare, boolean shortPath, boo
   }
   }
 
+
 void fixOrientation(){
   while(orient!=0){
     leftAboutTurn();
     orient = orientation(orient,'L');
+    delay(500);
   }
 }
+
+void loadCells(){
+  for (int i=0;i<14;i++){
+    for (int j=0; j<14;j++){
+      cells[j][i]= EEPROM.read(i*14+j);
+    }
+  }
+}
+
+void writeCells(){
+  for (int i=0;i<14;i++){
+    for (int j=0; j<14;j++){
+      EEPROM.write(i*14+j ,cells[j][i]);
+    }
+  }
+}
+
+
+void searchStates(){
+  byte searchState= EEPROM.read(200);
+
+  if (searchState==3){ searchState=0; }
+  loadCells();
+
+
+
+
+  if (searchState==0){
+    mazeStart();
+      if (selectMode==1){
+        traverse(0,0,true,false,false);
+        L= false; R= false; F= false;
+        center();
+        cellBrake();
+        buzz();
+        delay(3000);
+        writeCells();
+        traverse(13,0,false,false,false);
+        cellBrake();
+        buzz();
+        traverse(0,0,false,false,false);
+        cellBrake();
+        buzz();
+        fixOrientation();
+        delay(3000);
+        mazeStart();
+
+        if (selectMode==2){
+          writeCells();
+          EEPROM.write(200,searchState+1);
+        }
+        else if(selectMode==3){
+          eepromClear();
+          delay(1000);
+          buzzDone();
+        }
+    }
+
+    else if (selectMode==2){
+        traverse(0,0,true,true,false);
+        L= false; R= false; F= false;
+        center();
+        cellBrake();
+        buzz();
+        delay(3000);
+        traverse(0,0,false,false,false);
+        cellBrake();
+        buzz();
+        fixOrientation();
+        delay(3000);
+        mazeStart();
+
+        if (selectMode==2){
+          writeCells();
+        }
+        else if(selectMode==3){
+          eepromClear();
+          delay(1000);
+          buzzDone();
+        
+        }
+    }
+    else if (selectMode==3){
+      eepromClear();
+      delay(1000);
+      buzzDone();
+    }
+  }
+
+
+
+
+
+  
+  else if (searchState==1){
+    mazeStart();
+    if (selectMode==1){
+      traverse(0,0,true,false,false);
+      L=0; R=0; F=0;
+      cellBrake();
+      center();
+      traverse(0,13,false,false,false);
+      cellBrake();
+      buzz();
+      delay(500);
+      traverse(0,0,false,false,false);
+      cellBrake();
+      fixOrientation();
+      mazeStart();
+
+      if (selectMode==2){
+        writeCells();
+        EEPROM.write(200,searchState+1);
+      }
+      else if (selectMode==3){
+        eepromClear();
+        buzzDone();
+      }
+
+    }
+    else if(selectMode==2){
+      floodFill2();
+      traverse(0,0,true,true,false);
+      L=0; R=0; F=0;
+      cellBrake();
+      center();
+      buzz();
+      delay(500);
+      traverse(0,0,false,false,false);
+      cellBrake();
+      fixOrientation();
+      mazeStart();
+
+      if (selectMode==2){
+        writeCells();
+      }
+      else if (selectMode==3){
+        eepromClear();
+        delay(1000);
+        buzzDone();
+      }
+    }
+    else if(selectMode==3){
+      eepromClear();
+      delay(1000);
+      buzzDone();
+    
+    }
+  }
+  
+  
+  
+  
+  
+  
+  else if(searchState==2){
+    mazeStart();
+    if (selectMode==1){
+      traverse(0,0,true,false,false);
+      L=0; R=0; F=0;
+      cellBrake();
+      center();
+      buzz();
+      delay(500);
+      traverse(13,13,false,false,false);
+      cellBrake();
+      buzz();
+      delay(500);
+      traverse(0,0,false,false,false);
+      cellBrake();
+      fixOrientation();
+      mazeStart();
+
+      if (selectMode==2){
+        writeCells();
+        EEPROM.write(200,searchState+1);
+      }
+      else if (selectMode==3){
+        eepromClear();
+        buzzDone();
+      }
+    }
+    else if(selectMode==2){
+      floodFill2();
+      traverse(0,0,true,true,false);
+      L=0; R=0; F=0;
+      cellBrake();
+      center();
+      buzz();
+      delay(500);
+      traverse(0,0,false,false,false);
+      cellBrake();
+      fixOrientation();
+      mazeStart();
+
+      if (selectMode==2){
+        writeCells();
+    }
+      else if (selectMode==3){
+        eepromClear();
+        delay(1000);
+        buzzDone();
+    }
+    
+    }
+    else if(selectMode==3){
+      eepromClear();
+      delay(1000);
+      buzzDone();
+    
+    }
+
+  }
+    
+  
+  
+
+
+}
+
+
