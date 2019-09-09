@@ -341,20 +341,18 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     byte val= flood[y][x];
     byte prev=254;
     byte minVals[4]={254,254,254,254};
-
-      /*for (int i=0; i<4;i++){
-          Serial.print(minVals[i]);
-          Serial.print(' ');
-        }
-      Serial.println(' ');*/
+    byte visited[4]={2,2,2,2};
 
 
 
     if (isAccessible(x,y,x_0,y_0)){
         if (x_0==xprev && y_0==yprev)
             prev=0;
+        if (cells[y_0][x_0]!=0)
+            visited[0]= 1;
+        else
+            visited[0]= 2;
         minVals[0]= flood[y_0][x_0];
-        //Serial.println(1000);
     }
     else
       minVals[0]=254;
@@ -362,8 +360,12 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     if (isAccessible(x,y,x_1,y_1)){
         if (x_1==xprev && y_1==yprev)
             prev=1;
+        if (cells[y_1][x_1]!=0)
+            visited[1]= 1;
+        else
+            visited[1]= 2;
+            
         minVals[1]= flood[y_1][x_1];
-        //Serial.println(2000);
     }
     else
       minVals[1]=254;
@@ -371,8 +373,11 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     if (isAccessible(x,y,x_2,y_2)){
         if (x_2==xprev && y_2==yprev)
             prev=2;
+        if (cells[y_2][x_2]!=0)
+            visited[2]= 1;
+        else
+            visited[2]= 2;
         minVals[2]= flood[y_2][x_2];
-        //Serial.println(3000);
     }
     else
       minVals[2]=254;
@@ -380,26 +385,26 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
     if (isAccessible(x,y,x_3,y_3)){
         if (x_3==xprev && y_3==yprev)
             prev=3;
+        if (cells[y_3][x_3]!=0)
+            visited[3]= 1;
+        else
+            visited[3]= 2;
         minVals[3]= flood[y_3][x_3];
-        //Serial.println(4000);
     }
     else
       minVals[3]=254;
 
     
-    //Serial.println(prev);
     byte minVal=254;
     byte minCell=0;
     byte noMovements=0;
     
     
     for (int i=0; i<4;i++){
-      //Serial.print(minVals[i]);
-      //Serial.print(' ');
         if (minVals[i]!= 254){
             noMovements+=1;}
     }
-    //Serial.println(' ');
+    
     for (int i=0; i<4;i++){
         if (minVals[i]<minVal){
             if (noMovements==1){
@@ -410,14 +415,52 @@ char toMove(byte x,byte y,byte xprev,byte yprev,byte orient){
                 if(i!=prev){
                     minVal= minVals[i];
                     minCell= i;
-                    //Serial.print(minVals[i]);
-                    //Serial.print(' ');
-                    //Serial.println(minCell);
                     
                 }
             }
         }
     }
+
+
+    byte bla[4] ={254,254,254,254};
+    for (int i=0; i<4;i++){
+        if (minVals[i]==minVal)
+            bla[i]= visited[i];
+    }
+
+    byte blaCount=0;
+    for (int i=0; i<4;i++){
+        if (bla[i]== 2){
+            minCell=i ;
+            blaCount+=1;
+        }
+    }
+      
+    if (blaCount==0){
+        for (int i=0; i<4;i++){
+            if (bla[i]== 1)
+                minCell=i;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     
     if (minCell==orient)
