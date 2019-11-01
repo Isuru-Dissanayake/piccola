@@ -7,3 +7,5 @@ You can find codes for following functionalities as header files inside the 'cod
 - flood fill  algorithm and shortest path calculating
 - reading writing with eeprom stm32
 - piccola maze solving stratergy
+
+Stay tuned for a article series on medium about piccola!
